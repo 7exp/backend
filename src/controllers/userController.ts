@@ -16,6 +16,15 @@ export const getUsers = async (req: Request, res: Response) => {
   res.json({ data: result, message: "User list" });
 };
 
+export const getUsersById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await prisma.users.findUnique({
+    where: { id: Number(id) },
+    select: { id: true, name: true, email: true, address: true },
+  });
+  res.json({ data: result, message: "User list" });
+};
+
 export const updateUser = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, email, address } = req.body;
