@@ -8,15 +8,18 @@ datasource db {
 }
 
 model users {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  email     String   @unique(map: "email") @db.VarChar(255)
-  address   String?  @db.VarChar(255)
-  password  String?  @db.VarChar(255)
-  createdAt DateTime @default(now()) @db.Timestamp(0)
-  updatedAt DateTime @default(now()) @db.Timestamp(0)
+  id          String        @id @default(uuid())
+  name        String        @db.VarChar(255)
+  email       String        @unique(map: "email") @db.VarChar(255)
+  address     String?       @db.VarChar(255)
+  password    String?       @db.VarChar(255)
+  role        String        @default("user") @db.VarChar(255)
+  createdAt   DateTime      @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime      @default(now()) @db.Timestamp(0)
+  handicraft  handicraft[]
+  likes       likes[]
+  recognition recognition[]
 }
-
 
 model Product {
   id        Int      @id @default(autoincrement())
@@ -27,4 +30,89 @@ model Product {
   profit    Float
   createdAt DateTime @default(now()) @db.Timestamp(0)
   updatedAt DateTime @default(now()) @db.Timestamp(0)
+}
+
+model handicraft {
+  id                String              @id @default(uuid())
+  name              String              @db.VarChar(255)
+  description       String              @db.Text
+  image             String              @db.VarChar(255)
+  id_category       String              @db.VarChar(255)
+  id_user           String              @db.VarChar(255)
+  createdAt         DateTime            @default(now()) @db.Timestamp(0)
+  updatedAt         DateTime            @default(now()) @db.Timestamp(0)
+  category_craft    category_craft      @relation(fields: [id_category], references: [id])
+  users             users               @relation(fields: [id_user], references: [id])
+  detail_handicraft detail_handicraft[]
+  likes             likes[]
+  recognition       recognition[]
+  waste_handicraft  waste_handicraft[]
+}
+
+model detail_handicraft {
+  id_handicraft String     @id @default(uuid())
+  name          String     @db.VarChar(255)
+  description   String     @db.Text
+  image         String     @db.VarChar(255)
+  step_number   Int
+  createdAt     DateTime   @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime   @default(now()) @db.Timestamp(0)
+  handicraft    handicraft @relation(fields: [id_handicraft], references: [id])
+}
+
+model category_craft {
+  id         String       @id @default(uuid())
+  name       String       @db.VarChar(255)
+  createdAt  DateTime     @default(now()) @db.Timestamp(0)
+  updatedAt  DateTime     @default(now()) @db.Timestamp(0)
+  handicraft handicraft[]
+}
+
+model likes {
+  id            String     @id @default(uuid())
+  id_user       String     @db.VarChar(255)
+  id_handicraft String     @db.VarChar(255)
+  createdAt     DateTime   @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime   @default(now()) @db.Timestamp(0)
+  users         users      @relation(fields: [id_user], references: [id])
+  handicraft    handicraft @relation(fields: [id_handicraft], references: [id])
+}
+
+model recognition {
+  id                 String               @id @default(uuid())
+  id_user            String               @db.VarChar(255)
+  id_handicraft      String               @db.VarChar(255)
+  createdAt          DateTime             @default(now()) @db.Timestamp(0)
+  updatedAt          DateTime             @default(now()) @db.Timestamp(0)
+  users              users                @relation(fields: [id_user], references: [id])
+  handicraft         handicraft           @relation(fields: [id_handicraft], references: [id])
+  detai_recognition  detai_recognition[]
+}
+
+model detai_recognition {
+  id             String      @id @default(uuid())
+  id_recognition String      @db.VarChar(255)
+  id_waste       String      @db.VarChar(255)
+  createdAt      DateTime    @default(now()) @db.Timestamp(0)
+  updatedAt      DateTime    @default(now()) @db.Timestamp(0)
+  recognition    recognition @relation(fields: [id_recognition], references: [id])
+}
+
+model waste {
+  id          String        @id @default(uuid())
+  name        String        @db.VarChar(255)
+  image       String        @db.VarChar(255)
+  createdAt   DateTime      @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime      @default(now()) @db.Timestamp(0)
+  waste_handicraft waste_handicraft[]
+}
+
+model waste_handicraft {
+  id            String     @id @default(uuid())
+  id_handicraft String     @db.VarChar(255)
+  id_waste      String     @db.VarChar(255)
+  createdAt     DateTime   @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime   @default(now()) @db.Timestamp(0)
+  handicraft    handicraft @relation(fields: [id_handicraft], references: [id])
+  waste         waste      @relation(fields: [id_waste], references: [id])
 }
