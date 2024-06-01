@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { google } from "googleapis";
 import { config } from "../config";
 
-const prisma = new PrismaClient();
 const oauth2Client = new google.auth.OAuth2(config.googleClientId, config.googleClientSecret, config.googleCallbackUrl);
 
 const scopes = ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"];
