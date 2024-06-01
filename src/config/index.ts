@@ -7,4 +7,7 @@ export const config = {
   jwtSecret: process.env.JWT_SECRET,
   googleClientId: process.env.GOOGLE_CLIENT_ID,
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  googleCallbackUrl: process.env.GOOGLE_CALLBACK_URL,
+  googleRedirectUrlAdmin: process.env.BASE_URL_FRONTEND_ADMIN,
+  googleRedirectUrlUser: process.env.BASE_URL_FRONTEND_USER,
 };

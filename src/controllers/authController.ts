@@ -6,7 +6,7 @@ import { google } from "googleapis";
 import { config } from "../config";
 
 const prisma = new PrismaClient();
-const oauth2Client = new google.auth.OAuth2(config.googleClientId, config.googleClientSecret, "http://localhost:5000/auth/google/callback");
+const oauth2Client = new google.auth.OAuth2(config.googleClientId, config.googleClientSecret, config.googleCallbackUrl);
 
 const scopes = ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"];
 const authorizationUrl = oauth2Client.generateAuthUrl({
@@ -40,19 +40,27 @@ export const googleCallback = async (req: Request, res: Response) => {
   });
 
   if (!user) {
+    // Jika pengguna tidak ada, tambahkan sebagai pengguna baru
     user = await prisma.users.create({
-      data: { name: data.name, email: data.email, address: "-" },
+      data: { name: data.name, email: data.email, address: "-", role: "user", image: data.picture },
     });
   }
 
-  const payload = { id: user.id, name: user.name, address: user.address };
+  // Cek apakah pengguna adalah admin
+  const isAdmin = user.role === "admin";
+
+  // Simpan informasi pengguna ke sesi
+  const payload = { id: user.id, name: user.name, address: user.address, role: user.role, image: user.image };
   const token = jwt.sign(payload, config.jwtSecret!, { expiresIn: 60 * 60 * 1 });
 
-  // simpan token dan email di cookie
-  res.cookie("token", token, { httpOnly: true });
-  res.redirect("http://localhost:5173/auth/signin");
-};
+  res.cookie("token", token);
 
+  if (isAdmin) {
+    res.redirect(`${config.googleRedirectUrlAdmin}`); // Redirect ke halaman admin jika pengguna adalah admin
+  } else {
+    res.redirect(`${config.googleRedirectUrlUser}`); // Redirect ke halaman pengguna jika pengguna adalah pengguna biasa
+  }
+};
 export const register = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -109,7 +117,7 @@ export const getUserInfo = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    res.json({ id: user.id, name: user.name, email: user.email, address: user.address });
+    res.json({ id: user.id, name: user.name, email: user.email, address: user.address, role: user.role, image: user.image });
   } catch (err) {
     res.status(401).json({ error: "Unauthorized" });
   }
