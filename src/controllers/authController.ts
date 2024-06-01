@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -64,8 +64,18 @@ export const googleCallback = async (req: Request, res: Response) => {
 export const register = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
+  // if user exists then return error
+  const user = await prisma.users.findUnique({ where: { email } });
+  if (user) {
+    return res.status(400).json({ message: "User already exists" });
+  } else {
   await prisma.users.create({ data: { name, email, password: hashedPassword } });
-  res.json({ message: "user created" });
+  const user = await prisma.users.findUnique({ where: { email } });
+  if (user) {
+    const data = { id: user.id, name: user.name, email: user.email };
+    res.json({ message: "user created", data });
+  }
+  }
 };
 
 export const login = async (req: Request, res: Response) => {
@@ -85,7 +95,7 @@ export const login = async (req: Request, res: Response) => {
   if (isPasswordValid) {
     const payload = { id: user.id, name: user.name, address: user.address };
     const token = jwt.sign(payload, config.jwtSecret!, { expiresIn: 60 * 60 * 1 });
-    return res.json({ data: { id: user.id, name: user.name, address: user.address }, token });
+    return res.json({ data: { id: user.id, name: user.name, address: user.email }, token });
   } else {
     return res.status(403).json({ message: "Wrong password" });
   }

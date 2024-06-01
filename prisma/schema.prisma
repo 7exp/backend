@@ -14,13 +14,18 @@ model users {
   address     String?       @db.VarChar(255)
   password    String?       @db.VarChar(255)
   image       String?       @db.VarChar(255)
-  role        String        @default("user") @db.VarChar(255)
+  role        Role          @default(user)
   createdAt   DateTime      @default(now()) @db.Timestamp(0)
   updatedAt   DateTime      @default(now()) @db.Timestamp(0)
   handicraft  handicraft[]
   likes       likes[]
   history_handicraft history_handicraft[]
   recognition recognition[]
+}
+
+enum Role {
+  user
+  admin
 }
 
 model Product {
