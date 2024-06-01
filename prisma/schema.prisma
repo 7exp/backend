@@ -18,6 +18,7 @@ model users {
   updatedAt   DateTime      @default(now()) @db.Timestamp(0)
   handicraft  handicraft[]
   likes       likes[]
+  history_handicraft history_handicraft[]
   recognition recognition[]
 }
 
@@ -45,6 +46,7 @@ model handicraft {
   users             users               @relation(fields: [id_user], references: [id])
   detail_handicraft detail_handicraft[]
   likes             likes[]
+  history_handicraft history_handicraft[]
   recognition       recognition[]
   waste_handicraft  waste_handicraft[]
 }
@@ -78,6 +80,18 @@ model likes {
   handicraft    handicraft @relation(fields: [id_handicraft], references: [id])
 }
 
+model history_handicraft {
+  id            String     @id @default(uuid())
+  id_user       String     @db.VarChar(255)
+  id_handicraft String     @db.VarChar(255)
+  done          Boolean    @default(false)
+  step_number   Int
+  createdAt     DateTime   @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime   @default(now()) @db.Timestamp(0)
+  users         users      @relation(fields: [id_user], references: [id])
+  handicraft    handicraft @relation(fields: [id_handicraft], references: [id])
+}
+
 model recognition {
   id                 String               @id @default(uuid())
   id_user            String               @db.VarChar(255)
@@ -86,10 +100,10 @@ model recognition {
   updatedAt          DateTime             @default(now()) @db.Timestamp(0)
   users              users                @relation(fields: [id_user], references: [id])
   handicraft         handicraft           @relation(fields: [id_handicraft], references: [id])
-  detai_recognition  detai_recognition[]
+  detail_recognition  detail_recognition[]
 }
 
-model detai_recognition {
+model detail_recognition {
   id             String      @id @default(uuid())
   id_recognition String      @db.VarChar(255)
   id_waste       String      @db.VarChar(255)
