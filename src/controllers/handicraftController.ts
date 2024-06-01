@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import prisma from "../../prisma/client";
 
+// Create Handicraft
 export const createHandicraft = async (req: Request, res: Response) => {
-  const { name, description, image, id_category, id_user, detail_handicrafts } = req.body;
+  const { name, description, image, id_category, id_user } = req.body;
 
   try {
     const newHandicraft = await prisma.handicraft.create({
@@ -12,28 +13,18 @@ export const createHandicraft = async (req: Request, res: Response) => {
         image,
         id_category,
         id_user,
-        detail_handicraft: {
-          create: detail_handicrafts.map((detail: any) => ({
-            name: detail.name,
-            description: detail.description,
-            image: detail.image,
-            step_number: detail.step_number,
-          })),
-        },
       },
     });
-    res.status(201).json({ data: newHandicraft, message: "Handicraft created" });
-  } catch (error) {
-    res.status(500).json({ error: "Error creating handicraft" });
+    res.status(201).json({ message: "Handicraft created", data: newHandicraft });
+  } catch (error: any) {
+    res.status(500).json({ error: "Error creating handicraft", message: error.message });
   }
 };
 
 // Get All Handicrafts
 export const getAllHandicrafts = async (req: Request, res: Response) => {
   try {
-    const handicrafts = await prisma.handicraft.findMany({
-      include: { detail_handicraft: true }, // Include related detail_handicrafts
-    });
+    const handicrafts = await prisma.handicraft.findMany();
     res.status(200).json({ data: handicrafts });
   } catch (error) {
     res.status(500).json({ error: "Error fetching handicrafts" });
@@ -47,7 +38,6 @@ export const getHandicraftById = async (req: Request, res: Response) => {
   try {
     const handicraft = await prisma.handicraft.findUnique({
       where: { id },
-      include: { detail_handicraft: true }, // Include related detail_handicrafts
     });
 
     if (!handicraft) {
@@ -63,7 +53,7 @@ export const getHandicraftById = async (req: Request, res: Response) => {
 // Update Handicraft
 export const updateHandicraft = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, description, image, id_category, id_user, detail_handicrafts } = req.body;
+  const { name, description, image, id_category, id_user } = req.body;
 
   try {
     const updatedHandicraft = await prisma.handicraft.update({
@@ -74,15 +64,6 @@ export const updateHandicraft = async (req: Request, res: Response) => {
         image,
         id_category,
         id_user,
-        detail_handicraft: {
-          deleteMany: {}, // Remove existing detail_handicrafts
-          create: detail_handicrafts.map((detail: any) => ({
-            name: detail.name,
-            description: detail.description,
-            image: detail.image,
-            step_number: detail.step_number,
-          })),
-        },
       },
     });
 

@@ -25,9 +25,9 @@ export const getUsersById = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, email, address } = req.body;
+  const { name, email, address, role } = req.body;
   const result = await prisma.users.update({
-    data: { name, email, address },
+    data: { name, email, address, role },
     where: { id: id },
   });
   res.json({ data: result, message: `User ${id} updated` });

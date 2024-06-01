@@ -93,6 +93,7 @@ export const login = async (req: Request, res: Response) => {
 // buatkan logout juga menggunakan jwt menghapus token dari client
 export const logout = async (req: Request, res: Response) => {
   const token = req.headers.authorization?.split(" ")[1];
+
   if (!token) {
     return res.status(403).json({ message: "Token not found" });
   }
