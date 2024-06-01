@@ -9,8 +9,7 @@ export const createUser = async (req: Request, res: Response) => {
     return res.status(400).json({ message: "User already exists" });
   } else {
     const result = await prisma.users.create({ data: { name, email, address } });
-    console.log("result: ", result);
-    res.json({ message: `User created` });
+    res.json({ message: `User created`, data: result });
   }
 };
 
@@ -18,7 +17,7 @@ export const getUsers = async (req: Request, res: Response) => {
   const result = await prisma.users.findMany({
     select: { id: true, name: true, email: true, address: true },
   });
-  res.json({ data: result, message: "User list" });
+  res.json({ message: "User list", data: result });
 };
 
 export const getUsersById = async (req: Request, res: Response) => {
@@ -27,7 +26,7 @@ export const getUsersById = async (req: Request, res: Response) => {
     where: { id: id },
     select: { id: true, name: true, email: true, address: true },
   });
-  res.json({ data: result, message: "User list" });
+  res.json({ message: "User list", data: result });
 };
 
 export const updateUser = async (req: Request, res: Response) => {
