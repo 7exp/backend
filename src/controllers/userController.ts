@@ -3,8 +3,15 @@ import prisma from "../../prisma/client";
 
 export const createUser = async (req: Request, res: Response) => {
   const { name, email, address } = req.body;
-  const result = await prisma.users.create({ data: { name, email, address } });
-  res.json({ data: result, message: `User created` });
+  //if user exists then return error
+  const user = await prisma.users.findUnique({ where: { email } });
+  if (user) {
+    return res.status(400).json({ message: "User already exists" });
+  } else {
+    const result = await prisma.users.create({ data: { name, email, address } });
+    console.log("result: ", result);
+    res.json({ message: `User created` });
+  }
 };
 
 export const getUsers = async (req: Request, res: Response) => {
@@ -30,7 +37,7 @@ export const updateUser = async (req: Request, res: Response) => {
     data: { name, email, address, role },
     where: { id: id },
   });
-  res.json({ data: result, message: `User ${id} updated` });
+  res.json({ message: `User ${id} updated`, data: result });
 };
 
 export const deleteUser = async (req: Request, res: Response) => {
