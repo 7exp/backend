@@ -5,6 +5,7 @@ import userRoutes from "./routes/userRoutes";
 import productRoutes from "./routes/productRoutes";
 import handicraftRoutes from "./routes/handicraftRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
+import likeRoutes from "./routes/likeRoutes";
 import { config } from "./config";
 import cookieParser from "cookie-parser"; // Import cookie-parser
 
@@ -18,6 +19,7 @@ app.use("/users", userRoutes);
 app.use("/products", productRoutes);
 app.use("/handicrafts", handicraftRoutes);
 app.use("/categories", categoryRoutes);
+app.use("/likes", likeRoutes);
 
 app.listen(config.port, () => {
   console.log(`Server running on port ${config.port}`);

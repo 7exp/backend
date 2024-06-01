@@ -7,7 +7,7 @@ const router = Router();
 router.get("/", accessValidation, getUsers);
 // get user by id
 router.get("/:id", accessValidation, getUsersById);
-router.patch("/:id", accessValidation, updateUser);
+router.put("/:id", accessValidation, updateUser);
 router.post("/", accessValidationAdmin, createUser);
 router.delete("/:id", accessValidationAdmin, deleteUser);
 

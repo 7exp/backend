@@ -11,7 +11,7 @@ export const createCategory = async (req: Request, res: Response) => {
         name,
       },
     });
-    res.status(201).json({ data: newCategory, message: "Category created" });
+    res.status(201).json({  message: "Category created", data: newCategory });
   } catch (error) {
     res.status(500).json({ error: "Error creating category" });
   }
@@ -21,7 +21,7 @@ export const createCategory = async (req: Request, res: Response) => {
 export const getAllCategories = async (req: Request, res: Response) => {
   try {
     const categories = await prisma.category_craft.findMany();
-    res.status(200).json({ data: categories });
+    res.status(200).json({ message : "Category list", data: categories });
   } catch (error) {
     res.status(500).json({ error: "Error fetching categories" });
   }
@@ -40,7 +40,7 @@ export const getCategoryById = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Category not found" });
     }
 
-    res.status(200).json({ data: category });
+    res.status(200).json({ message : "Category found", data: category });
   } catch (error) {
     res.status(500).json({ error: "Error fetching category" });
   }
@@ -51,6 +51,10 @@ export const updateCategory = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name } = req.body;
 
+  if(!id || !name) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
   try {
     const updatedCategory = await prisma.category_craft.update({
       where: { id },
@@ -59,7 +63,7 @@ export const updateCategory = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).json({ data: updatedCategory, message: "Category updated" });
+    res.status(200).json({ message: "Category updated", data: updatedCategory  });
   } catch (error) {
     res.status(500).json({ error: "Error updating category" });
   }
@@ -74,7 +78,7 @@ export const deleteCategory = async (req: Request, res: Response) => {
       where: { id },
     });
 
-    res.status(200).json({ message: "Category deleted" });
+    res.status(200).json({ message: `Category ${id} deleted` });
   } catch (error) {
     res.status(500).json({ error: "Error deleting category" });
   }

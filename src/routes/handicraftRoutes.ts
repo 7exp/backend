@@ -7,7 +7,7 @@ const router = Router();
 router.post("/", accessValidationAdmin, createHandicraft);
 router.get("/", getAllHandicrafts);
 router.get("/:id", getHandicraftById);
-router.patch("/:id", accessValidationAdmin, updateHandicraft);
+router.put("/:id", accessValidationAdmin, updateHandicraft);
 router.delete("/:id", accessValidationAdmin, deleteHandicraft);
 
 export default router;

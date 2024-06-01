@@ -5,6 +5,10 @@ import prisma from "../../prisma/client";
 export const createHandicraft = async (req: Request, res: Response) => {
   const { name, description, image, id_category, id_user } = req.body;
 
+  if (!name || !description || !image || !id_category || !id_user) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
   try {
     const newHandicraft = await prisma.handicraft.create({
       data: {
@@ -25,7 +29,7 @@ export const createHandicraft = async (req: Request, res: Response) => {
 export const getAllHandicrafts = async (req: Request, res: Response) => {
   try {
     const handicrafts = await prisma.handicraft.findMany();
-    res.status(200).json({ data: handicrafts });
+    res.status(200).json({ message: "Handicraft list", data: handicrafts });
   } catch (error) {
     res.status(500).json({ error: "Error fetching handicrafts" });
   }
@@ -44,7 +48,7 @@ export const getHandicraftById = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Handicraft not found" });
     }
 
-    res.status(200).json({ data: handicraft });
+    res.status(200).json({ message: "Handicraft found", data: handicraft });
   } catch (error) {
     res.status(500).json({ error: "Error fetching handicraft" });
   }
@@ -67,7 +71,7 @@ export const updateHandicraft = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).json({ data: updatedHandicraft, message: "Handicraft updated" });
+    res.status(200).json({ message: "Handicraft updated", data: updatedHandicraft });
   } catch (error) {
     res.status(500).json({ error: "Error updating handicraft" });
   }
@@ -82,7 +86,7 @@ export const deleteHandicraft = async (req: Request, res: Response) => {
       where: { id },
     });
 
-    res.status(200).json({ message: "Handicraft deleted" });
+    res.status(200).json({ message: `Handicraft ${id} deleted` });
   } catch (error) {
     res.status(500).json({ error: "Error deleting handicraft" });
   }
