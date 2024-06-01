@@ -82,7 +82,7 @@ export const login = async (req: Request, res: Response) => {
   const isPasswordValid = await bcrypt.compare(password, user.password);
 
   if (isPasswordValid) {
-    const payload = { id: user.id, name: user.name, address: user.address };
+    const payload = { id: user.id, name: user.name, address: user.address, role: user.role };
     const token = jwt.sign(payload, config.jwtSecret!, { expiresIn: 60 * 60 * 1 });
     return res.json({ data: { id: user.id, name: user.name, address: user.address }, token });
   } else {
