@@ -6,7 +6,7 @@ import { google } from "googleapis";
 import { config } from "../config";
 
 const prisma = new PrismaClient();
-const oauth2Client = new google.auth.OAuth2(config.googleClientId, config.googleClientSecret, "http://localhost:5000/auth/google/callback");
+const oauth2Client = new google.auth.OAuth2(config.googleClientId, config.googleClientSecret, config.googleCallbackUrl);
 
 const scopes = ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"];
 const authorizationUrl = oauth2Client.generateAuthUrl({
@@ -42,7 +42,7 @@ export const googleCallback = async (req: Request, res: Response) => {
   if (!user) {
     // Jika pengguna tidak ada, tambahkan sebagai pengguna baru
     user = await prisma.users.create({
-      data: { name: data.name, email: data.email, address: "-", role: "user", image: data.picture, token: tokens.access_token },
+      data: { name: data.name, email: data.email, address: "-", role: "user", image: data.picture },
     });
   }
 
@@ -56,9 +56,9 @@ export const googleCallback = async (req: Request, res: Response) => {
   res.cookie("token", token);
 
   if (isAdmin) {
-    res.redirect("http://localhost:5173"); // Redirect ke halaman admin jika pengguna adalah admin
+    res.redirect(`${config.googleRedirectUrlAdmin}`); // Redirect ke halaman admin jika pengguna adalah admin
   } else {
-    res.redirect("http://localhost:5173/auth/signin"); // Redirect ke halaman login jika pengguna adalah pengguna biasa
+    res.redirect(`${config.googleRedirectUrlUser}`); // Redirect ke halaman pengguna jika pengguna adalah pengguna biasa
   }
 };
 export const register = async (req: Request, res: Response) => {

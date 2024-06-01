@@ -8,6 +8,6 @@ router.get("/google/callback", googleCallback);
 router.post("/register", register);
 router.post("/login", login);
 router.get("/me", getUserInfo);
-router.delete("/logout", logout);
+router.post("/logout", logout);
 
 export default router;
