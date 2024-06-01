@@ -1,11 +1,11 @@
-import e, { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { Request, Response } from "express";
+import prisma from "../../prisma/client";
+
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { google } from "googleapis";
 import { config } from "../config";
 
-const prisma = new PrismaClient();
 const oauth2Client = new google.auth.OAuth2(config.googleClientId, config.googleClientSecret, config.googleCallbackUrl);
 
 const scopes = ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"];
@@ -93,7 +93,7 @@ export const login = async (req: Request, res: Response) => {
   const isPasswordValid = await bcrypt.compare(password, user.password);
 
   if (isPasswordValid) {
-    const payload = { id: user.id, name: user.name, address: user.address };
+    const payload = { id: user.id, name: user.name, address: user.address, role: user.role };
     const token = jwt.sign(payload, config.jwtSecret!, { expiresIn: 60 * 60 * 1 });
     return res.json({ data: { id: user.id, name: user.name, address: user.email }, token });
   } else {
@@ -104,6 +104,7 @@ export const login = async (req: Request, res: Response) => {
 // buatkan logout juga menggunakan jwt menghapus token dari client
 export const logout = async (req: Request, res: Response) => {
   const token = req.headers.authorization?.split(" ")[1];
+
   if (!token) {
     return res.status(403).json({ message: "Token not found" });
   }

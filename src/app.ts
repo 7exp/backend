@@ -3,6 +3,8 @@ import corsMiddleware from "./middleware/corsMiddleware"; // Import middleware C
 import authRoutes from "./routes/authRoutes";
 import userRoutes from "./routes/userRoutes";
 import productRoutes from "./routes/productRoutes";
+import handicraftRoutes from "./routes/handicraftRoutes";
+import categoryRoutes from "./routes/categoryRoutes";
 import { config } from "./config";
 import cookieParser from "cookie-parser"; // Import cookie-parser
 
@@ -14,6 +16,8 @@ app.use(cookieParser()); // Use cookie-parser
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/products", productRoutes);
+app.use("/handicrafts", handicraftRoutes);
+app.use("/categories", categoryRoutes);
 
 app.listen(config.port, () => {
   console.log(`Server running on port ${config.port}`);
