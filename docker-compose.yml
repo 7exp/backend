@@ -22,3 +22,4 @@ services:
 
 networks:
   craft-network:
+    name: craft-network
