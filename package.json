@@ -5,7 +5,9 @@
   "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node ./src/app.ts",
+    "build": "tsc",
+    "tsstart": "ts-node ./src/app.ts",
+    "start": "node ./src/app.js",
     "nd:start": "nodemon --exec npm start"
   },
   "keywords": [],

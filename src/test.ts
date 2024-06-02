@@ -241,7 +241,7 @@ app.patch("/users/:id", accessValidation, async (req, res) => {
       address: address,
     },
     where: {
-      id: Number(id),
+      id
     },
   });
   res.json({
@@ -256,7 +256,7 @@ app.delete("/users/:id", accessValidation, async (req, res) => {
 
   const result = await prisma.users.delete({
     where: {
-      id: Number(id),
+      id
     },
   });
   res.json({
