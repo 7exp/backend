@@ -5,6 +5,7 @@ import userRoutes from "./routes/userRoutes";
 import productRoutes from "./routes/productRoutes";
 import handicraftRoutes from "./routes/handicraftRoutes";
 import likeRoutes from "./routes/likeRoutes";
+import wasteRoutes from "./routes/wasteRoutes";
 import { config } from "./config";
 import cookieParser from "cookie-parser"; // Import cookie-parser
 
@@ -17,6 +18,7 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/products", productRoutes);
 app.use("/handicrafts", handicraftRoutes);
+app.use("/waste", wasteRoutes);
 app.use("/likes", likeRoutes);
 
 app.listen(config.port, () => {
