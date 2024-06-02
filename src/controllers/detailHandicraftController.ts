@@ -20,6 +20,17 @@ export const createDetailHandicraft = async (req: Request, res: Response) => {
     return res.status(404).json({ error: "Handicraft not found" });
   }
 
+  const step_numberExists = await prisma.detail_handicraft.findMany({
+    where: {
+      id_handicraft: id_handicraft,
+      step_number: step_number,
+    },
+  });
+  
+  if (step_numberExists.length > 0) {
+    return res.status(400).json({ error: "Step number " + step_number + " already exists" });
+  }
+
   try {
     const newDetailHandicraft = await prisma.detail_handicraft.create({
       data: {
@@ -30,7 +41,7 @@ export const createDetailHandicraft = async (req: Request, res: Response) => {
         step_number,
       },
     });
-    res.status(201).json({ message: "DetailHandicraft created", data: newDetailHandicraft });
+    res.status(201).json({ message: "Successfully created detailHandicraft", data: newDetailHandicraft });
   } catch (error: any) {
     res.status(500).json({ error: "Error creating detailHandicraft", message: error.message });
   }
@@ -60,10 +71,10 @@ export const getDetailHandicraft = async (req: Request, res: Response) => {
 //  edit detailHandicraft
 
 export const editDetailHandicraft = async (req: Request, res: Response) => {
-  const { name, description, image, step_number } = req.body;
+  const { name, description, image} = req.body;
   const { id } = req.params;
 
-  if (!name || !description || !image || !step_number) {
+  if (!name || !description || !image ) {
     return res.status(400).json({ error: "All fields are required" });
   }
 
@@ -76,11 +87,10 @@ export const editDetailHandicraft = async (req: Request, res: Response) => {
         name,
         description,
         image,
-        step_number,
       },
     });
 
-    res.status(200).json({ message: "DetailHandicraft updated", data: updatedDetailHandicraft });
+    res.status(200).json({ message: "Successfully updated detailHandicraft", data: updatedDetailHandicraft });
   } catch (error: any) {
     res.status(500).json({ error: "Error updating detailHandicraft", message: error.message });
   }
