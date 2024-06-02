@@ -8,5 +8,7 @@ const router = Router();
 router.post("/:id_handicraft", accessValidation, handicraftValidation, createDetailHandicraft);
 router.get("/:id", accessValidation, getDetailHandicraft);
 router.get("/", accessValidation, getDetailHandicraft);
-router.put("/:id", accessValidation, handicraftValidation, editDetailHandicraft);
-router.delete("/:id", accessValidation, handicraftValidation, deleteDetailHandicraft);
+router.put("/:id", accessValidation, editDetailHandicraft);
+router.delete("/:id", accessValidation, deleteDetailHandicraft);
+
+export default router;
