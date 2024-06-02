@@ -8,11 +8,8 @@ services:
       - craft-network
     ports:
       - 5000:5000
-    environment:
-      - GOOGLE_CLIENT_ID=
-      - GOOGLE_CLIENT_SECRET=
-      - JWT_SECRET=
-      - DATABASE_URL=mysql://root:abogoboga@10.1.1.13:3306/project_bacngkit
+    env_file:
+      - stack.env
     # healthcheck:
     #   test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
     #   interval: 60s
