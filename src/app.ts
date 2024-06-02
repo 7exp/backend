@@ -8,13 +8,17 @@ import detailHandicraftRoutes from "./routes/detailHandicraftRoutes";
 import likeRoutes from "./routes/likeRoutes";
 import wasteRoutes from "./routes/wasteRoutes";
 import { config } from "./config";
+import multer from "multer";
+
 import cookieParser from "cookie-parser"; // Import cookie-parser
 
 const app = express();
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 app.use(express.json());
 app.use(corsMiddleware);
-app.use(cookieParser()); // Use cookie-parser
+app.use(cookieParser());
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/products", productRoutes);

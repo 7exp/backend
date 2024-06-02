@@ -10,4 +10,7 @@ export const config = {
   googleCallbackUrl: process.env.GOOGLE_CALLBACK_URL,
   googleRedirectUrlAdmin: process.env.BASE_URL_FRONTEND_ADMIN,
   googleRedirectUrlUser: process.env.BASE_URL_FRONTEND_USER,
+  bucketName: process.env.BUCKET_NAME,
+  projectId: process.env.PROJECT_ID,
+  keyFilename: process.env.KEYFILENAME,
 };
