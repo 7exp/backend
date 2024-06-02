@@ -20,6 +20,10 @@ export const createHandicraft = async (req: Request, res: Response) => {
     console.log("tag created");
   }
 
+  if (!name || !description || !image || !id_user) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
   try {
     const newHandicraft = await prisma.handicraft.create({
       data: {
