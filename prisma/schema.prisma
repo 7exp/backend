@@ -57,7 +57,8 @@ model handicraft {
 }
 
 model detail_handicraft {
-  id_handicraft String     @id @default(uuid())
+  id            String    @id @default(uuid())
+  id_handicraft String     @db.VarChar(255)
   name          String     @db.VarChar(255)
   description   String     @db.Text
   image         String     @db.VarChar(255)
