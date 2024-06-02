@@ -4,6 +4,7 @@ import authRoutes from "./routes/authRoutes";
 import userRoutes from "./routes/userRoutes";
 import productRoutes from "./routes/productRoutes";
 import handicraftRoutes from "./routes/handicraftRoutes";
+import detailHandicraftRoutes from "./routes/detailHandicraftRoutes";
 import likeRoutes from "./routes/likeRoutes";
 import wasteRoutes from "./routes/wasteRoutes";
 import { config } from "./config";
@@ -18,6 +19,7 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/products", productRoutes);
 app.use("/handicrafts", handicraftRoutes);
+app.use("/handicrafts/detail", detailHandicraftRoutes);
 app.use("/waste", wasteRoutes);
 app.use("/likes", likeRoutes);
 

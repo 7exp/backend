@@ -57,7 +57,7 @@ model handicraft {
 }
 
 model detail_handicraft {
-  id            String    @id @default(uuid())
+  id            String     @id @default(uuid())
   id_handicraft String     @db.VarChar(255)
   name          String     @db.VarChar(255)
   description   String     @db.Text
@@ -130,7 +130,7 @@ model detail_recognition {
 
 model waste {
   id               String             @id @default(uuid())
-  name             String             @db.VarChar(255)
+  name             String             @unique @db.VarChar(255)
   image            String             @db.VarChar(255)
   createdAt        DateTime           @default(now()) @db.Timestamp(0)
   updatedAt        DateTime           @default(now()) @db.Timestamp(0)

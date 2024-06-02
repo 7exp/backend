@@ -15,22 +15,27 @@ interface ValidationRequest extends Request {
   userData?: UserData;
 }
 
-export const handicraftValidation = (req: Request, res: Response, next: NextFunction) => {
+export const handicraftValidation = async (req: Request, res: Response, next: NextFunction) => {
   const validationReq = req as ValidationRequest;
 
   const { id_handicraft } = req.params;
   const id_user = validationReq.userData?.id;
+  console.log(id_handicraft, id_user);
 
-  const handicraft = prisma.handicraft.findFirst({
+  try {
+  const handicraft = await prisma.handicraft.findFirst({
     where: {
       id: id_handicraft,
       id_user: id_user,
     },
   });
-
+  console.log(handicraft);
   if (!handicraft) {
-    return res.status(403).json({ message: "You are not authorized to access this resource" });
+    return res.status(403).json({ message: "You are not authorized to access this handicraft" });
   }
 
   next();
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
 };

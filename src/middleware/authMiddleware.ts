@@ -18,7 +18,7 @@ export const accessValidation = (req: Request, res: Response, next: NextFunction
   const { authorization } = validationReq.headers;
 
   if (!authorization) {
-    return res.status(401).json({ message: "Token diperlukan untuk login" });
+    return res.status(401).json({ message: "Token is undefined or invalid" });
   }
 
   const token = authorization.split(" ")[1];
@@ -40,7 +40,7 @@ export const accessValidationAdmin = (req: Request, res: Response, next: NextFun
   const { authorization } = validationReq.headers;
 
   if (!authorization) {
-    return res.status(401).json({ message: "Token diperlukan untuk login" });
+    return res.status(401).json({ message: "Token is undefined or invalid" });
   }
 
   const token = authorization.split(" ")[1];
@@ -49,7 +49,7 @@ export const accessValidationAdmin = (req: Request, res: Response, next: NextFun
     const jwtDecode = jwt.verify(token, config.jwtSecret!) as UserData;
 
     if (jwtDecode.role !== "admin") {
-      return res.status(403).json({ message: "Anda tidak memiliki izin admin untuk mengakses sumber daya ini" });
+      return res.status(403).json({ message: "You don't have permission" });
     }
 
     validationReq.userData = jwtDecode;
