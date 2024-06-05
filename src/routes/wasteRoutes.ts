@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { accessValidationAdmin, accessValidation } from "../middleware/authMiddleware";
-import { getAllWastes, getWasteById, updateWaste, deleteWaste } from "../controllers/wasteController";
+import { createWaste, getAllWastes, getWasteById, updateWaste, deleteWaste } from "../controllers/wasteController";
 import multer from "multer";
 
 const router = Router();
@@ -13,6 +13,7 @@ const upload = multer({
   //   },
 });
 
+router.post("/", accessValidationAdmin, upload.single("file"), createWaste); // Apply multer middleware here
 router.get("/", accessValidation, getAllWastes);
 router.get("/:id", accessValidation, getWasteById);
 router.put("/:id", accessValidationAdmin, upload.single("file"), updateWaste); // Apply multer middleware here

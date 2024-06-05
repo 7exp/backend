@@ -91,6 +91,41 @@ export const updateWaste = async (req: Request, res: Response) => {
   }
 };
 
+// Create Waste
+export const createWaste = async (req: Request, res: Response) => {
+  const file = req.file;
+  const { name } = req.body; // Mengambil data input lain
+
+  const filename = file?.originalname;
+  const fileOutputName = `${Date.now()}-${filename}`;
+  const bucketName = config.bucketName as string;
+
+  console.log("Received file:", file); // Log the file object
+
+  if (!file) {
+    return res.status(400).json({ error: "File is required" });
+  }
+
+  try {
+    // Upload file to Google Cloud Storage
+    await uploadFileGCS(bucketName, file as any, fileOutputName);
+    const public_url = `https://storage.googleapis.com/${bucketName}/waste/${fileOutputName}`;
+
+    // Create new waste record in the database
+    const newWaste = await prisma.waste.create({
+      data: {
+        image: public_url,
+        name: name,
+      },
+    });
+
+    res.status(201).json({ message: "Waste created", data: newWaste });
+  } catch (error) {
+    console.error("Error uploading file or creating database record:", error);
+    return res.status(500).json({ error: "Error uploading file or creating database record" });
+  }
+};
+
 // Get All Waste
 export const getAllWastes = async (req: Request, res: Response) => {
   try {
