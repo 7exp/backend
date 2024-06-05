@@ -6,6 +6,7 @@ services:
     container_name: craft-backend
     networks:
       - craft-network
+      - tunnel
     ports:
       - 5000:5000
     env_file:
@@ -20,3 +21,5 @@ services:
 networks:
   craft-network:
     name: craft-network
+  tunnel:
+    external: true
