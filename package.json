@@ -8,7 +8,7 @@
     "build": "tsc",
     "tsstart": "ts-node ./src/app.ts",
     "start": "node ./src/app.js",
-    "nd:start": "nodemon --exec npm start"
+    "nd:start": "nodemon --exec npm run tsstart"
   },
   "keywords": [],
   "author": "",
