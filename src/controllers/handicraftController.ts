@@ -3,7 +3,7 @@ import prisma from "../../prisma/client";
 
 // Create Handicraft
 export const createHandicraft = async (req: Request, res: Response) => {
-  const { name, description, image, id_user, waste, tags} = req.body;
+  const { name, description, image, id_user, waste, tags } = req.body;
 
   let id_handicraft = "";
 
@@ -68,7 +68,7 @@ export const createHandicraft = async (req: Request, res: Response) => {
       id_user: id_user,
       waste: waste,
       tags: tags,
-    }
+    };
 
     res.status(201).json({ message: "Successfully created Handicraft", data: payload });
   } catch (error: any) {
@@ -104,14 +104,14 @@ export const getHandicraftById = async (req: Request, res: Response) => {
     const tags = await prisma.tag_handicraft.findMany({ where: { id_handicraft: id } });
     const likes = await prisma.likes.count({ where: { id_handicraft: id } });
     const totalStep = await prisma.detail_handicraft.count({ where: { id_handicraft: id } });
-    
-    const data = { ...handicraft, createdBy : user[0].name, waste: waste.map((waste) => waste.id_waste), tags: tags.map((tag) => tag.id_tag), likes, totalStep };
+
+    const data = { ...handicraft, createdBy: user[0].name, waste: waste.map((waste) => waste.id_waste), tags: tags.map((tag) => tag.id_tag), likes, totalStep };
     const wasteName = await prisma.waste.findMany({ where: { id: { in: waste.map((waste) => waste.id_waste) } } });
     data.waste = wasteName.map((waste) => waste.name);
     const tagsName = await prisma.tag.findMany({ where: { id: { in: tags.map((tag) => tag.id_tag) } } });
     data.tags = tagsName.map((tag) => tag.name);
-    
-    res.status(200).json({ "message": "Successfully fetched Handicraft", data: data });
+
+    res.status(200).json({ message: "Successfully fetched Handicraft", data: data });
   } catch (error) {
     res.status(500).json({ error: "Error fetching handicraft" });
   }

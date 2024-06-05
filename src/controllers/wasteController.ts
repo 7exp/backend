@@ -39,6 +39,17 @@ const uploadFileGCS = async (bucketName: string, file: Express.Multer.File, file
   }
 };
 
+const deleteFileGCS = async (bucketName: string, filePath: string) => {
+  try {
+    const bucket = storageGCS.bucket(bucketName);
+    await bucket.file(filePath).delete();
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting file:", error);
+    throw error;
+  }
+};
+
 export const updateWaste = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -108,17 +119,29 @@ export const getWasteById = async (req: Request, res: Response) => {
 export const deleteWaste = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  if (!id) {
-    return res.status(400).json({ error: "ID is required" });
-  }
-
   try {
-    await prisma.waste.delete({
-      where: { id: id },
-    });
+    // Cari data waste berdasarkan ID
+    const waste = await prisma.waste.findUnique({ where: { id: id } });
 
-    res.status(200).json({ message: `Waste ${id} deleted` });
+    if (!waste) {
+      return res.status(404).json({ error: "Waste not found" });
+    }
+
+    // Ambil URL gambar dari waste
+    const imageUrl = waste.image;
+
+    // Extract the file path from the URL (assuming the file path starts after the bucket name)
+    const filePath = imageUrl.split(`https://storage.googleapis.com/${config.bucketName}/`)[1];
+
+    // Hapus file dari Google Cloud Storage
+    await deleteFileGCS(config.bucketName as string, filePath);
+
+    // Hapus data waste dari database
+    await prisma.waste.delete({ where: { id: id } });
+
+    res.status(200).json({ message: `Waste ${id} deleted successfully` });
   } catch (error) {
-    res.status(500).json({ error: "Error deleting waste" });
+    console.error("Error deleting waste:", error);
+    return res.status(500).json({ error: "Error deleting waste" });
   }
 };
