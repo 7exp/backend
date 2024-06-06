@@ -10,7 +10,7 @@ RUN npm ci
 COPY . .
 RUN apt-get update -y && apt-get install -y openssl
 RUN npx prisma generate
-Run npm run build
+RUN npm run build
 
 FROM node:lts-slim AS runner
 
