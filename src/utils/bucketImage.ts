@@ -6,13 +6,13 @@ const storageGCS = new Storage({
   keyFilename: config.keyFilename,
 });
 
-export const uploadFileGCS = async (bucketName: string, file: Express.Multer.File, fileOutputName: string) => {
+export const uploadFileGCS = async (bucketName: string, file: Express.Multer.File, fileOutputName: string, urlBucket: string) => {
   try {
     // Get a reference to the specified bucket
     const bucket = storageGCS.bucket(bucketName);
 
     // Create a writable stream to upload the file
-    const fileUploadStream = bucket.file(`waste/${fileOutputName}`).createWriteStream({
+    const fileUploadStream = bucket.file(`${urlBucket}/${fileOutputName}`).createWriteStream({
       metadata: {
         contentType: file.mimetype,
       },

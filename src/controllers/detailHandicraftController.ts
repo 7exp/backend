@@ -3,10 +3,10 @@ import prisma from "../../prisma/client";
 
 // create detailHandicraft
 export const createDetailHandicraft = async (req: Request, res: Response) => {
-  const { name, description, image, step_number } = req.body;
+  const { name, description, step_number } = req.body;
   const { id_handicraft } = req.params;
 
-  if (!id_handicraft || !description || !image || !step_number) {
+  if (!id_handicraft || !description || !step_number) {
     return res.status(400).json({ error: "All fields are required" });
   }
 
@@ -26,7 +26,7 @@ export const createDetailHandicraft = async (req: Request, res: Response) => {
       step_number: step_number,
     },
   });
-  
+
   if (step_numberExists.length > 0) {
     return res.status(400).json({ error: "Step number " + step_number + " already exists" });
   }
@@ -37,7 +37,6 @@ export const createDetailHandicraft = async (req: Request, res: Response) => {
         id_handicraft,
         name,
         description,
-        image,
         step_number,
       },
     });
@@ -71,10 +70,10 @@ export const getDetailHandicraft = async (req: Request, res: Response) => {
 //  edit detailHandicraft
 
 export const editDetailHandicraft = async (req: Request, res: Response) => {
-  const { name, description, image} = req.body;
+  const { name, description } = req.body;
   const { id } = req.params;
 
-  if (!name || !description || !image ) {
+  if (!name || !description) {
     return res.status(400).json({ error: "All fields are required" });
   }
 
@@ -86,7 +85,6 @@ export const editDetailHandicraft = async (req: Request, res: Response) => {
       data: {
         name,
         description,
-        image,
       },
     });
 
