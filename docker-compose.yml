@@ -10,7 +10,9 @@ services:
     ports:
       - 5000:5000
     env_file:
-      - stack.env
+      - .env
+    depends_on:
+      - db
     # healthcheck:
     #   test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
     #   interval: 60s
@@ -31,6 +33,21 @@ services:
       - "3306:3306"
     networks:
       - craft-network
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      # - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_PORT=3306
+    ports:
+      - "888:80"
+    networks:
+      - craft-network
+    depends_on:
+      - db
     restart: unless-stopped
 
 networks:
