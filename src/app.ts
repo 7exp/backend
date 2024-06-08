@@ -7,6 +7,7 @@ import detailHandicraftRoutes from "./routes/detailHandicraftRoutes";
 import likeRoutes from "./routes/likeRoutes";
 import wasteRoutes from "./routes/wasteRoutes";
 import imageUploadRoutes from "./routes/imageUploadRoutes";
+import health from "./routes/healthRoutes";
 import { config } from "./config";
 import multer from "multer";
 
@@ -25,6 +26,7 @@ app.use("/handicrafts", handicraftRoutes);
 app.use("/handicrafts/detail", detailHandicraftRoutes);
 app.use("/waste", wasteRoutes);
 app.use("/likes", likeRoutes);
+app.use("/health", health);
 app.use("/image", imageUploadRoutes);
 app.listen(config.port, () => {
   console.log(`Server running on port ${config.port}`);
