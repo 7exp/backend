@@ -14,7 +14,7 @@ RUN npm run build
 
 FROM node:lts-slim AS runner
 
-RUN apt-get update -y && apt-get install -y openssl
+RUN apt-get update -y && apt-get install -y openssl curl
 
 WORKDIR /app
 COPY --from=builder /app/package.json .
@@ -29,7 +29,7 @@ ENV DATABASE_URL=mysql://root:abogoboga@10.1.1.13:3306/project_bacngkit
 ENV GOOGLE_CLIENT_ID=
 ENV GOOGLE_CLIENT_SECRET=
 ENV JWT_SECRET=
-VOLUME ["./key"] 
+VOLUME ["/app/key"] 
 
 EXPOSE 5000
 
