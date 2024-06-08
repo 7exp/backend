@@ -13,7 +13,7 @@ model users {
   email              String               @unique(map: "email") @db.VarChar(255)
   address            String?              @db.VarChar(255)
   password           String?              @db.VarChar(255)
-  image              String?              @db.VarChar(255)
+  image              String?              @db.VarChar(255)  @default("https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png")
   role               Role                 @default(user)
   createdAt          DateTime             @default(now()) @db.Timestamp(0)
   updatedAt          DateTime             @default(now()) @db.Timestamp(0)
@@ -28,22 +28,12 @@ enum Role {
   admin
 }
 
-model Product {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  category  String   @db.VarChar(255)
-  price     Float
-  sold      Int
-  profit    Float
-  createdAt DateTime @default(now()) @db.Timestamp(0)
-  updatedAt DateTime @default(now()) @db.Timestamp(0)
-}
 
 model handicraft {
   id                 String               @id @default(uuid())
   name               String               @db.VarChar(255)
   description        String               @db.Text
-  image              String               @db.VarChar(255)
+  image              String               @db.VarChar(255) @default("")
   id_user            String               @db.VarChar(255)
   createdAt          DateTime             @default(now()) @db.Timestamp(0)
   updatedAt          DateTime             @default(now()) @db.Timestamp(0)
@@ -61,7 +51,7 @@ model detail_handicraft {
   id_handicraft String     @db.VarChar(255)
   name          String     @db.VarChar(255)
   description   String     @db.Text
-  image         String     @db.VarChar(255)
+  image         String     @db.VarChar(255) @default("")
   step_number   Int
   createdAt     DateTime   @default(now()) @db.Timestamp(0)
   updatedAt     DateTime   @default(now()) @db.Timestamp(0)

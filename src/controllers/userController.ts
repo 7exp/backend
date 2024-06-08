@@ -31,17 +31,54 @@ export const getUsersById = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, email, address, role } = req.body;
+  const { name, email, address } = req.body;
   // if user not found return error
   const user = await prisma.users.findUnique({ where: { id: id } });
   if (!user) {
     return res.status(404).json({ message: "User not found" });
   } else {
     const result = await prisma.users.update({
-      data: { name, email, address, role },
+      data: { name, email, address },
       where: { id: id },
     });
     res.json({ message: `Successfully updated user`, data: result });
+  }
+};
+
+// update user role
+export const updateUserRole = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { role } = req.body;
+  // if user not found return error
+  const user = await prisma.users.findUnique({ where: { id: id } });
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  } else {
+    const result = await prisma.users.update({
+      data: { role },
+      where: { id: id },
+    });
+    res.json({ message: `Successfully updated user role`, data: result });
+  }
+};
+
+// update password old password required for update password
+export const updatePassword = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { oldPassword, newPassword } = req.body;
+  // if user not found return error
+  const user = await prisma.users.findUnique({ where: { id: id } });
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  } else {
+    if (oldPassword !== user.password) {
+      return res.status(400).json({ message: "Old password is incorrect" });
+    }
+    const result = await prisma.users.update({
+      data: { password: newPassword },
+      where: { id: id },
+    });
+    res.json({ message: `Successfully updated password`, data: result });
   }
 };
 

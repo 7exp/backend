@@ -1,54 +1,10 @@
 import { Request, Response } from "express";
 import prisma from "../../prisma/client";
 import { config } from "../config";
+// import uuidv4
+import { v4 as uuidv4 } from "uuid";
 
-const { Storage } = require("@google-cloud/storage");
-
-const storageGCS = new Storage({
-  projectId: config.projectId,
-  keyFilename: config.keyFilename,
-});
-
-const uploadFileGCS = async (bucketName: string, file: Express.Multer.File, fileOutputName: string) => {
-  try {
-    // Get a reference to the specified bucket
-    const bucket = storageGCS.bucket(bucketName);
-
-    // Create a writable stream to upload the file
-    const fileUploadStream = bucket.file(`waste/${fileOutputName}`).createWriteStream({
-      metadata: {
-        contentType: file.mimetype,
-      },
-    });
-
-    // Write the buffer to the stream
-    fileUploadStream.end(file.buffer);
-
-    // Wait for the stream to finish
-    await new Promise((resolve, reject) => {
-      fileUploadStream.on("finish", resolve);
-      fileUploadStream.on("error", reject);
-    });
-
-    // Return a successful result
-    return { success: true };
-  } catch (error) {
-    // Handle any errors that occur during the upload process
-    console.error("Error:", error);
-    throw error;
-  }
-};
-
-const deleteFileGCS = async (bucketName: string, filePath: string) => {
-  try {
-    const bucket = storageGCS.bucket(bucketName);
-    await bucket.file(filePath).delete();
-    return { success: true };
-  } catch (error) {
-    console.error("Error deleting file:", error);
-    throw error;
-  }
-};
+import { uploadFileGCS, deleteFileGCS } from "../utils/bucketImage";
 
 export const updateWaste = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -57,10 +13,10 @@ export const updateWaste = async (req: Request, res: Response) => {
   const { name } = req.body; // Mengambil data input lain
 
   const filename = file?.originalname;
-  const fileOutputName = `${id}-${filename}`;
+  const fileOutputName = `${uuidv4()}-${filename}`;
   const bucketName = config.bucketName as string;
 
-  console.log("Received file:", file); // Log the file object
+  // console.log("Received file:", file); // Log the file object
 
   if (!file) {
     return res.status(400).json({ error: "File is required" });
@@ -68,7 +24,7 @@ export const updateWaste = async (req: Request, res: Response) => {
 
   try {
     // Upload file to Google Cloud Storage
-    await uploadFileGCS(bucketName, file as any, fileOutputName);
+    await uploadFileGCS(bucketName, file as any, fileOutputName, "waste");
     const public_url = `https://storage.googleapis.com/${bucketName}/waste/${fileOutputName}`;
 
     if (!id) {
@@ -86,21 +42,21 @@ export const updateWaste = async (req: Request, res: Response) => {
 
     res.status(200).json({ message: `Waste ${id} updated`, data: updatedWaste });
   } catch (error) {
-    console.error("Error uploading file or updating database:", error);
+    // console.error("Error uploading file or updating database:", error);
     return res.status(500).json({ error: "Error uploading file or updating database" });
   }
 };
 
 // Create Waste
 export const createWaste = async (req: Request, res: Response) => {
-  const file = req.file;
+  const file = req.file as Express.Multer.File;
   const { name } = req.body; // Mengambil data input lain
 
   const filename = file?.originalname;
-  const fileOutputName = `${Date.now()}-${filename}`;
+  const fileOutputName = `${uuidv4()}-${filename}`;
   const bucketName = config.bucketName as string;
 
-  console.log("Received file:", file); // Log the file object
+  // console.log("Received file:", file); // Log the file object
 
   if (!file) {
     return res.status(400).json({ error: "File is required" });
@@ -108,7 +64,7 @@ export const createWaste = async (req: Request, res: Response) => {
 
   try {
     // Upload file to Google Cloud Storage
-    await uploadFileGCS(bucketName, file as any, fileOutputName);
+    await uploadFileGCS(bucketName, file as any, fileOutputName, "waste");
     const public_url = `https://storage.googleapis.com/${bucketName}/waste/${fileOutputName}`;
 
     // Create new waste record in the database
@@ -121,7 +77,17 @@ export const createWaste = async (req: Request, res: Response) => {
 
     res.status(201).json({ message: "Waste created", data: newWaste });
   } catch (error) {
-    console.error("Error uploading file or creating database record:", error);
+    // console.error("Error uploading file or creating database record:", error);
+
+    // If there's an error after the file upload, delete the file from GCS
+    const filePath = `waste/${fileOutputName}`;
+    try {
+      await deleteFileGCS(bucketName, filePath);
+      console.log("Rolled back file upload");
+    } catch (rollbackError) {
+      console.error("Error rolling back file upload:", rollbackError);
+    }
+
     return res.status(500).json({ error: "Error uploading file or creating database record" });
   }
 };

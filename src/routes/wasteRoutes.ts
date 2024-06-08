@@ -1,17 +1,9 @@
 import { Router } from "express";
 import { accessValidationAdmin, accessValidation } from "../middleware/authMiddleware";
 import { createWaste, getAllWastes, getWasteById, updateWaste, deleteWaste } from "../controllers/wasteController";
-import multer from "multer";
+import { upload } from "../utils/multer";
 
 const router = Router();
-
-const storage = multer.memoryStorage();
-const upload = multer({
-  storage: storage,
-  //   limits: {
-  //     fileSize: 1024 * 1024 * 5, 5 MB
-  //   },
-});
 
 router.post("/", accessValidationAdmin, upload.single("file"), createWaste); // Apply multer middleware here
 router.get("/", accessValidation, getAllWastes);
