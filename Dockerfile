@@ -24,6 +24,8 @@ COPY --from=builder /app/package-lock.json .
 # COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/dist ./
 COPY --from=builder /app/node_modules ./node_modules
+# make key directory
+RUN mkdir -p /app/key
 
 ENV DATABASE_URL=mysql://root:abogoboga@10.1.1.13:3306/project_bacngkit
 ENV GOOGLE_CLIENT_ID=
