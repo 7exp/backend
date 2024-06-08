@@ -6,7 +6,7 @@ import { updateImageHandicraft, updateImageDetailHandicraft } from "../controlle
 
 const router = Router();
 
-router.put("/:id/updateHandicraft", accessValidation, handicraftValidation, upload.single("image"), updateImageHandicraft);
-router.put("/:id/updateDetailHandicraft", accessValidation, handicraftValidation, upload.single("image"), updateImageDetailHandicraft);
+router.put("/handicraft/:id", accessValidation, handicraftValidation, upload.single("image"), updateImageHandicraft);
+router.put("/detailhandicraft/:id", accessValidation, handicraftValidation, upload.single("image"), updateImageDetailHandicraft);
 
 export default router;

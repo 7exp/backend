@@ -69,12 +69,12 @@ export const register = async (req: Request, res: Response) => {
   if (user) {
     return res.status(400).json({ message: "User already exists" });
   } else {
-  await prisma.users.create({ data: { name, email, password: hashedPassword } });
-  const user = await prisma.users.findUnique({ where: { email } });
-  if (user) {
-    const data = { id: user.id, name: user.name, email: user.email };
-    res.json({ message: "user created", data });
-  }
+    await prisma.users.create({ data: { name, email, password: hashedPassword } });
+    const user = await prisma.users.findUnique({ where: { email } });
+    if (user) {
+      const data = { id: user.id, name: user.name, email: user.email };
+      res.json({ message: "user created", data });
+    }
   }
 };
 
@@ -108,7 +108,12 @@ export const logout = async (req: Request, res: Response) => {
   if (!token) {
     return res.status(403).json({ message: "Token not found" });
   }
-  return res.json({ message: "Logout success" });
+  try {
+    res.clearCookie("token");
+    return res.json({ message: "Logout success" });
+  } catch (error) {
+    return res.status(500).json({ message: "Logout failed" });
+  }
 };
 
 export const getUserInfo = async (req: Request, res: Response) => {
