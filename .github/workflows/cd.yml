@@ -20,4 +20,5 @@ jobs:
                   key: ${{ secrets.SSH_KEY }}
                   script: |
                     cd ~/backend
+                    git pull
                     sh deploy.sh

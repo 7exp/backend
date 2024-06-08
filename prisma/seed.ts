@@ -998,4 +998,22 @@ async function main() {
       },
     },
   });
+  console.log(`Created user with id: ${user.id}`);
+
+  const waste = await prisma.waste.upsert({
+    where: { name: "plastic" },
+    update: {},
+    create: {
+      name: "plastic",
+    },
+  });
 }
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
