@@ -4,4 +4,4 @@ node_modules
 dist
 compose
 bucket-425203-62e8f72a3fa0.json
-key
+key/gcp-key.json
