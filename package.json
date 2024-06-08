@@ -10,6 +10,9 @@
     "start": "node ./src/app.js",
     "nd:start": "nodemon --exec npm run tsstart"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

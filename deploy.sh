@@ -11,17 +11,6 @@ error_message () {
   exit 1
 }
 
-# Navigate to the backend directory
-cd ~/backend || error_message "Failed to change directory"
-
-# Update the Git repository
-git pull
-if [ $? -eq 0 ]; then
-  success_message "Git repository updated"
-else
-  error_message "Failed to update Git repository"
-fi
-
 # Pull the latest Docker images
 sudo docker-compose pull
 if [ $? -eq 0 ]; then
