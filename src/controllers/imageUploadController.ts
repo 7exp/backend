@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import prisma from "../../prisma/client";
-import { v4 as uuidv4 } from "uuid";
 import { uploadFileGCS, deleteFileGCS } from "../utils/bucketImage";
 import { config } from "../config";
+
+const ALLOWED_EXTENSIONS = [".png", ".jpg", ".jpeg", ".PNG", ".JPG", ".JPEG"];
 
 // image upload for handicraft
 export const updateImageHandicraft = async (req: Request, res: Response) => {
@@ -24,8 +25,14 @@ export const updateImageHandicraft = async (req: Request, res: Response) => {
     return res.status(404).json({ error: "Handicraft not found" });
   }
 
-  const filename = image?.originalname;
-  const fileOutputName = `${uuidv4()}-${filename}`;
+  // use id as file name
+  const fileExtension = image.originalname.split(".").pop()?.toLowerCase();
+  if (!fileExtension || !ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
+    return res.status(400).json({ error: "Invalid file type. Only PNG, JPG, and JPEG are allowed." });
+  }
+
+  // Construct the file output name using the id and the file extension
+  const fileOutputName = `${id}.${fileExtension}`;
 
   try {
     // Upload new image to GCS
@@ -87,8 +94,14 @@ export const updateImageDetailHandicraft = async (req: Request, res: Response) =
     return res.status(404).json({ error: "Detail Handicraft not found" });
   }
 
-  const filename = image?.originalname;
-  const fileOutputName = `${uuidv4()}-${filename}`;
+  // use id as file name
+  const fileExtension = image.originalname.split(".").pop()?.toLowerCase();
+  if (!fileExtension || !ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
+    return res.status(400).json({ error: "Invalid file type. Only PNG, JPG, and JPEG are allowed." });
+  }
+
+  // Construct the file output name using the id and the file extension
+  const fileOutputName = `${id}.${fileExtension}`;
 
   try {
     // Upload new image to GCS
@@ -150,8 +163,14 @@ export const updateImageUser = async (req: Request, res: Response) => {
     return res.status(404).json({ error: "User not found" });
   }
 
-  const filename = image?.originalname;
-  const fileOutputName = `${uuidv4()}-${filename}`;
+  // use id as file name
+  const fileExtension = image.originalname.split(".").pop()?.toLowerCase();
+  if (!fileExtension || !ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
+    return res.status(400).json({ error: "Invalid file type. Only PNG, JPG, and JPEG are allowed." });
+  }
+
+  // Construct the file output name using the id and the file extension
+  const fileOutputName = `${id}.${fileExtension}`;
 
   try {
     // Upload new image to GCS
