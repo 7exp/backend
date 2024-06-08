@@ -6,8 +6,8 @@ import { updateImageHandicraft, updateImageDetailHandicraft, updateImageUser } f
 
 const router = Router();
 
-router.put("/:id/updateHandicraft", accessValidation, handicraftValidation, upload.single("image"), updateImageHandicraft);
-router.put("/:id/updateDetailHandicraft", accessValidation, handicraftValidation, upload.single("image"), updateImageDetailHandicraft);
-router.put("/:id/updateUser", accessValidation, upload.single("image"), updateImageUser);
+router.put("/handicraft/:id", accessValidation, handicraftValidation, upload.single("image"), updateImageHandicraft);
+router.put("/detailhandicraft/:id", accessValidation, handicraftValidation, upload.single("image"), updateImageDetailHandicraft);
+router.put("/user/:id", accessValidation, upload.single("image"), updateImageUser);
 
 export default router;
