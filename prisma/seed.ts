@@ -998,4 +998,37 @@ async function main() {
       },
     },
   });
+  console.log(`Created user with id: ${user.id}`);
+
+  const waste = await prisma.waste.createMany({
+    data: [
+      {
+        name: "cardboard box",
+      },
+      {
+        name: "plastic",
+      },
+      {
+        name: "plastic bottles",
+      },
+      {
+        name: "paper",
+      },
+      {
+        name: "canned drink",
+      },
+    ],
+    skipDuplicates: true,
+  });
+  console.log(`Created many`); 
+  
 }
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
