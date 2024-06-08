@@ -40,7 +40,7 @@ services:
     container_name: phpmyadmin
     environment:
       # - PMA_ARBITRARY=1
-      - PMA_HOST=service-db
+      - PMA_HOST=db
       - PMA_PORT=3306
     ports:
       - "888:80"
