@@ -13,6 +13,8 @@ services:
       - .env
     depends_on:
       - db
+    volumes: 
+      - ./key:./key
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 60s
