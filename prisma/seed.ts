@@ -1000,13 +1000,28 @@ async function main() {
   });
   console.log(`Created user with id: ${user.id}`);
 
-  const waste = await prisma.waste.upsert({
-    where: { name: "plastic" },
-    update: {},
-    create: {
-      name: "plastic",
-    },
+  const waste = await prisma.waste.createMany({
+    data: [
+      {
+        name: "cardboard box",
+      },
+      {
+        name: "plastic",
+      },
+      {
+        name: "plastic bottles",
+      },
+      {
+        name: "paper",
+      },
+      {
+        name: "canned drink",
+      },
+    ],
+    skipDuplicates: true,
   });
+  console.log(`Created many`); 
+  
 }
 main()
   .then(async () => {
