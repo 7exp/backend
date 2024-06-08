@@ -29,7 +29,7 @@ ENV DATABASE_URL=mysql://root:abogoboga@10.1.1.13:3306/project_bacngkit
 ENV GOOGLE_CLIENT_ID=
 ENV GOOGLE_CLIENT_SECRET=
 ENV JWT_SECRET=
-# VOLUME ["/app/images"]
+VOLUME ["./key"] 
 
 EXPOSE 5000
 
