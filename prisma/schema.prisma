@@ -121,7 +121,7 @@ model detail_recognition {
 model waste {
   id               String             @id @default(uuid())
   name             String             @unique @db.VarChar(255)
-  image            String             @db.VarChar(255)
+  image            String             @db.VarChar(255) @default("")
   createdAt        DateTime           @default(now()) @db.Timestamp(0)
   updatedAt        DateTime           @default(now()) @db.Timestamp(0)
   waste_handicraft waste_handicraft[]
