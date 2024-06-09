@@ -13,7 +13,7 @@ services:
       - .env
     depends_on:
       - db
-    volumes: 
+    volumes:
       - ./key:./key
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]

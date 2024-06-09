@@ -5,7 +5,95 @@ import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
 const userid = "aec9d6eb-dbbf-425a-89ad-16cbb438c039";
+const wasteid = [
+  uuidv4(),
+  uuidv4(),
+  uuidv4(),
+  uuidv4(),
+  uuidv4(),
+]
+const tagid = [
+  uuidv4(),
+  uuidv4(),
+  uuidv4(),
+  uuidv4(),
+  uuidv4(),
+  uuidv4(),
+  uuidv4(),
+  uuidv4(),
+  uuidv4(),
+]
 async function main() {
+  const waste = await prisma.waste.createMany({
+    data: [
+      {
+        id: wasteid[0],
+        name: "Cardboard Box",
+      },
+      {
+        id: wasteid[1],
+        name: "Plastic",
+      },
+      {
+        id: wasteid[2],
+        name: "Plastic Bottles",
+      },
+      {
+        id: wasteid[3],
+        name: "Paper",
+      },
+      {
+        id: wasteid[4],
+        name: "Panned Drink",
+      },
+    ],
+    skipDuplicates: true,
+  });
+  console.log(`Created many waste with ids: ${waste}`);
+
+  const tag = await prisma.tag.createMany({
+    data: [
+      {
+        id: tagid[0],
+        name: "Tools",
+      },
+      {
+        id: tagid[1],
+        name: "Accessories",
+      },
+      {
+        id: tagid[2],
+        name: "Lighting",
+      },
+      {
+        id: tagid[3],
+        name: "Toys",
+      },
+      {
+        id: tagid[4],
+        name: "Fashion",
+      },
+      {
+        id: tagid[5],
+        name: "Decoration",
+      },
+      {
+        id: tagid[6],
+        name: "Art",
+      },
+      {
+        id: tagid[7],
+        name: "Camping",
+      },
+      {
+        id: tagid[8],
+        name: "Garden",
+      }
+    ],
+    skipDuplicates: true,
+  });
+  console.log(`Created many tag with ids: ${tag}`);
+
   const user = await prisma.users.upsert({
     where: { id: userid },
     update: {},
@@ -19,7 +107,7 @@ async function main() {
       handicraft: {
         create: [
           {
-            name: "Cute Soda Can Hair Clip,Fashion",
+            name: "Cute Soda Can Hair Clip",
             description:
               "I was looking for something to hold my hair back for a minute and i looked on my desk...i found a can. so i made this little craft! its so easy and it even actually works! so give it a try! oh, and its kinda fashionable too ",
             image: "Fashion,https://content.instructables.com/F5H/KSOS/GGPF3E5O/F5HKSOSGGPF3E5O.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
@@ -73,6 +161,23 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[4],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[1],
+                },
+                {
+                  id_tag: tagid[4],
+                },
+              ]
+            }
           },
           {
             name: "Can and Bottle Flower Dish",
@@ -158,6 +263,23 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[2],
+                },
+                {
+                  id_waste: wasteid[4],
+                },
+              ]
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[5],
+                },
+              ],
+            }
           },
           {
             name: "Chalk Board Paint Can",
@@ -233,6 +355,20 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[4],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[0],
+                }
+              ],
+            }
           },
           {
             name: "Make a Laptop Stand Out of a Soda Can",
@@ -274,9 +410,26 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[4],
+                },
+              ]
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[0],
+                },
+                {
+                  id_tag: tagid[1],
+                },
+              ],
+            }
           },
           {
-            name: "Alcohol Fueled Soda Bottle Rocket,Rockets",
+            name: "Alcohol Fueled Soda Bottle Rocket",
             description: "Contest, The Alcohol Fueled Soda Bottle Rocket, the most awesome thing you can do with a soda bottle other than empty it!",
             image: "https://content.instructables.com/F1P/DXOI/F3SYTKMR/F1PDXOIF3SYTKMR.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
             detail_handicraft: {
@@ -324,6 +477,20 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[2],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[3],
+                },
+              ],
+            }
           },
           {
             name: "Eco-safe Hydro/pressure-powered Bottle Rocket With No Cost!",
@@ -357,9 +524,23 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[2],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[3],
+                },
+              ],
+            }
           },
           {
-            name: "Can Stove,Camping",
+            name: "Can Stove",
             description: "Build a backpacking stove out of two aluminum cans: design is strong, reliable, and extrordinarily lightweight",
             image: "https://content.instructables.com/F6L/6D5H/TKKEP27ZXDX/F6L6D5HTKKEP27ZXDX.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
             detail_handicraft: {
@@ -457,9 +638,26 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[4],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[0],
+                },
+                {
+                  id_tag: tagid[7],
+                },
+              ],
+            }
           },
           {
-            name: "Can Lanterns,Lighting",
+            name: "Can Lanterns",
             description: "Recycle your used drinks cans into potential fire hazards!! A modern take on the paper lantern... now even shinier",
             image: "https://content.instructables.com/FIX/KIRV/G4EEP2LL67Q/FIXKIRVG4EEP2LL67Q.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
             detail_handicraft: {
@@ -520,6 +718,23 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[4],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[0],
+                },
+                {
+                  id_tag: tagid[2],
+                },
+              ],
+            }
           },
           {
             name: "Easy to Make Bottle Head Launcher!",
@@ -565,9 +780,23 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[2],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[3],
+                },
+              ],
+            }
           },
           {
-            name: "Bottle Rocket Pistol,Rockets",
+            name: "Bottle Rocket Pistol",
             description:
               "There are plenty of bottle rocket plans out there, but I hadn't seen anyone use a quick release coupler as a launch mechanism before. Plus, all other launchers are so large, it seemed to me all you need is the coupler and a valve. I decided to make two so me and the girl can go to the park and have a shootout",
             image: "https://content.instructables.com/FSP/ANL0/ZA6EUN32ROQ/FSPANL0ZA6EUN32ROQ.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
@@ -639,9 +868,23 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[2],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[3],
+                },
+              ],
+            }
           },
           {
-            name: "Bottle Gun,Launchers",
+            name: "Bottle Gun",
             description: "use this on ur friends to scare them, they will back away and cover their face once they see it pointing at them.  its a lame instrutable but hey, it might help some people",
             image: "https://content.instructables.com/FAH/FKVX/7X0ET9K5H7Y/FAHFKVX7X0ET9K5H7Y.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
             detail_handicraft: {
@@ -683,7 +926,7 @@ async function main() {
             },
           },
           {
-            name: "Fun Water Bottle Gun,Water",
+            name: "Fun Water Bottle Gun",
             description:
               "this is my first instructable by the way so I made a simple amusing one.\nAnyone who put's grandad's eye out or anyone else's eye out or damages them in some odd way with idea takes full responsiblity by using this information to create the item and effect ilustrated",
             image: "https://content.instructables.com/FHC/803B/F4W8PPN7/FHC803BF4W8PPN7.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
@@ -711,6 +954,20 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[2],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[3],
+                },
+              ],
+            }
           },
           {
             name: "How to Make a Soda Can Rocket",
@@ -751,9 +1008,23 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[4],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[3],
+                },
+              ],
+            }
           },
           {
-            name: "Soda Can Stove,Camping",
+            name: "Soda Can Stove",
             description:
               "Today i'm going to show you how to build a portable alcohol stove made from two cans\nit burns great. ThereÂ isÂ a lot of steps but it does notÂ take more 10-15 minutes to build.\nÂ p.s. This is my firist instructable, so if there is some thingÂ to make this better please tell me",
             image: "https://content.instructables.com/F4X/3PF1/GDVZEZBU/F4X3PF1GDVZEZBU.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
@@ -843,6 +1114,23 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[4],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[0],
+                },
+                {
+                  id_tag: tagid[7],
+                }
+              ],
+            }
           },
           {
             name: "Night Stand Bottle Light",
@@ -893,6 +1181,26 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[3],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[0],
+                },
+                {
+                  id_tag: tagid[1],
+                },
+                {
+                  id_tag: tagid[5],
+                }
+              ],
+            }
           },
           {
             name: "Water Bottle Sprinkler Cap",
@@ -924,105 +1232,100 @@ async function main() {
                 },
               ],
             },
-          },
-          {
-            name: "How to Make a Vodka Lamp (or Any Other Booze Bottle Light Up)",
-            description:
-              "This instructable is very easy and requires no soldering, no knowledge of electronics, heavy drinking and a lot of friends . \nI thought of this because I couldn't cut off the bottoms of bottles without slicing off my own hand and i don't know how to solder and make LEDs work . I'll promise to learn how to solder. No really, shoon, after finishiing thish bottle.",
-            image: "https://content.instructables.com/FG9/JUY3/F5Y3YUF8/FG9JUY3F5Y3YUF8.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-            detail_handicraft: {
+            waste_handicraft: {
               create: [
                 {
-                  step_number: 1,
-                  image: "",
-                  name: "Step 1: Crafting staples",
-                  description:
-                    "It's more like how to make a Coaster Lamp. Using coasters and a led push button lite, you could easily make a Vodka bottle or any other object that is translucent like a glass into a lamp! This instructable is very easy and requires no soldering, no knowledge of electronics, heavy drinking and a lot of friends (optional for the drinking part). I thought of this because I couldn't cut off the bottoms of bottles without slicing off my own hand and i don't know how to solder and make LEDs work . I'll promise to learn how to solder. No really, shoon, after finishiing thish bottle. hic~",
-                },
-                {
-                  step_number: 2,
-                  image: "https://content.instructables.com/F2O/KM3C/F5Y3YUEZ/F2OKM3CF5Y3YUEZ.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-                  name: "Step 2: Gathering Your Materials: the Bottle",
-                  description:
-                    "This is my favorite step of this instructable: Decide what kind of bottle you'll have as your lamp. I chose the Absolut bottles because they are rather iconic and come in frosted versions which i find work best (and delicious in flavors too). Gather all your friends for a party but make should you stay sober enough to pocket the empty bottles later on. Of course you could put a full, brand new Vodka bottle on your coaster lamp but that's a shame isin't it? and sharing is caring, heh.",
-                },
-                {
-                  step_number: 3,
-                  image: "https://content.instructables.com/F6D/DL6D/F5Y3YUG3/F6DDL6DF5Y3YUG3.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-                  name: "Step 3: Materials You'll Need",
-                  description:
-                    "After you've recovered from your hangover, these are the materials you'll need. 1. A cutting mat 2. A cutter (a good sharp one works best) 3. about 9 coasters, or more if you want them stacked higher 4. Any Led push light thingy. I got this from Osram, called 'dot-it' it has 3 very bright leds inside and looks lovely. you push the lights and they switch on, you push them again to switch it off. 5. about 20 minutes, or you cut slowly like me, an hour.",
-                },
-                {
-                  step_number: 4,
-                  image: "https://content.instructables.com/F4A/VKR0/F5Y3YUET/F4AVKR0F5Y3YUET.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-                  name: "Step 4: Trace a Circle Around the Coaster",
-                  description:
-                    "Put the push light on a coaster and trace around it. I wouldn't be totally accurate about it being centered. It will look more natural like a stack of coasters in the day. and no one would guess it's a lamp.",
-                },
-                {
-                  step_number: 5,
-                  image: "https://content.instructables.com/FXW/SAZ7/F5Y3YUF4/FXWSAZ7F5Y3YUF4.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
-                  name: "Step 5: Continue Doing So Until You Get About 8 Coasters",
-                  description: "Cut them out and repeat. Trace and cut until you get about 8 rings.",
-                },
-                {
-                  step_number: 6,
-                  image: "https://content.instructables.com/FF2/RRXN/F5Y3YUEP/FF2RRXNF5Y3YUEP.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-                  name: "Step 6: Cut a Smaller Hole",
-                  description: "Cut a smaller hole just for the light button. You don't really need to do this step but I think it looks better this way.",
-                },
-                {
-                  step_number: 7,
-                  image: "https://content.instructables.com/F36/R5TF/F5Y3YUF9/F36R5TFF5Y3YUF9.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-                  name: "Step 7: Building the Lamp Base",
-                  description: "Push the coaster rings through the light.",
-                },
-                {
-                  step_number: 8,
-                  image: "https://content.instructables.com/F45/PPT2/F5Y3YUF0/F45PPT2F5Y3YUF0.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-                  name: "Step 8: Base Done",
-                  description:
-                    "Add the coaster with the smaller hole on top and tada! Your lamp base is done. Optional: I've put some Absolut vodka text on the back of the light as it came with some sticky backing that I didn't need to use and so I covered it up.",
-                },
-                {
-                  step_number: 9,
-                  image: "https://content.instructables.com/F2K/KXS6/F5Y3YUF2/F2KKXS6F5Y3YUF2.jpg?auto=web",
-                  name: "Step 9: Put Bottle and Top and Finished",
-                  description: "Place your bottle on top and you're done! Congratulations!",
+                  id_waste: wasteid[2],
                 },
               ],
             },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[1],
+                },
+                {
+                  id_tag: tagid[8],
+                }
+              ],
+            }
           },
+          // {
+          //   name: "How to Make a Vodka Lamp (or Any Other Booze Bottle Light Up)",
+          //   description:
+          //     "This instructable is very easy and requires no soldering, no knowledge of electronics, heavy drinking and a lot of friends . \nI thought of this because I couldn't cut off the bottoms of bottles without slicing off my own hand and i don't know how to solder and make LEDs work . I'll promise to learn how to solder. No really, shoon, after finishiing thish bottle.",
+          //   image: "https://content.instructables.com/FG9/JUY3/F5Y3YUF8/FG9JUY3F5Y3YUF8.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+          //   detail_handicraft: {
+          //     create: [
+          //       {
+          //         step_number: 1,
+          //         image: "",
+          //         name: "Step 1: Crafting staples",
+          //         description:
+          //           "It's more like how to make a Coaster Lamp. Using coasters and a led push button lite, you could easily make a Vodka bottle or any other object that is translucent like a glass into a lamp! This instructable is very easy and requires no soldering, no knowledge of electronics, heavy drinking and a lot of friends (optional for the drinking part). I thought of this because I couldn't cut off the bottoms of bottles without slicing off my own hand and i don't know how to solder and make LEDs work . I'll promise to learn how to solder. No really, shoon, after finishiing thish bottle. hic~",
+          //       },
+          //       {
+          //         step_number: 2,
+          //         image: "https://content.instructables.com/F2O/KM3C/F5Y3YUEZ/F2OKM3CF5Y3YUEZ.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+          //         name: "Step 2: Gathering Your Materials: the Bottle",
+          //         description:
+          //           "This is my favorite step of this instructable: Decide what kind of bottle you'll have as your lamp. I chose the Absolut bottles because they are rather iconic and come in frosted versions which i find work best (and delicious in flavors too). Gather all your friends for a party but make should you stay sober enough to pocket the empty bottles later on. Of course you could put a full, brand new Vodka bottle on your coaster lamp but that's a shame isin't it? and sharing is caring, heh.",
+          //       },
+          //       {
+          //         step_number: 3,
+          //         image: "https://content.instructables.com/F6D/DL6D/F5Y3YUG3/F6DDL6DF5Y3YUG3.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+          //         name: "Step 3: Materials You'll Need",
+          //         description:
+          //           "After you've recovered from your hangover, these are the materials you'll need. 1. A cutting mat 2. A cutter (a good sharp one works best) 3. about 9 coasters, or more if you want them stacked higher 4. Any Led push light thingy. I got this from Osram, called 'dot-it' it has 3 very bright leds inside and looks lovely. you push the lights and they switch on, you push them again to switch it off. 5. about 20 minutes, or you cut slowly like me, an hour.",
+          //       },
+          //       {
+          //         step_number: 4,
+          //         image: "https://content.instructables.com/F4A/VKR0/F5Y3YUET/F4AVKR0F5Y3YUET.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+          //         name: "Step 4: Trace a Circle Around the Coaster",
+          //         description:
+          //           "Put the push light on a coaster and trace around it. I wouldn't be totally accurate about it being centered. It will look more natural like a stack of coasters in the day. and no one would guess it's a lamp.",
+          //       },
+          //       {
+          //         step_number: 5,
+          //         image: "https://content.instructables.com/FXW/SAZ7/F5Y3YUF4/FXWSAZ7F5Y3YUF4.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+          //         name: "Step 5: Continue Doing So Until You Get About 8 Coasters",
+          //         description: "Cut them out and repeat. Trace and cut until you get about 8 rings.",
+          //       },
+          //       {
+          //         step_number: 6,
+          //         image: "https://content.instructables.com/FF2/RRXN/F5Y3YUEP/FF2RRXNF5Y3YUEP.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+          //         name: "Step 6: Cut a Smaller Hole",
+          //         description: "Cut a smaller hole just for the light button. You don't really need to do this step but I think it looks better this way.",
+          //       },
+          //       {
+          //         step_number: 7,
+          //         image: "https://content.instructables.com/F36/R5TF/F5Y3YUF9/F36R5TFF5Y3YUF9.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+          //         name: "Step 7: Building the Lamp Base",
+          //         description: "Push the coaster rings through the light.",
+          //       },
+          //       {
+          //         step_number: 8,
+          //         image: "https://content.instructables.com/F45/PPT2/F5Y3YUF0/F45PPT2F5Y3YUF0.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+          //         name: "Step 8: Base Done",
+          //         description:
+          //           "Add the coaster with the smaller hole on top and tada! Your lamp base is done. Optional: I've put some Absolut vodka text on the back of the light as it came with some sticky backing that I didn't need to use and so I covered it up.",
+          //       },
+          //       {
+          //         step_number: 9,
+          //         image: "https://content.instructables.com/F2K/KXS6/F5Y3YUF2/F2KKXS6F5Y3YUF2.jpg?auto=web",
+          //         name: "Step 9: Put Bottle and Top and Finished",
+          //         description: "Place your bottle on top and you're done! Congratulations!",
+          //       },
+          //     ],
+          //   },
+          // },
         ],
       },
     },
   });
   console.log(`Created user with id: ${user.id}`);
-
-  const waste = await prisma.waste.createMany({
-    data: [
-      {
-        name: "cardboard box",
-      },
-      {
-        name: "plastic",
-      },
-      {
-        name: "plastic bottles",
-      },
-      {
-        name: "paper",
-      },
-      {
-        name: "canned drink",
-      },
-    ],
-    skipDuplicates: true,
-  });
-  console.log(`Created many`); 
-  
 }
+
 main()
   .then(async () => {
     await prisma.$disconnect();
