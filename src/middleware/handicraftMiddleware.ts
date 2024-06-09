@@ -26,7 +26,6 @@ export const handicraftValidation = async (req: Request, res: Response, next: Ne
         id_user: id_user,
       },
     });
-    console.log(handicraft);
     if (!handicraft) {
       return res.status(403).json({ message: "You are not authorized to access this handicraft" });
     }

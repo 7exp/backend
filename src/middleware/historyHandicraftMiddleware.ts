@@ -15,13 +15,13 @@ interface ValidationRequest extends Request {
 export const historyHandicraftValidation = async (req: Request, res: Response, next: NextFunction) => {
   const validationReq = req as ValidationRequest;
 
-  const { id_history } = req.params;
+  const { id } = req.params;
   const id_user = validationReq.userData?.id;
 
   try {
     const historyHandicraft = await prisma.history_handicraft.findFirst({
       where: {
-        id: id_history,
+        id: id,
         id_user: id_user,
       },
     });
