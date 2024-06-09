@@ -13,7 +13,7 @@ model users {
   email              String               @unique(map: "email") @db.VarChar(255)
   address            String?              @db.VarChar(255)
   password           String?              @db.VarChar(255)
-  image              String?              @db.VarChar(255)  @default("https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png")
+  image              String?              @default("https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png") @db.VarChar(255)
   role               Role                 @default(user)
   createdAt          DateTime             @default(now()) @db.Timestamp(0)
   updatedAt          DateTime             @default(now()) @db.Timestamp(0)
@@ -28,12 +28,11 @@ enum Role {
   admin
 }
 
-
 model handicraft {
   id                 String               @id @default(uuid())
   name               String               @db.VarChar(255)
   description        String               @db.Text
-  image              String               @db.VarChar(255) @default("")
+  image              String               @default("") @db.VarChar(255)
   id_user            String               @db.VarChar(255)
   createdAt          DateTime             @default(now()) @db.Timestamp(0)
   updatedAt          DateTime             @default(now()) @db.Timestamp(0)
@@ -51,7 +50,7 @@ model detail_handicraft {
   id_handicraft String     @db.VarChar(255)
   name          String     @db.VarChar(255)
   description   String     @db.Text
-  image         String     @db.VarChar(255) @default("")
+  image         String     @default("") @db.VarChar(255)
   step_number   Int
   createdAt     DateTime   @default(now()) @db.Timestamp(0)
   updatedAt     DateTime   @default(now()) @db.Timestamp(0)
@@ -121,7 +120,7 @@ model detail_recognition {
 model waste {
   id               String             @id @default(uuid())
   name             String             @unique @db.VarChar(255)
-  image            String             @db.VarChar(255) @default("")
+  image            String             @default("") @db.VarChar(255)
   createdAt        DateTime           @default(now()) @db.Timestamp(0)
   updatedAt        DateTime           @default(now()) @db.Timestamp(0)
   waste_handicraft waste_handicraft[]
