@@ -66,6 +66,7 @@ export const createHandicraft = async (req: Request, res: Response) => {
       id: id_handicraft,
       name: name,
       description: description,
+      Image: newHandicraft.image,
       id_user: id_user,
       waste: waste,
       tags: tags,
@@ -253,24 +254,52 @@ export const searchHandicraft = async (req: Request, res: Response) => {
   const { query } = req.query;
 
   try {
-    const handicrafts = await prisma.handicraft.findMany({
-      where: {
-        OR: [
-          {
-            name: {
-              contains: query as string,
-            },
-          },
-          {
-            description: {
-              contains: query as string,
-            },
-          },
-        ],
-      },
-    });
+    let handicrafts: any[] = [];
+    if (query) {
+      handicrafts = await prisma.handicraft.findMany({
+        where: {
+          OR: [
+            { name: { contains: query as string} },
+            { description: { contains: query as string} },
+          ],
+        },
+      });
+      // query search on waste and tags and add to handicrafts
+      const waste = await prisma.waste.findMany({ where: { name: { contains: query as string } } });
+      const tag = await prisma.tag.findMany({ where: { name: { contains: query as string } } });
+      const wasteHandicraft = await prisma.waste_handicraft.findMany({ where: { id_waste: { in: waste.map((waste) => waste.id) } } });
+      const tagHandicraft = await prisma.tag_handicraft.findMany({ where: { id_tag: { in: tag.map((tag) => tag.id) } } });
+      const handicraftsWaste = await prisma.handicraft.findMany({ where: { id: { in: wasteHandicraft.map((waste) => waste.id_handicraft) } } });
+      const handicraftsTag = await prisma.handicraft.findMany({ where: { id: { in: tagHandicraft.map((tag) => tag.id_handicraft) } } });
+      handicrafts = [...handicrafts, ...handicraftsWaste, ...handicraftsTag];
 
-    res.status(200).json({ data: handicrafts });
+      handicrafts = await Promise.all(
+        handicrafts.map(async (handicraft) => {
+          const user = await prisma.users.findMany({ where: { id: handicraft.id_user } });
+          const waste = await prisma.waste_handicraft.findMany({ where: { id_handicraft: handicraft.id } });
+          const tags = await prisma.tag_handicraft.findMany({ where: { id_handicraft: handicraft.id } });
+          const likes = await prisma.likes.count({ where: { id_handicraft: handicraft.id } });
+          const totalStep = await prisma.detail_handicraft.count({ where: { id_handicraft: handicraft.id } });
+
+          const data = { ...handicraft, createdBy: user[0].name, waste: waste.map((waste) => waste.id_waste), tags: tags.map((tag) => tag.id_tag), likes, totalStep };
+          const wasteName = await prisma.waste.findMany({ where: { id: { in: waste.map((waste) => waste.id_waste) } } });
+          data.waste = wasteName.map((waste) => waste.name);
+          const tagsName = await prisma.tag.findMany({ where: { id: { in: tags.map((tag) => tag.id_tag) } } });
+          data.tags = tagsName.map((tag) => tag.name);
+
+          handicrafts = handicrafts.filter((handicraft) => handicraft.id !== data.id);
+          if (handicrafts.length < 20) handicrafts.push(data);
+          return data;
+        })
+      );
+    }
+
+    if (handicrafts.length === 0) {
+      return res.status(404).json({ message: "No Handicraft Found" });
+    }
+    
+
+    res.status(200).json({ mesaage: "Successfully Fetched Handicraft", data: handicrafts });
   } catch (error) {
     res.status(500).json({ error: "Error fetching handicrafts" });
   }

@@ -120,7 +120,7 @@ export const getUserInfo = async (req: Request, res: Response) => {
   const token = req.cookies.token;
 
   if (!token) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ message: "Unauthorized" });
   }
 
   try {
@@ -130,11 +130,11 @@ export const getUserInfo = async (req: Request, res: Response) => {
     });
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ message: "User not found" });
     }
 
     res.json({ id: user.id, name: user.name, email: user.email, address: user.address, role: user.role, image: user.image });
   } catch (err) {
-    res.status(401).json({ error: "Unauthorized" });
+    res.status(401).json({ message: "Unauthorized" });
   }
 };
