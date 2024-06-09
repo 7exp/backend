@@ -4,6 +4,6 @@ import { accessValidationAdmin } from "../middleware/authMiddleware";
 
 const router = Router();
 
-router.get("/", accessValidationAdmin, healthCheck);
+router.get("/", healthCheck);
 
 export default router;
