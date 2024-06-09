@@ -12,22 +12,20 @@ interface ValidationRequest extends Request {
   userData?: UserData;
 }
 
-export const handicraftValidation = async (req: Request, res: Response, next: NextFunction) => {
+export const historyHandicraftValidation = async (req: Request, res: Response, next: NextFunction) => {
   const validationReq = req as ValidationRequest;
 
-  const { id_handicraft } = req.params;
+  const { id_history } = req.params;
   const id_user = validationReq.userData?.id;
-  console.log(id_handicraft, id_user);
 
   try {
-    const handicraft = await prisma.handicraft.findFirst({
+    const historyHandicraft = await prisma.history_handicraft.findFirst({
       where: {
-        id: id_handicraft,
+        id: id_history,
         id_user: id_user,
       },
     });
-    console.log(handicraft);
-    if (!handicraft) {
+    if (!historyHandicraft) {
       return res.status(403).json({ message: "You are not authorized to access this handicraft" });
     }
 
