@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { createHistoryHandicraft, deleteHistoryHandicraft, editHistoryHandicraft, getAllHistoryHandicraft, getHistoryHandicraft } from "../controllers/historyHandicreaftController";
 import { accessValidation } from "../middleware/authMiddleware";
-import { historyHandicraftValidation } from "../middleware/historyHandicraftMiddleware";
+import { historyHandicraftValidation } from "../middleware/historyHandicraftController";
 import { handicraftValidation } from "../middleware/handicraftMiddleware";
 
 const router = Router();

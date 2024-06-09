@@ -7,7 +7,7 @@ export const createDetailHandicraft = async (req: Request, res: Response) => {
   const { id_handicraft } = req.params;
 
   if (!id_handicraft || !description || !step_number) {
-    return res.status(400).json({ message: "All fields are required", data: []});
+    return res.status(400).json({ message: "All fields are required", data: [] });
   }
 
   const id_handicraftExists = await prisma.handicraft.findUnique({
@@ -17,7 +17,7 @@ export const createDetailHandicraft = async (req: Request, res: Response) => {
   });
 
   if (!id_handicraftExists) {
-    return res.status(404).json({ message: "Handicraft not found", data: []});
+    return res.status(404).json({ message: "Handicraft not found", data: [] });
   }
 
   const step_numberExists = await prisma.detail_handicraft.findMany({
@@ -28,7 +28,7 @@ export const createDetailHandicraft = async (req: Request, res: Response) => {
   });
 
   if (step_numberExists.length > 0) {
-    return res.status(400).json({ message: "Step number " + step_number + " already exists", data: []});
+    return res.status(400).json({ message: "Step number " + step_number + " already exists", data: [] });
   }
 
   try {
@@ -58,7 +58,7 @@ export const getDetailHandicraft = async (req: Request, res: Response) => {
     });
 
     if (!detailHandicraft) {
-      return res.status(404).json({ message: "DetailHandicraft not found" });
+      return res.status(404).json({ message: "DetailHandicraft not found", data: [] });
     }
 
     res.status(200).json({ message: "DetailHandicraft found", data: detailHandicraft });
@@ -74,7 +74,7 @@ export const editDetailHandicraft = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   if (!name || !description) {
-    return res.status(400).json({ message: "All fields are required", data: []});
+    return res.status(400).json({ message: "All fields are required", data: [] });
   }
 
   try {
@@ -105,8 +105,8 @@ export const deleteDetailHandicraft = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).json({ message: `DetailHandicraft with id ${id} deleted`, data: []});
+    res.status(200).json({ message: `DetailHandicraft with id ${id} deleted`, data: [] });
   } catch (error) {
-    res.status(500).json({ message: "Error deleting detailHandicraft", data: error});
+    res.status(500).json({ message: "Error deleting detailHandicraft", data: error });
   }
 };
