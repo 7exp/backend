@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import prisma from "../../prisma/client";
 import { config } from "../config";
 // import uuidv4
@@ -19,7 +19,7 @@ export const updateWaste = async (req: Request, res: Response) => {
   // console.log("Received file:", file); // Log the file object
 
   if (!file) {
-    return res.status(400).json({ error: "File is required" });
+    return res.status(400).json({ message: "File is required", data: [] });
   }
 
   try {
@@ -28,7 +28,7 @@ export const updateWaste = async (req: Request, res: Response) => {
     const public_url = `https://storage.googleapis.com/${bucketName}/waste/${fileOutputName}`;
 
     if (!id) {
-      return res.status(400).json({ error: "ID is required" });
+      return res.status(400).json({ message: "ID is required", data: [] });
     }
 
     // Update database record with the new image URL
@@ -43,7 +43,7 @@ export const updateWaste = async (req: Request, res: Response) => {
     res.status(200).json({ message: `Waste ${id} updated`, data: updatedWaste });
   } catch (error) {
     // console.error("Error uploading file or updating database:", error);
-    return res.status(500).json({ error: "Error uploading file or updating database" });
+    return res.status(500).json({ message: "Error uploading file or updating database", data: error });
   }
 };
 
@@ -59,7 +59,7 @@ export const createWaste = async (req: Request, res: Response) => {
   // console.log("Received file:", file); // Log the file object
 
   if (!file) {
-    return res.status(400).json({ error: "File is required" });
+    return res.status(400).json({ message: "File is required", data: []});
   }
 
   try {
@@ -88,7 +88,7 @@ export const createWaste = async (req: Request, res: Response) => {
       console.error("Error rolling back file upload:", rollbackError);
     }
 
-    return res.status(500).json({ error: "Error uploading file or creating database record" });
+    return res.status(500).json({ message: "Error uploading file or creating database record", data: error});
   }
 };
 
@@ -98,7 +98,7 @@ export const getAllWastes = async (req: Request, res: Response) => {
     const wastes = await prisma.waste.findMany();
     res.status(200).json({ data: wastes });
   } catch (error) {
-    res.status(500).json({ error: "Error fetching wastes" });
+    res.status(500).json({ message: "Error fetching wastes", data: []});
   }
 };
 
@@ -112,7 +112,7 @@ export const getWasteById = async (req: Request, res: Response) => {
     });
     res.status(200).json({ data: waste });
   } catch (error) {
-    res.status(500).json({ error: "Error fetching waste" });
+    res.status(500).json({ message: "Error fetching waste", data: error});
   }
 };
 
@@ -125,7 +125,7 @@ export const deleteWaste = async (req: Request, res: Response) => {
     const waste = await prisma.waste.findUnique({ where: { id: id } });
 
     if (!waste) {
-      return res.status(404).json({ error: "Waste not found" });
+      return res.status(404).json({ message: "Waste not found", data: [] });
     }
 
     // Ambil URL gambar dari waste
@@ -140,9 +140,9 @@ export const deleteWaste = async (req: Request, res: Response) => {
     // Hapus data waste dari database
     await prisma.waste.delete({ where: { id: id } });
 
-    res.status(200).json({ message: `Waste ${id} deleted successfully` });
+    res.status(200).json({ message: `Waste ${id} deleted successfully`, data: []});
   } catch (error) {
     console.error("Error deleting waste:", error);
-    return res.status(500).json({ error: "Error deleting waste" });
+    return res.status(500).json({ message: "Error deleting waste", data: error });
   }
 };

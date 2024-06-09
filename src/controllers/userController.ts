@@ -6,7 +6,7 @@ export const createUser = async (req: Request, res: Response) => {
   //if user exists then return error
   const user = await prisma.users.findUnique({ where: { email } });
   if (user) {
-    return res.status(400).json({ message: "User already exists" });
+    return res.status(400).json({ message: "User already exists", data: [] });
   } else {
     const result = await prisma.users.create({ data: { name, email, address } });
     res.json({ message: `User created`, data: result });
@@ -35,7 +35,7 @@ export const updateUser = async (req: Request, res: Response) => {
   // if user not found return error
   const user = await prisma.users.findUnique({ where: { id: id } });
   if (!user) {
-    return res.status(404).json({ message: "User not found" });
+    return res.status(404).json({ message: "User not found", data: []});
   } else {
     const result = await prisma.users.update({
       data: { name, email, address },
@@ -52,7 +52,7 @@ export const updateUserRole = async (req: Request, res: Response) => {
   // if user not found return error
   const user = await prisma.users.findUnique({ where: { id: id } });
   if (!user) {
-    return res.status(404).json({ message: "User not found" });
+    return res.status(404).json({ message: "User not found", data: []});
   } else {
     const result = await prisma.users.update({
       data: { role },
@@ -69,10 +69,10 @@ export const updatePassword = async (req: Request, res: Response) => {
   // if user not found return error
   const user = await prisma.users.findUnique({ where: { id: id } });
   if (!user) {
-    return res.status(404).json({ message: "User not found" });
+    return res.status(404).json({ message: "User not found", data: []});
   } else {
     if (oldPassword !== user.password) {
-      return res.status(400).json({ message: "Old password is incorrect" });
+      return res.status(400).json({ message: "Old password is incorrect", data: []});
     }
     const result = await prisma.users.update({
       data: { password: newPassword },

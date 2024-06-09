@@ -12,14 +12,16 @@ error_message () {
 }
 
 # Pull the latest Docker images
+echo "Pulling the latest Docker images..."
 sudo docker-compose pull
 if [ $? -eq 0 ]; then
-  success_message "Docker images pulled"
+  success_message "Docker images pulled successfully"
 else
   error_message "Failed to pull Docker images"
 fi
 
 # Start your Docker containers
+echo "Starting Docker containers..."
 sudo docker-compose up -d
 if [ $? -eq 0 ]; then
   success_message "Docker containers started"
@@ -28,6 +30,7 @@ else
 fi
 
 # Remove unused Docker images
+echo "Removing unused Docker images..."
 sudo docker image prune -af
 if [ $? -eq 0 ]; then
   success_message "Unused Docker images removed"

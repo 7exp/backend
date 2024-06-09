@@ -28,7 +28,7 @@ async function main() {
       },
       {
         id: wasteid[4],
-        name: "Panned Drink",
+        name: "Canned Drink",
       },
     ],
     skipDuplicates: true,
