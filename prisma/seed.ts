@@ -5,24 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
 const userid = "aec9d6eb-dbbf-425a-89ad-16cbb438c039";
-const wasteid = [
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-]
-const tagid = [
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-]
+const wasteid = [uuidv4(), uuidv4(), uuidv4(), uuidv4(), uuidv4()];
+const tagid = [uuidv4(), uuidv4(), uuidv4(), uuidv4(), uuidv4(), uuidv4(), uuidv4(), uuidv4(), uuidv4()];
 async function main() {
   const waste = await prisma.waste.createMany({
     data: [
@@ -88,7 +72,7 @@ async function main() {
       {
         id: tagid[8],
         name: "Garden",
-      }
+      },
     ],
     skipDuplicates: true,
   });
@@ -176,8 +160,8 @@ async function main() {
                 {
                   id_tag: tagid[4],
                 },
-              ]
-            }
+              ],
+            },
           },
           {
             name: "Can and Bottle Flower Dish",
@@ -271,7 +255,7 @@ async function main() {
                 {
                   id_waste: wasteid[4],
                 },
-              ]
+              ],
             },
             tag_handicraft: {
               create: [
@@ -279,7 +263,7 @@ async function main() {
                   id_tag: tagid[5],
                 },
               ],
-            }
+            },
           },
           {
             name: "Chalk Board Paint Can",
@@ -366,9 +350,9 @@ async function main() {
               create: [
                 {
                   id_tag: tagid[0],
-                }
+                },
               ],
-            }
+            },
           },
           {
             name: "Make a Laptop Stand Out of a Soda Can",
@@ -415,7 +399,7 @@ async function main() {
                 {
                   id_waste: wasteid[4],
                 },
-              ]
+              ],
             },
             tag_handicraft: {
               create: [
@@ -426,7 +410,7 @@ async function main() {
                   id_tag: tagid[1],
                 },
               ],
-            }
+            },
           },
           {
             name: "Alcohol Fueled Soda Bottle Rocket",
@@ -490,7 +474,7 @@ async function main() {
                   id_tag: tagid[3],
                 },
               ],
-            }
+            },
           },
           {
             name: "Eco-safe Hydro/pressure-powered Bottle Rocket With No Cost!",
@@ -537,7 +521,7 @@ async function main() {
                   id_tag: tagid[3],
                 },
               ],
-            }
+            },
           },
           {
             name: "Can Stove",
@@ -654,7 +638,7 @@ async function main() {
                   id_tag: tagid[7],
                 },
               ],
-            }
+            },
           },
           {
             name: "Can Lanterns",
@@ -734,7 +718,7 @@ async function main() {
                   id_tag: tagid[2],
                 },
               ],
-            }
+            },
           },
           {
             name: "Easy to Make Bottle Head Launcher!",
@@ -793,7 +777,7 @@ async function main() {
                   id_tag: tagid[3],
                 },
               ],
-            }
+            },
           },
           {
             name: "Bottle Rocket Pistol",
@@ -881,7 +865,7 @@ async function main() {
                   id_tag: tagid[3],
                 },
               ],
-            }
+            },
           },
           {
             name: "Bottle Gun",
@@ -967,7 +951,7 @@ async function main() {
                   id_tag: tagid[3],
                 },
               ],
-            }
+            },
           },
           {
             name: "How to Make a Soda Can Rocket",
@@ -1021,7 +1005,7 @@ async function main() {
                   id_tag: tagid[3],
                 },
               ],
-            }
+            },
           },
           {
             name: "Soda Can Stove",
@@ -1128,9 +1112,9 @@ async function main() {
                 },
                 {
                   id_tag: tagid[7],
-                }
+                },
               ],
-            }
+            },
           },
           {
             name: "Night Stand Bottle Light",
@@ -1198,9 +1182,9 @@ async function main() {
                 },
                 {
                   id_tag: tagid[5],
-                }
+                },
               ],
-            }
+            },
           },
           {
             name: "Water Bottle Sprinkler Cap",
@@ -1246,79 +1230,591 @@ async function main() {
                 },
                 {
                   id_tag: tagid[8],
-                }
+                },
               ],
-            }
+            },
           },
-          // {
-          //   name: "How to Make a Vodka Lamp (or Any Other Booze Bottle Light Up)",
-          //   description:
-          //     "This instructable is very easy and requires no soldering, no knowledge of electronics, heavy drinking and a lot of friends . \nI thought of this because I couldn't cut off the bottoms of bottles without slicing off my own hand and i don't know how to solder and make LEDs work . I'll promise to learn how to solder. No really, shoon, after finishiing thish bottle.",
-          //   image: "https://content.instructables.com/FG9/JUY3/F5Y3YUF8/FG9JUY3F5Y3YUF8.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-          //   detail_handicraft: {
-          //     create: [
-          //       {
-          //         step_number: 1,
-          //         image: "",
-          //         name: "Step 1: Crafting staples",
-          //         description:
-          //           "It's more like how to make a Coaster Lamp. Using coasters and a led push button lite, you could easily make a Vodka bottle or any other object that is translucent like a glass into a lamp! This instructable is very easy and requires no soldering, no knowledge of electronics, heavy drinking and a lot of friends (optional for the drinking part). I thought of this because I couldn't cut off the bottoms of bottles without slicing off my own hand and i don't know how to solder and make LEDs work . I'll promise to learn how to solder. No really, shoon, after finishiing thish bottle. hic~",
-          //       },
-          //       {
-          //         step_number: 2,
-          //         image: "https://content.instructables.com/F2O/KM3C/F5Y3YUEZ/F2OKM3CF5Y3YUEZ.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-          //         name: "Step 2: Gathering Your Materials: the Bottle",
-          //         description:
-          //           "This is my favorite step of this instructable: Decide what kind of bottle you'll have as your lamp. I chose the Absolut bottles because they are rather iconic and come in frosted versions which i find work best (and delicious in flavors too). Gather all your friends for a party but make should you stay sober enough to pocket the empty bottles later on. Of course you could put a full, brand new Vodka bottle on your coaster lamp but that's a shame isin't it? and sharing is caring, heh.",
-          //       },
-          //       {
-          //         step_number: 3,
-          //         image: "https://content.instructables.com/F6D/DL6D/F5Y3YUG3/F6DDL6DF5Y3YUG3.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-          //         name: "Step 3: Materials You'll Need",
-          //         description:
-          //           "After you've recovered from your hangover, these are the materials you'll need. 1. A cutting mat 2. A cutter (a good sharp one works best) 3. about 9 coasters, or more if you want them stacked higher 4. Any Led push light thingy. I got this from Osram, called 'dot-it' it has 3 very bright leds inside and looks lovely. you push the lights and they switch on, you push them again to switch it off. 5. about 20 minutes, or you cut slowly like me, an hour.",
-          //       },
-          //       {
-          //         step_number: 4,
-          //         image: "https://content.instructables.com/F4A/VKR0/F5Y3YUET/F4AVKR0F5Y3YUET.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-          //         name: "Step 4: Trace a Circle Around the Coaster",
-          //         description:
-          //           "Put the push light on a coaster and trace around it. I wouldn't be totally accurate about it being centered. It will look more natural like a stack of coasters in the day. and no one would guess it's a lamp.",
-          //       },
-          //       {
-          //         step_number: 5,
-          //         image: "https://content.instructables.com/FXW/SAZ7/F5Y3YUF4/FXWSAZ7F5Y3YUF4.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
-          //         name: "Step 5: Continue Doing So Until You Get About 8 Coasters",
-          //         description: "Cut them out and repeat. Trace and cut until you get about 8 rings.",
-          //       },
-          //       {
-          //         step_number: 6,
-          //         image: "https://content.instructables.com/FF2/RRXN/F5Y3YUEP/FF2RRXNF5Y3YUEP.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-          //         name: "Step 6: Cut a Smaller Hole",
-          //         description: "Cut a smaller hole just for the light button. You don't really need to do this step but I think it looks better this way.",
-          //       },
-          //       {
-          //         step_number: 7,
-          //         image: "https://content.instructables.com/F36/R5TF/F5Y3YUF9/F36R5TFF5Y3YUF9.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-          //         name: "Step 7: Building the Lamp Base",
-          //         description: "Push the coaster rings through the light.",
-          //       },
-          //       {
-          //         step_number: 8,
-          //         image: "https://content.instructables.com/F45/PPT2/F5Y3YUF0/F45PPT2F5Y3YUF0.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
-          //         name: "Step 8: Base Done",
-          //         description:
-          //           "Add the coaster with the smaller hole on top and tada! Your lamp base is done. Optional: I've put some Absolut vodka text on the back of the light as it came with some sticky backing that I didn't need to use and so I covered it up.",
-          //       },
-          //       {
-          //         step_number: 9,
-          //         image: "https://content.instructables.com/F2K/KXS6/F5Y3YUF2/F2KKXS6F5Y3YUF2.jpg?auto=web",
-          //         name: "Step 9: Put Bottle and Top and Finished",
-          //         description: "Place your bottle on top and you're done! Congratulations!",
-          //       },
-          //     ],
-          //   },
-          // },
+          {
+            name: "Orchid Miniature From Paper",
+            description:
+              "Hello, everyone!Previously, I made the Houseplant Miniature from paper and also Plant Miniature From Paper. This time I am going to show you how I made orchids miniature from paper. The orchids that I made were Paphiopedilum liemianum and Phalaenopsis bellina, both are protected plant species in Indonesia. This project would be perfect for your miniature dollhouse, more than that, you can give it to your beloved 'plant mom'.Let's rock!",
+            image: "https://content.instructables.com/F8P/KOEH/LWNJVHPV/F8PKOEHLWNJVHPV.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+
+            detail_handicraft: {
+              create: [
+                {
+                  step_number: 1,
+                  image: "",
+                  name: "Crafting staples",
+                  description:
+                    'Hello, everyone! Previously, I made the Houseplant Miniature from paper and also Plant Miniature From Paper. This time I am going to show you how I made orchids miniature from paper. The orchids that I made were Paphiopedilum liemianum and Phalaenopsis bellina, both are protected plant species in Indonesia. This project would be perfect for your miniature dollhouse, more than that, you can give it to your beloved "plant mom". Let\'s rock!',
+                },
+                {
+                  step_number: 2,
+                  image: "https://content.instructables.com/FX0/15SS/LWNJV4ZL/FX015SSLWNJV4ZL.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+                  name: "Step 2: Paphiopedilum Liemianum - Morphology",
+                  description:
+                    "Paphiopedilum liemianum is a terrestrial orchid species that is endemic to Northern Sumatra, Indonesia. This species is characterized by pouch shaped-lip, rounded at the ends, pink and fade towards the edge, leathery and ribbon leaves with a prominent middle rib, leaf color dark green at the upper surface and green with purple grape spotting at the lower surface with trichomes at the edge leaves. Inflorescence emerges from the tip of the stem, supporting approximately 8 flowers. The flowers stay fresh for up to 3 weeks. They are marketed as pot plant with high value because of their unique and exotic flowers. (Source: Repository UNAIR)",
+                },
+                {
+                  step_number: 3,
+                  image: "https://content.instructables.com/F05/G2UP/LWM4FA4F/F05G2UPLWM4FA4F.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 3: Paphiopedilum Liemianum - Lip",
+                  description:
+                    "The lip of Paphiopedilum liemianum is like a tube/sac. Cut 0.1 cm x 4.5 cm strips from purple-magenta colored paper. I used a 0.2 cm diameter cylindrical object (the cap of my glue applicator) to make the outer of a tight coil. I usually make this outer ring for a tight coil to have a consistent size of several tight coils. Then I rolled the 0.1 cm x 4.5 cm paper strip and placed it inside the outer ring. Now I have a 0.2 cm in diameter tight coil. To turn this coil into a dome-like shape, I used my tweezers to give a little push to the coil to achieve that dome shape. Secure the dome with a little PVAc glue. Cut 0.3 cm width strips from purple-magenta colored paper. Wrap this strip outside the dome and secure it with PVAc glue.",
+                },
+                {
+                  step_number: 4,
+                  image: "https://content.instructables.com/FOP/C2HF/LWM4FD51/FOPC2HFLWM4FD51.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 4: Paphiopedilum Liemianum - Dorsal Sepal",
+                  description: "Cut the dark green paper into the shape as you can see in the picture. I added some white lines on the edges of the dorsal sepal using a white gel pen. Glue it to the lip of the flower.",
+                },
+                {
+                  step_number: 5,
+                  image: "https://content.instructables.com/FP2/3R3D/LWM4FD5K/FP23R3DLWM4FD5K.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 5: Paphiopedilum Liemianum - Petal",
+                  description:
+                    "I cut lime green paper into a seaweed-like shape to make the petals of Paphiopedilum liemianum. I added some purple stripes on the petals using a purple gel pen. Then I glue the petals on the dorsal sepal as you can see in the picture.",
+                },
+                {
+                  step_number: 6,
+                  image: "https://content.instructables.com/FVT/5EBN/LWM4FD6K/FVT5EBNLWM4FD6K.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 6: Paphiopedilum Liemianum - Synsepal",
+                  description: "This part is like the cape of the flower. I cut dark green paper into a spade-like form. Then glue it on the back of the dorsal sepal.",
+                },
+                {
+                  step_number: 7,
+                  image: "https://content.instructables.com/FGO/E019/LWM4FGN1/FGOE019LWM4FGN1.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 7: Paphiopedilum Liemianum - Staminode",
+                  description: "For this part, I just cut a little from a 0.5-width paper strip, then I crumpled it. After that, I glued it on top of the petal.",
+                },
+                {
+                  step_number: 8,
+                  image: "https://content.instructables.com/F0L/B5GT/LWM4FGOO/F0LB5GTLWM4FGOO.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 8: Paphiopedilum Liemianum - Peduncle",
+                  description: "This time I tried to make two flowers in one plant. So the peduncle (stalk) needed to be branched. I used a thin wire and covered it with dark green paper (you can use floral tape).",
+                },
+                {
+                  step_number: 9,
+                  image: "https://content.instructables.com/FII/AL1D/LWM4FGSA/FIIAL1DLWM4FGSA.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 9: Paphiopedilum Liemianum - Leaves",
+                  description: "I cut the leaves from dark green paper, as you can see in the picture. Then I rolled the leaves around the peduncle and secure it with glue.",
+                },
+                {
+                  step_number: 10,
+                  image: "https://content.instructables.com/FN8/N128/LWM4FGU9/FN8N128LWM4FGU9.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 10: Paphiopedilum Liemianum - the Pot",
+                  description:
+                    "I used this technique so many times to make a ring coil. I used a 1 cm width paper strip and also my cutting pen with 0.5 cm diameter (you can use a regular pen or any cylindrical object) to help me make the coil. I simply rolled my strip around my cutting pen, adding a little glue to the beginning end to keep it still. Then roll the paper (I rolled up to 3 layers of paper so that the pot looked thicker than the actual thickness of the paper). Glue to secure the paper when you reach the end of the strip. The ring is complete. Remove gently from the cutting pen. Cut a circle for the base of the pot. I glued some crumpled dark brown paper inside the pot to resemble soil and then I put the whole Paphiopedilum liemianum inside the pot.",
+                },
+                {
+                  step_number: 11,
+                  image: "https://content.instructables.com/FIN/6462/LWNJV3BU/FIN6462LWNJV3BU.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+                  name: "Step 11: Phalaenopsis Bellina - Morphology",
+                  description:
+                    "Phalaenopsis bellina is an orchid endemic to Borneo, Indonesia. Flowers are star-shaped, 5â€“6 cm in size, deeply saturated fuchsia or violet near the base of sepals and petals. The interior half of the lower sepals typically display more coloration than other sepals and petals. Inflorescences emerge from the leaf axils arranged alternately on the main stem. Oftentimes during development, they puncture the epidermis at the base of the leaves. A single inflorescence typically carries only 2 or 3 flowers at a time, however, more has been observed. Leaves of Phalaenopsis bellina are thick, succulent leaves. They are oval, light to medium green, and sometimes wavy. When mounted, leaves grow so that older, lower leaves are shifted towards the sides while new growth points downwards, in order to expose as much surface area to sunlight. Potted plants do not display this growth habit, so it is often recommended that plants be grown mounted to best expose leaves to light. Phalaenopsis bellina has a fibrous root system, with roots usually emerging near the base of the stem. Roots are thick and are capable of holding water for extended periods of drought. Dense root hairs emerge from the velamen and root tips to anchor plants to host trees or mounts. (Source: Wikipedia)",
+                },
+                {
+                  step_number: 12,
+                  image: "https://content.instructables.com/FER/FA0F/LWM4FM1I/FERFA0FLWM4FM1I.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 12: Phalaenopsis Bellina - Leaves",
+                  description:
+                    "For Phalaenopsis bellina, it's best to make the leaves first, because while we wait for the leaves to dry, we can make the other part of the plant. The leaves are quite longer and wider than the Paphiopedilum liemianum's leaves. They also have a glossy appearance on the surface. I cut the leaves shape from dark green paper and applied PVAc glue on the surface to make the leaves look glossy. Wait until dry about 20-30 minutes.",
+                },
+                {
+                  step_number: 13,
+                  image: "https://content.instructables.com/FJ7/OZFR/LWM4FM3Z/FJ7OZFRLWM4FM3Z.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 13: Phalaenopsis Bellina - Tepal and Column",
+                  description:
+                    "The Phalaenopsis bellina flower consists of inner and outer tepals, but to make it simple, I cut the white paper into a star-like shape. Then I added green and fuchsia colors to mimic the actual color of the orchid. For the green color, I used a gel pen, and for fuchsia, I used paper (you can use a marker). To make the column of the flower, I made a small coil using a 0.1 cm width paper strip. Then I glued it on the center of the tepal.",
+                },
+                {
+                  step_number: 14,
+                  image: "https://content.instructables.com/F4W/GLGU/LWM4FM6K/F4WGLGULWM4FM6K.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 14: Phalaenopsis Bellina - Lip",
+                  description:
+                    'For this part, I used fuchsia-colored paper and then cut it into a spoon-like shape. To make the "spoon" slightly more concave, I pushed the "spoon" part on the EVA foam with a straight pin. I also cut a tiny piece of mustard color paper to make the lateral lip of this orchid and glued it under the fuchsia lip.',
+                },
+                {
+                  step_number: 15,
+                  image: "https://content.instructables.com/FW6/RGYJ/LWM4EZGE/FW6RGYJLWM4EZGE.gif?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+                  name: "Step 15: Phalaenopsis Bellina - Mount",
+                  description:
+                    "This time I didn't place the orchid inside a pot, rather I decided to mount the orchid. I used a 3 mm thick EVA foam in the size of 1 cm x 1.5 cm. Then I stab the foam using a push pin. Like the actual orchid that needs moss to be able to attach and grow properly on the mount, I also added a moss-like object for this orchid miniature. I crumpled a black sewing thread and then added glue to it to stiffen the thread. Then I added green moss to them using small cuts from a green satin ribbon. Then I glued it on the EVA foam using super glue. Now it's time to glue all those parts to the mount. First I glued the leaves. I arranged it in a zig-zag direction, with larger leaves on the bottom. Secondly, I glue the stalk (I used the same method from the previous stalk/peduncle, but this time it's a single stalk, no branch). Then I glued the flower to the stalk. For this orchid I used the super glue to glue the parts.",
+                },
+                {
+                  step_number: 16,
+                  image: "https://content.instructables.com/FA6/6V8F/LWNJVCS8/FA66V8FLWNJVCS8.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 16: Final Thoughts",
+                  description:
+                    "I had so much fun with this project. Before, I was never interested in orchids. For this miniature project, at first, I had an idea to make a miniature of endangered plants in Indonesia, but then I came to learn that Indonesia is home to so many beautiful yet endangered orchid species. If you have any questions or suggestions regarding this project, feel free to leave a comment, or contact me on my Instagram @quinzyvarira. I will also post some footage of the process of making these orchids on my Instagram. I hope you enjoy this instructable as much as I do, and see you in the next instructable!",
+                },
+              ],
+            },
+          },
+          {
+            name: "Cardboard Lampshade",
+            description:
+              "Hi, I'm a student Industrial Product Design. We've got the design challenge to make a new concept with corrugated fiberboard and start from an existing box. I've used an box from a lamp. With that in mind I've tried to make a new lampshade to decorate old sockets or maybe refresh it with a new design. In this tutorial I'll show you how to upcycle your corrugated fiberboard to make an easy lampshade!",
+            image: "https://content.instructables.com/FUK/GEDF/IJLZZ87N/FUKGEDFIJLZZ87N.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+            detail_handicraft: {
+              create: [
+                {
+                  step_number: 1,
+                  image: "",
+                  name: "Crafting Staples",
+                  description:
+                    "Hi, I'm a student in Industrial Product Design. We've got the design challenge to make a new concept with corrugated fiberboard and start from an existing box. I've used a box from a lamp. With that in mind, I've tried to make a new lampshade to decorate old sockets or maybe refresh them with a new design. In this tutorial, I'll show you how to upcycle your corrugated fiberboard to make an easy lampshade!",
+                },
+                {
+                  step_number: 2,
+                  image: "https://content.instructables.com/FM6/NE3S/IJLZZ81G/FM6NE3SIJLZZ81G.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 2: The Things You Need",
+                  description: "Corrugated fiberboard box: the size depends on how big you want your lampshade to be. Cutter, Ruler, Pencil, Wood glue, Clothespins",
+                },
+                {
+                  step_number: 3,
+                  image: "https://content.instructables.com/F0J/CSVX/IJLZZ97U/F0JCSVXIJLZZ97U.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 3 Cutting the Shape(s)",
+                  description:
+                    "If you want to make a small lampshade you can print out the picture and resize it to your wishes. Draw it on the fiberboard and cut. But I wanted to make a big one so I had to cut them all separately. After you've cut out your shape(s), you have to bend the sides.",
+                },
+                {
+                  step_number: 4,
+                  image: "https://content.instructables.com/FST/NGQN/IJLZZ842/FSTNGQNIJLZZ842.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 4 Glueing the Parts",
+                  description:
+                    "After you've bent all the sides comes the tricky part. You have to glue on the small stroke and add some wood glue. To keep it in place I've used some clothespins. This helps a lot to keep them together! Let it dry for half an hour.",
+                },
+                {
+                  step_number: 5,
+                  image: "https://content.instructables.com/FUK/GEDF/IJLZZ87N/FUKGEDFIJLZZ87N.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 5 Finishing Off",
+                  description: "Now admire your work because you're almost finished! Erase some pencil marks and all you need to do know is pinch a hole in the center of the top side with a size of 1cm.",
+                },
+                {
+                  step_number: 6,
+                  image: "https://content.instructables.com/F6S/35HG/IJLZZ8HO/F6S35HGIJLZZ8HO.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 6 Hanging Up Your Lampshade",
+                  description:
+                    "In the last step, you have to turn off the lights. Unplug your socket and put the wire through the hole in the top. Re-attach your socket and turn on the lights. Make sure you connect the right colors! If you've followed the steps correctly, it should look like the lampshade I've made! I hope you've enjoyed it and don't forget to comment or give it a like!",
+                },
+              ],
+            },
+          },
+          {
+            name: "Best Paper Airplane Ever (Flies Like a Beauty!)",
+            description: "This is a very good paper airplane for beginners who are getting into making paper airplanes. It's simple and fast to make, and with the right conditions and modifications, can fly really well!",
+            image: "https://content.instructables.com/FLU/34O8/LWKOZEEY/FLU34O8LWKOZEEY.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+
+            detail_handicraft: {
+              create: [
+                {
+                  step_number: 1,
+                  image: "",
+                  name: "Crafting Staples",
+                  description: "This is a very good paper airplane for beginners who are getting into making paper airplanes. It's simple and fast to make, and with the right conditions and modifications, can fly really well!",
+                },
+                {
+                  step_number: 2,
+                  image: "https://content.instructables.com/F2P/MM2Y/LWKOZB9F/F2PMM2YLWKOZB9F.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 2: Vertical Fold",
+                  description: "Fold the paper vertically from the left side to the right side. It should look like this.",
+                },
+                {
+                  step_number: 3,
+                  image: "https://content.instructables.com/FP2/SW5Q/LWKOZBD6/FP2SW5QLWKOZBD6.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 3: Fold Top Corners",
+                  description: "Unfold the paper. Take the top 2 corners and fold them until the center crease line. It should look like this.",
+                },
+                {
+                  step_number: 4,
+                  image: "https://content.instructables.com/FF8/HGCC/LWKOZBC0/FF8HGCCLWKOZBC0.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 4: Fold the Top Corners Downwards",
+                  description: "Grab the very top of where the two previously folded corners meet. Pull it down to the very bottom. The result should look somewhat like an envelope.",
+                },
+                {
+                  step_number: 5,
+                  image: "https://content.instructables.com/FWY/UOF7/LWKOZBCU/FWYUOF7LWKOZBCU.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 5: Repeat Step 2",
+                  description: "Repeat Step 2 and fold the top corners towards the center crease. Your fold's result should look like this.",
+                },
+                {
+                  step_number: 6,
+                  image: "https://content.instructables.com/FTF/BCXK/LWKOZBC9/FTFBCXKLWKOZBC9.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 6: Repeat Step 4",
+                  description: "Repeat Step 4 and fold the top corners towards the center crease. Your fold's result should look like this. (I know this is repetitive but bear with me here).",
+                },
+                {
+                  step_number: 7,
+                  image: "https://content.instructables.com/FMQ/NL63/LWKOZB9O/FMQNL63LWKOZB9O.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 7: Undo and Fold Triangle",
+                  description: "Unfold the last 2 steps. You should a small triangle sticking out from the bottom. Fold it up so it looks like this.",
+                },
+                {
+                  step_number: 8,
+                  image: "https://content.instructables.com/F81/NMEC/LWKOZBCJ/F81NMECLWKOZBCJ.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 8: Redo and Final Folds",
+                  description: "Now, fold the plane back into what it looked like in Step 5. Then, fold it in half, and remember to fold downwards. It should look like this.",
+                },
+                {
+                  step_number: 9,
+                  image: "https://content.instructables.com/FWC/OA0D/LWKOZBDJ/FWCOA0DLWKOZBDJ.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 9: Bask in Glory",
+                  description: "Fold it back out and you should have something that looks like this. Fly this around and impress your friends with your skills. If you want some modifications for this, let me know!",
+                },
+              ],
+            },
+          },
+          {
+            name: "Ultimate Paper Wallet",
+            description: 'This DIY folded paper wallet will hold over ten credit cards and several bills, yet is only 1/4" thick and will easily fit in a back pocket.',
+            image: "https://content.instructables.com/FMF/E8BS/F11S8RPJ/FMFE8BSF11S8RPJ.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+            detail_handicraft: {
+              create: [
+                {
+                  step_number: 1,
+                  image: "",
+                  name: "Crafting Staples",
+                  description: 'This DIY folded paper wallet will hold over ten credit cards and several bills, yet is only 1/4" thick and will easily fit in a back pocket.',
+                },
+                {
+                  step_number: 2,
+                  image: "",
+                  name: "Step 2: Assemble Your Materials",
+                  description: 'Materials needed:\n- 9" x 12" piece of heavy paper (the front 1/2 of a manilla envelope works well)\n- 10 credit cards (or however many you will need to carry)\n- 1 pencil or pen',
+                },
+                {
+                  step_number: 3,
+                  image: "https://content.instructables.com/FKO/5Y9M/F11S8RQ0/FKO5Y9MF11S8RQ0.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 3: Fold Sheet in Half",
+                  description: "This will give you a guideline for the center of the sheet.",
+                },
+                {
+                  step_number: 4,
+                  image: "https://content.instructables.com/FCL/UKV4/F11S8RQ3/FCLUKV4F11S8RQ3.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 4: Unfold",
+                  description: "Unfold - the crease should be pointing up as in the photo.",
+                },
+                {
+                  step_number: 5,
+                  image: "https://content.instructables.com/FXR/KCOQ/F11S8RQ7/FXRKCOQF11S8RQ7.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: 'Step 5: Fold to About 3/4" to 1" From the Edge',
+                  description: 'Fold to about 3/4" - 1" from the edge.',
+                },
+                {
+                  step_number: 6,
+                  image: "https://content.instructables.com/FN3/7UUW/F11S8RQG/FN37UUWF11S8RQG.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 6: Fold Back So New Fold Meets the Center Line",
+                  description: "Fold back so the new fold meets the center line.",
+                },
+                {
+                  step_number: 7,
+                  image: "https://content.instructables.com/FC5/O1WW/F11S8RQS/FC5O1WWF11S8RQS.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 7: Repeat Last 2 Folds for Other End",
+                  description: "Turn paper around 180 degrees and repeat the last 2 folds for the other end.",
+                },
+                {
+                  step_number: 8,
+                  image: "https://content.instructables.com/FS5/7DEM/F11S8RR1/FS57DEMF11S8RR1.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 8: Not As Tricky As It Looks...",
+                  description: "Unfold just the center of the fanfold to get the compound fold shown in the photo.",
+                },
+                {
+                  step_number: 9,
+                  image: "https://content.instructables.com/F7D/NNON/F11S8RR8/F7DNNONF11S8RR8.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 9: Turn the Paper Over and Fold the Bottom Edge",
+                  description: 'Turn the paper over and fold the bottom edge up about 1 1/2".',
+                },
+                {
+                  step_number: 10,
+                  image: "https://content.instructables.com/F1Z/Q9ZQ/F11S8RRF/F1ZQ9ZQF11S8RRF.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 10: Insert Cards",
+                  description: "Insert your credit cards under each side of the center flap.",
+                },
+                {
+                  step_number: 11,
+                  image: "https://content.instructables.com/FGF/6GX4/F11S8RRS/FGF6GX4F11S8RRS.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 11: Fold & Mark the Top Flap",
+                  description: "Fold the top down tightly over the cards.",
+                },
+                {
+                  step_number: 12,
+                  image: "https://content.instructables.com/FNF/MN0N/F11S8RRY/FNFMN0NF11S8RRY.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 12: Fold at Mark",
+                  description: "Unfold the top flap and make a new fold at the mark. (Mark is just visible in the photo).",
+                },
+                {
+                  step_number: 13,
+                  image: "https://content.instructables.com/FR5/QOEG/F11S8RS5/FR5QOEGF11S8RS5.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 13: Turn the Whole Thing Over",
+                  description: "Turn the whole thing over- keep the cards in place.",
+                },
+                {
+                  step_number: 14,
+                  image: "https://content.instructables.com/FKN/NHDO/F11S8RSH/FKNNHDOF11S8RSH.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 14: Fold the Ends",
+                  description: "Fold the ends in tightly against the cards.",
+                },
+                {
+                  step_number: 15,
+                  image: "https://content.instructables.com/F03/EAER/F11S8RSN/F03EAERF11S8RSN.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 15: Tuck in the Ends",
+                  description: "Tuck one end into the other as in the photo.",
+                },
+                {
+                  step_number: 16,
+                  image: "https://content.instructables.com/FC0/QE7F/F11S8RSY/FC0QE7FF11S8RSY.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 16: Turn the Whole Thing Over and Fold the Top Flap Down",
+                  description: "Turn the whole thing over and fold the top flap down.",
+                },
+                {
+                  step_number: 17,
+                  image: "https://content.instructables.com/FHW/BKSQ/F11S8RTA/FHWBKSQF11S8RTA.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 17: That's It!",
+                  description: "Keep your cards inside, and tuck bills into the outer flap on the back of the wallet.",
+                },
+              ],
+            },
+          },
+          {
+            name: "How to Make a Cardboard Laptop Stand",
+            description:
+              "In this instructable I will show you how to make a sturdy laptop stand out of cardboard. Why pay over 30 pounds/$60 for a flimsy plastic laptop stand, when you can make a stronger and more environmentally friendly stand for free?! When I thought of this idea I was skeptical and didn't think the cardboard would be able to support the heavy laptop, but after a bit of brainstorming and some strength tests I thought it was possible and decided to give it a go. When I had finished making it I tentatively lowered my laptop onto the stand, half expecting it to crumble and my laptop slide off the desk. Fortunately the process was uneventful and my laptop was perfectly happy sitting on top of its swanky new stand. Even though the initial test was a success I didn't want to publish an ible that would fall apart in a few days and drop people's laptops, so I decided to go the distance and do an endurance test. Now it's just under two weeks since the first test and every day I have put the laptop on the stand in the morning and left it there all day and then taken it off in the evening. Results: Perfect, The stand is like new, nothing bent, frayed or crumpled, it's been really good having the screen elevated, much more ergonomic than usual.",
+            image: "https://content.instructables.com/FTI/54JC/FYAJBX65/FTI54JCFYAJBX65.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+            detail_handicraft: {
+              create: [
+                {
+                  step_number: 1,
+                  image: "",
+                  name: "Crafting Staples",
+                  description:
+                    "In this instructable, I will show you how to make a sturdy laptop stand out of cardboard. Why pay over 30 pounds/$60 for a flimsy plastic laptop stand when you can make a stronger and more environmentally friendly stand for free? When I thought of this idea, I was skeptical and didn't think the cardboard would be able to support the heavy laptop. But after a bit of brainstorming and some strength tests, I thought it was possible and decided to give it a go. When I had finished making it, I tentatively lowered my laptop onto the stand, half expecting it to crumble and my laptop slide off the desk. Fortunately, the process was uneventful, and my laptop was perfectly happy sitting on top of its swanky new stand. Even though the initial test was a success, I didn't want to publish an Instructable that would fall apart in a few days and drop people's laptops. So, I decided to go the distance and do an endurance test. Now it's just under two weeks since the first test, and every day I have put the laptop on the stand in the morning and left it there all day and then taken it off in the evening. Results: Perfect. The stand is like new, nothing bent, frayed, or crumpled. It's been really good having the screen elevated, much more ergonomic than usual.",
+                },
+                {
+                  step_number: 2,
+                  image: "https://content.instructables.com/FJV/4J8K/FXR6UIEZ/FJV4J8KFXR6UIEZ.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 2: Get Cardboard",
+                  description:
+                    "Pretty easy, everyone has some laying around. If you don't have any:\n- Ask friends\n- Ask in shops\n- Look behind shops\n- Ask at supermarkets\n- Ask parents\n- Go to recycling center\n- Ask anywhere that sells things, they will have some.",
+                },
+                {
+                  step_number: 3,
+                  image: "https://content.instructables.com/F7C/RLZR/FXV3AD28/F7CRLZRFXV3AD28.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 3: Cut Shapes",
+                  description: "Now you have got the cardboard you can get started cutting out the shapes. You will need a knife.",
+                },
+                {
+                  step_number: 4,
+                  image: "https://content.instructables.com/F7O/UBRM/FXR6UIF6/F7OUBRMFXR6UIF6.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 4: Check It All Fits",
+                  description: "Using some pins, put all the pieces together and check you have the right sizes. Dressmakers pins are perfect.",
+                },
+                {
+                  step_number: 5,
+                  image: "https://content.instructables.com/F94/X9Q9/FXR6VNB3/F94X9Q9FXR6VNB3.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 5: Glue !",
+                  description:
+                    "Now you have all the shapes cut and they all fit together we can assemble the stand. I used a hot glue gun for my stand but PVA or superglue would work just as well. Before gluing, I would recommend tracing out where you want the stands to be, this makes it easier and you are less likely to get it wrong. Glue the support bar to the base first. Then glue the stand sections to the base and support, then add the back and front. The laptop will be resting on the front panel so use plenty of glue to make sure it's strong. In fact, use lots of glue all over. Remember, spare the glue, spoil the stand! Let the glue dry for a bit before you test the stand.",
+                },
+                {
+                  step_number: 6,
+                  image: "https://content.instructables.com/FTI/54JC/FYAJBX65/FTI54JCFYAJBX65.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 6: Finished !",
+                  description:
+                    "Now get your laptop and enjoy ergonomic bliss! I am really pleased with this laptop stand, it's very strong and suits my needs perfectly. Thanks for reading. Don't forget to subscribe! Check out all my other Instructables.",
+                },
+              ],
+            },
+          },
+          {
+            name: 'Cardboard Pencil Holder "Stabb-it"',
+            description:
+              "Here's the Stabb-it, a cardboard pencil holder two school colleagues, Kim B. Deland and Simon Hamel, and myself made! Easy to build with laser cutting (or with an x-acto knife) and fun to use, you literally \"stab\" the pencil holder with your drawing/writing stuff! Submitted by DIN 2012, Université de Montréal, industrial design program, for the Instructables Sponsorship Program. You will need: 1 X cardboard sheet of approximately 385mm (15,16 inches) of height and 590mm (23,12 inches) of length. (I found mine in the recycle bin and adjusted it to fit inside the laser cutting machine) 1 X 4 inches long carriage bolt with a diameter of 3/8 inch 1 X 3/8 inch nut 1 X 3/8 inch washer The illustrator file provided with the instructable for the laser cutting machine (there's also a pdf version",
+            image: "https://content.instructables.com/F7U/5IF7/H1LWPJV5/F7U5IF7H1LWPJV5.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+
+            detail_handicraft: {
+              create: [
+                {
+                  step_number: 1,
+                  image: "",
+                  name: "Crafting Staples",
+                  description:
+                    "Here's the Stabb-it, a cardboard pencil holder made by school colleagues Kim B. Deland, Simon Hamel, and myself! Easy to build with laser cutting (or with an x-acto knife) and fun to use, you literally \"stab\" the pencil holder with your drawing/writing stuff! Submitted by DIN 2012, Université de Montréal, industrial design program, for the Instructables Sponsorship Program. You will need: 1 X cardboard sheet of approximately 385mm (15,16 inches) of height and 590mm (23,12 inches) of length. (I found mine in the recycle bin and adjusted it to fit inside the laser cutting machine) 1 X 4 inches long carriage bolt with a diameter of 3/8 inch 1 X 3/8 inch nut 1 X 3/8 inch washer The illustrator file provided with the instructable for the laser cutting machine (there's also a pdf version)",
+                },
+                {
+                  step_number: 2,
+                  image: "https://content.instructables.com/FGI/V1MM/H1LWPJW4/FGIV1MMH1LWPJW4.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 2: Laser Cutting",
+                  description:
+                    "Send the illustrator file to the laser cutting machine with an accordingly fitting size cardboard sheet depending on the size of your machine if the suggested cardboard size doesn't fit. You should end up with two spare cardboard squares out of the 24 on the .ai file since you'll be needing 22 of them later on. (the two extra squares are not included in the picture)",
+                },
+                {
+                  step_number: 3,
+                  image: "https://content.instructables.com/FE3/ZMFF/H1JUGVVK/FE3ZMFFH1JUGVVK.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 3: Assembly",
+                  description: "Simple stuff now! Stack the 22 cardboard squares on the bolt. Put the washer. Put the nut. Pretty simple isn't it? :)",
+                },
+                {
+                  step_number: 4,
+                  image: "https://content.instructables.com/F31/U8FE/H1JUIISF/F31U8FEH1JUIISF.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 4: Stab the Stabb-it and Twist It!",
+                  description:
+                    "Now that your Stabb-it is complete, feel free to stab it with your pen, pencils, and other small tools! As it gets older and wears out, it will start to look like an old book with old pages and get a new look! You can also twist your pencil holder and obtain interesting shapes and have your own little modern art sculpture on your desk! :)",
+                },
+              ],
+            },
+          },
+          {
+            name: "DIY Paper Curtain",
+            description:
+              "Paper is environmentally friendly. Paper is versatile. Paper is fabulous. You've always wanted to make a beautiful, feasible and useful piece of furniture out of very little material (which you always have at home) for someone or even for yourself in a short period of time? Then follow this instruction step by step and learn how to design a simple yet beautiful, modern curtain with 35 threads out of everyday paper. A proven protection against insects with an additional decorative effect. Dimensions: Approximately length 90cm & height 200cm. The 2-hour-DIY-project 'Paper as material' examines everyday paper as a medium, which supports creativity, concentration and manual skills for anyone. After this instruction one is going to hold a natural, beautiful and ready-to-use piece of furniture in the hands, which brings space to glow, etc...",
+            image: "https://content.instructables.com/FO5/IRWF/LW24973Y/FO5IRWFLW24973Y.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+            detail_handicraft: {
+              create: [
+                {
+                  step_number: 1,
+                  image: "",
+                  name: "Crafting Staples",
+                  description:
+                    'Paper is environmentally friendly. Paper is versatile. Paper is fabulous. You\'ve always wanted to make a beautiful, feasible and useful piece of furniture out of very little material (which you always have at home) for someone or even for yourself in a short period of time? Then follow this instruction step by step and learn how to design a simple yet beautiful, modern curtain with 35 threads out of everyday paper ⏤ A proven protection against insects with an additional decorative effect. :) Dimensions: Approx. length 90cm & height 200cm. The 2-hour-DIY-project "Paper as material" examines everyday paper as a medium, which supports creativity, concentration and manual skills for anyone. After this instruction one is going to hold a natural, beautiful and ready-to-use piece of furniture in the hands, which brings space to glow, etc…',
+                },
+                {
+                  step_number: 2,
+                  image: "https://content.instructables.com/FAL/HZPA/LW24976U/FALHZPALW24976U.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 2: Supplies",
+                  description: "To bring this project to life you will need different supplies. Here's is a list of them: Scissors, A ruler, Square-sized paper in various colors, A rather thick line, Pole out of metal or wood",
+                },
+                {
+                  step_number: 3,
+                  image: "https://content.instructables.com/FUO/A6TL/LW2496T7/FUOA6TLLW2496T7.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 3: Origami Folding",
+                  description:
+                    "First of all, you have to fold the paper in the middle into a half and then fold it another time in the middle into the other half. The next step is to fold the paper diagonally twice. Then you should fold the squared paper into the middle. After that hide the lower corners in the top middle of the paper. Knock over the tips on both sides (left and right) to the bottom. Bring the bottom triangle up and hide the tip of it on the other side of the butterfly.",
+                },
+                {
+                  step_number: 4,
+                  image: "https://content.instructables.com/FAK/WOZC/LW3JP4AQ/FAKWOZCLW3JP4AQ.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 4: Making the Knots",
+                  description: "Then tie the knots on the string. You can leave approx. 5 cm space between the knots. The origami butterflies can now be threaded onto the knots.",
+                },
+                {
+                  step_number: 5,
+                  image: "https://content.instructables.com/FST/E6RT/LW3JP46A/FSTE6RTLW3JP46A.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 5: Finalizing the Project",
+                  description: "Hang the finished strings on the metal rod.",
+                },
+              ],
+            },
+          },
+          {
+            name: "DIY Notebooks",
+            description:
+              "While commercially available notebooks have a nice polished feel to them, they are extremely expensive. If you use a large number of them, there is a considerable savings from making your own. If you professionally print the paper stock for them, they have the added benefit of customizable page layouts, for example, storyboards, grids, plain paper or normal lined paper.",
+            image: "https://content.instructables.com/FDG/SNIX/FT7PR644/FDGSNIXFT7PR644.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=d5685481d8087e147ebf2839c4017e05",
+
+            detail_handicraft: {
+              create: [
+                {
+                  step_number: 1,
+                  image: "",
+                  name: "Crafting Staples",
+                  description:
+                    "While commercially available notebooks have a nice polished feel to them, they are extremely expensive. If you use a large number of them, there is a considerable savings from making your own. If you professionally print the paper stock for them, they have the added benefit of customizable page layouts, for example, storyboards, grids, plain paper or normal lined paper.",
+                },
+                {
+                  step_number: 2,
+                  image: "https://content.instructables.com/FVZ/49VG/FT7PR5ZT/FVZ49VGFT7PR5ZT.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 2: Materials and Tools",
+                  description:
+                    "Materials: Corrugated Cardboard (Don't get fancy, cut it out of a box), 18 sheets of 8.5 x 11\" paper, Thread, Wood glue (PVA) or any glue with some flexibility (White glue would work as well), Cheesecloth (although any kind of coarse woven fabric should work). Tools: Text editing program such as Pages (Mac) or Word. (Textedit or Wordpad would also work), Black and white printer (or a local copy shop), Needle (Blunt is good, for the sake of your fingers), Guillotine (optional, but makes the cutting so much more precise, not to mention a few hundred times faster) and either 2 or more Clamps and Small (6 inch by 8 inch or thereabouts) pieces of plywood or a vice.",
+                },
+                {
+                  step_number: 3,
+                  image: "https://content.instructables.com/FCT/2H40/FT7PR66F/FCT2H40FT7PR66F.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 3: Designing the Paper",
+                  description:
+                    "Obviously, the first step is to design the paper. Some websites have lined paper patterns that can be downloaded and printed. Since we are making our own notebook, we might as well design the paper as well. If you are making a blank notebook, skip to step 4. Open a new file in your text editing program, and set the margins to 0 and 8.5 so that the printed document will fill the page. The top and bottom margins can be set near the top and bottom as well, but I like having extra space at the top of the notebook. Next, fill the paper with underscores if you are making lined paper, or the pattern you want to appear on your pages. The notebook will be around 4 x 5.5 inches, so remember that each page in your document must contain 4 notebook pages. The fold line of the finished sheets will be on the center of the pages, so leave room for trimming on both sides. The attached lined pdf will work, but it must be printed double-sided.",
+                },
+                {
+                  step_number: 4,
+                  image: "https://content.instructables.com/FUA/QDEZ/FT7PURRP/FUAQDEZFT7PURRP.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 4: Printing the Paper",
+                  description:
+                    "If you are making multiple notebooks, it might be cheaper to get these pages printed at a local print shop. If you cannot print double-sided, this will be much easier, although feeding the sheets through the printer twice is an option. Before you print all 18 pages, it is a good idea to print a few tests. Set your printer to the lowest ink volume and quality, and print a page to test the spacing of the elements. If you are happy with the design, print 18 copies of it double-sided (Keep in mind that you will have to set the printer to 36, since each sheet of paper has 2 sides. If you have a photocopier, it may be cheaper to make one, and photocopy another 17.",
+                },
+                {
+                  step_number: 5,
+                  image: "https://content.instructables.com/FYL/FZ7A/FTNHEDNZ/FYLFZ7AFTNHEDNZ.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 5: Cutting",
+                  description:
+                    "First, cut the sheets in half horizontally (making pieces of paper 8.5 x 5.5 inches), then cut 3/4 of an inch off each side, making the pages 7 x 5.5 inches. You can do this by hand, but it is much easier to use a guillotine. Making sure to remove any members of the French aristocracy, set the guide on the guillotine to 5.5 inches, and cut all the paper to this dimension as shown in the picture. Next, set the guide to 3/4 of an inch, and cut that amount off each end of the sheets.",
+                },
+                {
+                  step_number: 6,
+                  image: "https://content.instructables.com/FEL/ZJIG/FTO53YDJ/FELZJIGFTO53YDJ.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 6: Folding",
+                  description:
+                    "This step is the most mind-numbing, but it is much easier with some simple set up. Clamp a piece of wood to your work table or desk. Push the end of a piece of paper against it, then fold the other half over to meet it. Make the crease as sharp as possible, with a fingernail, or a folding tool. Repeat this for all the pages of the book.",
+                },
+                {
+                  step_number: 7,
+                  image: "https://content.instructables.com/F7M/IW5V/FTNHEDPM/F7MIW5VFTNHEDPM.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+                  name: "Step 7: Preparing Signatures",
+                  description:
+                    "Divide the freshly folded paper into 6 piles of 6 pieces each. Put the pages together, nesting them inside each other as illustrated below. Fold the signatures closed, and align the pages by tapping the edges on a table. Stack the signatures and align the edges. Place them between the two pieces of plywood and clamp tightly (or use a vice), with the spine edge protruding 1/4 inch above the edge of the plywood.",
+                },
+                {
+                  step_number: 8,
+                  image: "https://content.instructables.com/FBH/SR0I/FTNHEDQQ/FBHSR0IFTNHEDQQ.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 8: Preparing for Stitching",
+                  description:
+                    "Before stitching the notebook, you will need to make pilot holes for the needle. Make 4 cuts in the stack of signatures, 0.5 and 1.75 inches from each edge as indicated by black lines in the picture. Only cut deep enough to puncture all 6 pages in each signature. This will probably be 1/16 of an inch or less. Don't cut any farther than you have to, it will make the stitching harder.",
+                },
+                {
+                  step_number: 9,
+                  image: "https://content.instructables.com/F5V/HH7M/FTNHEF18/F5VHH7MFTNHEF18.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+                  name: "Step 9: Stitching",
+                  description:
+                    "Unclamp the signatures and thread a needle. Tie a large knot at the long end of the thread that will not slip through the hole through the first signature. Pass the needle through (left to right) the first hole, then out the second, in the third, and out the fourth. Do the same from right to left. Before beginning the next row, loop it around the closest part of the previous row, and pull tight. Repeat this until the last stitch. On that stitch, loop the end of the thread around the end of the previous row multiple times, and tie it tightly to avoid the signatures coming apart.",
+                },
+                {
+                  step_number: 10,
+                  image: "https://content.instructables.com/FG6/6Q9Z/FTNHEFRF/FG66Q9ZFTNHEFRF.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+                  name: "Step 10: Reinforcing the Book",
+                  description:
+                    "Put the stitched pile of signatures in the vice/clamps again, with about 1/2 inch protruding. Spread glue (PVA wood glue or white glue both work well) on the pages, leaving some space on each end so that the glue does not get between the pages. Lay a small piece of cheesecloth over the glue and spread a bit more on top to ensure that it is well attached. Leave this to dry for a few hours.",
+                },
+                {
+                  step_number: 11,
+                  image: "",
+                  name: "Step 11: Making the Cover",
+                  description:
+                    "Lay the sewn signatures out on the piece of cardboard you want to use for the cover. Figure out the measurement based on the amount of 'overhang' you want on the cover. Make sure the cardboard is oriented with the corrugations traveling up-down, not left-right. This will come in handy later. The cover piece should wrap around the spine and have a bit of overhang to protect the page edges. Use an X-acto knife to cut the cardboard to the right shape. You might want to round the corners.",
+                },
+                {
+                  step_number: 12,
+                  image: "",
+                  name: "Step 12: Attaching the Cover",
+                  description: "Find the middle of the cover and mark it. Center the stitched signatures on it and glue them down. Once the glue has dried, crease and fold the cover together.",
+                },
+                {
+                  step_number: 13,
+                  image: "https://content.instructables.com/FRA/4ZPH/FTNHEFTI/FRA4ZPHFTNHEFTI.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 13: Finishing",
+                  description:
+                    "The notebook also needs a strap to hold it closed. Run an elastic or a piece of guitar string through one of the corrugations and glue it in place. A low guitar string works well because it has a loop at one end that can be used as a fastener. If you are using elastic, knot the two ends together, and then slide the knot into the corrugation to hide it.",
+                },
+                {
+                  step_number: 14,
+                  image: "https://content.instructables.com/FTU/Y1GK/FTNHEFTM/FTUY1GKFTNHEFTM.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+                  name: "Step 14: Variations",
+                  description:
+                    "If you are varying the page number, the stitching pattern is easily adaptable for more signatures. Try to keep the signatures below 8 sheets each to keep the page ends aligned. Try cutting out designs with plain printer paper and gluing them on the cover. Go crazy!",
+                },
+              ],
+            },
+          },
         ],
       },
     },
