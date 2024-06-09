@@ -61,3 +61,35 @@ export const fyp = async (req: Request, res: Response): Promise<void> => {
     await prisma.$disconnect();
   }
 };
+
+// tranding handicraft
+export const trendingHandicrafts = async (req: Request, res: Response): Promise<void> => {
+  try {
+    // Mengambil kerajinan tangan yang memiliki jumlah like terbanyak
+    const trendingHandicrafts = await prisma.handicraft.findMany({
+      orderBy: {
+        likes: {
+          _count: "desc",
+        },
+      },
+      // Mengambil hanya beberapa informasi penting dari kerajinan tangan
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        image: true,
+        createdAt: true,
+        likes: true,
+      },
+      // Mengambil lima kerajinan tangan teratas yang paling populer
+      take: 5,
+    });
+
+    res.json(trendingHandicrafts);
+  } catch (err) {
+    console.error("Error executing query", err);
+    res.status(500).send("Internal Server Error");
+  } finally {
+    await prisma.$disconnect();
+  }
+};
