@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import prisma from "../../prisma/client";
-import { v4 as uuidv4 } from "uuid";
 import { uploadFileGCS, deleteFileGCS } from "../utils/bucketImage";
 import { config } from "../config";
+
+const ALLOWED_EXTENSIONS = [".png", ".jpg", ".jpeg", ".PNG", ".JPG", ".JPEG"];
 
 // image upload for handicraft
 export const updateImageHandicraft = async (req: Request, res: Response) => {
@@ -24,8 +25,14 @@ export const updateImageHandicraft = async (req: Request, res: Response) => {
     return res.status(404).json({ error: "Handicraft not found" });
   }
 
-  const filename = image?.originalname;
-  const fileOutputName = `${uuidv4()}-${filename}`;
+  // use id as file name
+  const fileExtension = image.originalname.split(".").pop()?.toLowerCase();
+  if (!fileExtension || !ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
+    return res.status(400).json({ error: "Invalid file type. Only PNG, JPG, and JPEG are allowed." });
+  }
+
+  // Construct the file output name using the id and the file extension
+  const fileOutputName = `${id}.${fileExtension}`;
 
   try {
     // Upload new image to GCS
@@ -39,18 +46,6 @@ export const updateImageHandicraft = async (req: Request, res: Response) => {
         image: public_url,
       },
     });
-
-    // Attempt to delete old image from GCS
-    if (imageExist.image) {
-      const oldFileName = imageExist.image.split("/").pop();
-      const oldFilePath = `handicraft/${oldFileName}`;
-      try {
-        await deleteFileGCS(config.bucketName as string, oldFilePath);
-      } catch (deleteError: any) {
-        // Log error but do not fail the update process
-        console.error("Error deleting old image from GCS:", deleteError.message);
-      }
-    }
 
     res.status(200).json({ message: "Successfully updated Handicraft image", data: updatedHandicraft });
   } catch (error: any) {
@@ -87,13 +82,19 @@ export const updateImageDetailHandicraft = async (req: Request, res: Response) =
     return res.status(404).json({ error: "Detail Handicraft not found" });
   }
 
-  const filename = image?.originalname;
-  const fileOutputName = `${uuidv4()}-${filename}`;
+  // use id as file name
+  const fileExtension = image.originalname.split(".").pop()?.toLowerCase();
+  if (!fileExtension || !ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
+    return res.status(400).json({ error: "Invalid file type. Only PNG, JPG, and JPEG are allowed." });
+  }
+
+  // Construct the file output name using the id and the file extension
+  const fileOutputName = `${id}.${fileExtension}`;
 
   try {
     // Upload new image to GCS
     await uploadFileGCS(config.bucketName as string, image, fileOutputName, "detail-handicraft");
-    const public_url = `https://storage.googleapis.com/${config.bucketName}/detail_handi/${fileOutputName}`;
+    const public_url = `https://storage.googleapis.com/${config.bucketName}/detail_handicraft/${fileOutputName}`;
 
     // Update the database with the new image URL
     const updatedDetailHandicraft = await prisma.detail_handicraft.update({
@@ -103,24 +104,12 @@ export const updateImageDetailHandicraft = async (req: Request, res: Response) =
       },
     });
 
-    // Attempt to delete old image from GCS
-    if (imageExist.image) {
-      const oldFileName = imageExist.image.split("/").pop();
-      const oldFilePath = `detail_handi/${oldFileName}`;
-      try {
-        await deleteFileGCS(config.bucketName as string, oldFilePath);
-      } catch (deleteError: any) {
-        // Log error but do not fail the update process
-        console.error("Error deleting old image from GCS:", deleteError.message);
-      }
-    }
-
     res.status(200).json({ message: "Successfully updated Detail Handicraft image", data: updatedDetailHandicraft });
   } catch (error: any) {
     // Handle any error during file upload or database update
     try {
       // If there's an error after the file upload, delete the new file from GCS
-      const filePath = `detail_handi/${fileOutputName}`;
+      const filePath = `detail_handicraft/${fileOutputName}`;
       await deleteFileGCS(config.bucketName as string, filePath);
       console.log("Rolled back file upload");
     } catch (rollbackError: any) {
@@ -150,8 +139,14 @@ export const updateImageUser = async (req: Request, res: Response) => {
     return res.status(404).json({ error: "User not found" });
   }
 
-  const filename = image?.originalname;
-  const fileOutputName = `${uuidv4()}-${filename}`;
+  // use id as file name
+  const fileExtension = image.originalname.split(".").pop()?.toLowerCase();
+  if (!fileExtension || !ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
+    return res.status(400).json({ error: "Invalid file type. Only PNG, JPG, and JPEG are allowed." });
+  }
+
+  // Construct the file output name using the id and the file extension
+  const fileOutputName = `${id}.${fileExtension}`;
 
   try {
     // Upload new image to GCS
@@ -165,18 +160,6 @@ export const updateImageUser = async (req: Request, res: Response) => {
         image: public_url,
       },
     });
-
-    // Attempt to delete old image from GCS
-    if (imageExist.image) {
-      const oldFileName = imageExist.image.split("/").pop();
-      const oldFilePath = `user/${oldFileName}`;
-      try {
-        await deleteFileGCS(config.bucketName as string, oldFilePath);
-      } catch (deleteError: any) {
-        // Log error but do not fail the update process
-        console.error("Error deleting old image from GCS:", deleteError.message);
-      }
-    }
 
     res.status(200).json({ message: "Successfully updated User image", data: updatedUser });
   } catch (error: any) {
