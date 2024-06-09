@@ -23,7 +23,7 @@ export const createHandicraft = async (req: Request, res: Response) => {
   }
 
   if (!name || !description || !id_user || !waste || !tags) {
-    return res.status(400).json({ error: "All fields are required" });
+    return res.status(400).json({ message: "All fields are required", data: [] });
   }
 
   try {
@@ -65,6 +65,7 @@ export const createHandicraft = async (req: Request, res: Response) => {
       id: id_handicraft,
       name: name,
       description: description,
+      Image: newHandicraft.image,
       id_user: id_user,
       waste: waste,
       tags: tags,
@@ -72,7 +73,7 @@ export const createHandicraft = async (req: Request, res: Response) => {
 
     res.status(201).json({ message: "Successfully created Handicraft", data: payload });
   } catch (error: any) {
-    res.status(500).json({ error: "Error creating handicraft", message: error.message });
+    res.status(500).json({ message: "Error creating handicraft", data: error.message });
   }
 };
 
@@ -82,7 +83,7 @@ export const updateHandicraft = async (req: Request, res: Response) => {
   const { name, description, id_user, waste = [], tags = [] } = req.body;
 
   if (!id) {
-    return res.status(400).json({ error: "ID is required" });
+    return res.status(400).json({ message: "ID is required", data: []});
   }
 
   try {
@@ -172,7 +173,7 @@ export const updateHandicraft = async (req: Request, res: Response) => {
 
     res.status(200).json({ message: "Successfully updated Handicraft", data: payload });
   } catch (error: any) {
-    res.status(500).json({ error: "Error updating handicraft", message: error.message });
+    res.status(500).json({ message: "Error updating handicraft", data: error.message });
   }
 };
 
@@ -182,7 +183,7 @@ export const getAllHandicrafts = async (req: Request, res: Response) => {
     const handicrafts = await prisma.handicraft.findMany();
     res.status(200).json({ data: handicrafts });
   } catch (error) {
-    res.status(500).json({ error: "Error fetching handicrafts" });
+    res.status(500).json({ message: "Error fetching handicrafts", data: error});
   }
 };
 
@@ -196,7 +197,7 @@ export const getHandicraftById = async (req: Request, res: Response) => {
     });
 
     if (!handicraft) {
-      return res.status(404).json({ error: "Handicraft not found" });
+      return res.status(404).json({ message: "Handicraft not found", data: []});
     }
 
     const user = await prisma.users.findMany({ where: { id: handicraft.id_user } });
@@ -213,7 +214,7 @@ export const getHandicraftById = async (req: Request, res: Response) => {
 
     res.status(200).json({ message: "Successfully fetched Handicraft", data: data });
   } catch (error) {
-    res.status(500).json({ error: "Error fetching handicraft" });
+    res.status(500).json({ message: "Error fetching handicraft", data: error});
   }
 };
 
@@ -225,7 +226,7 @@ export const deleteHandicraft = async (req: Request, res: Response) => {
     const handicraft = await prisma.handicraft.findUnique({ where: { id: id } });
 
     if (!handicraft) {
-      return res.status(404).json({ error: "Handicraft not found" });
+      return res.status(404).json({ message: "Handicraft not found", data: []});
     }
 
     const image = handicraft.image;
@@ -241,9 +242,9 @@ export const deleteHandicraft = async (req: Request, res: Response) => {
     await prisma.detail_handicraft.deleteMany({ where: { id_handicraft: id } });
     await prisma.handicraft.delete({ where: { id: id } });
 
-    res.status(200).json({ message: `Handicraft with id ${id} deleted` });
+    res.status(200).json({ message: `Handicraft with id ${id} deleted`, data: []});
   } catch (error) {
-    res.status(500).json({ error: "Error deleting handicraft" });
+    res.status(500).json({ message: "Error deleting handicraft", data: error});
   }
 };
 
@@ -252,26 +253,54 @@ export const searchHandicraft = async (req: Request, res: Response) => {
   const { query } = req.query;
 
   try {
-    const handicrafts = await prisma.handicraft.findMany({
-      where: {
-        OR: [
-          {
-            name: {
-              contains: query as string,
-            },
-          },
-          {
-            description: {
-              contains: query as string,
-            },
-          },
-        ],
-      },
-    });
+    let handicrafts: any[] = [];
+    if (query) {
+      handicrafts = await prisma.handicraft.findMany({
+        where: {
+          OR: [
+            { name: { contains: query as string} },
+            { description: { contains: query as string} },
+          ],
+        },
+      });
+      // query search on waste and tags and add to handicrafts
+      const waste = await prisma.waste.findMany({ where: { name: { contains: query as string } } });
+      const tag = await prisma.tag.findMany({ where: { name: { contains: query as string } } });
+      const wasteHandicraft = await prisma.waste_handicraft.findMany({ where: { id_waste: { in: waste.map((waste) => waste.id) } } });
+      const tagHandicraft = await prisma.tag_handicraft.findMany({ where: { id_tag: { in: tag.map((tag) => tag.id) } } });
+      const handicraftsWaste = await prisma.handicraft.findMany({ where: { id: { in: wasteHandicraft.map((waste) => waste.id_handicraft) } } });
+      const handicraftsTag = await prisma.handicraft.findMany({ where: { id: { in: tagHandicraft.map((tag) => tag.id_handicraft) } } });
+      handicrafts = [...handicrafts, ...handicraftsWaste, ...handicraftsTag];
 
-    res.status(200).json({ data: handicrafts });
+      handicrafts = await Promise.all(
+        handicrafts.map(async (handicraft) => {
+          const user = await prisma.users.findMany({ where: { id: handicraft.id_user } });
+          const waste = await prisma.waste_handicraft.findMany({ where: { id_handicraft: handicraft.id } });
+          const tags = await prisma.tag_handicraft.findMany({ where: { id_handicraft: handicraft.id } });
+          const likes = await prisma.likes.count({ where: { id_handicraft: handicraft.id } });
+          const totalStep = await prisma.detail_handicraft.count({ where: { id_handicraft: handicraft.id } });
+
+          const data = { ...handicraft, createdBy: user[0].name, waste: waste.map((waste) => waste.id_waste), tags: tags.map((tag) => tag.id_tag), likes, totalStep };
+          const wasteName = await prisma.waste.findMany({ where: { id: { in: waste.map((waste) => waste.id_waste) } } });
+          data.waste = wasteName.map((waste) => waste.name);
+          const tagsName = await prisma.tag.findMany({ where: { id: { in: tags.map((tag) => tag.id_tag) } } });
+          data.tags = tagsName.map((tag) => tag.name);
+
+          handicrafts = handicrafts.filter((handicraft) => handicraft.id !== data.id);
+          if (handicrafts.length < 20) handicrafts.push(data);
+          return data;
+        })
+      );
+    }
+
+    if (handicrafts.length === 0) {
+      return res.status(404).json({ message: "No Handicraft Found", data: []});
+    }
+    
+
+    res.status(200).json({ mesaage: "Successfully Fetched Handicraft", data: handicrafts });
   } catch (error) {
-    res.status(500).json({ error: "Error fetching handicrafts" });
+    res.status(500).json({ message: "Error fetching handicrafts", data: error});
   }
 };
 
@@ -300,7 +329,7 @@ export const searchHandicraft = async (req: Request, res: Response) => {
 //   }
 
 //   if (!name || !description || !image || !id_user || !waste || !tags) {
-//     return res.status(400).json({ error: "All fields are required" });
+//     return res.status(400).json({ message: "All fields are required" });
 //   }
 
 //   try {
@@ -361,6 +390,6 @@ export const searchHandicraft = async (req: Request, res: Response) => {
 //     } catch (rollbackError) {
 //       console.error("Error rolling back file upload:", rollbackError);
 //     }
-//     res.status(500).json({ error: "Error creating handicraft", message: error.message });
+//     res.status(500).json({ message: "Error creating handicraft", message: error.message });
 //   }
 // };

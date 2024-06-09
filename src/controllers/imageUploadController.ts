@@ -11,7 +11,7 @@ export const updateImageHandicraft = async (req: Request, res: Response) => {
   const image = req.file as Express.Multer.File;
 
   if (!id) {
-    return res.status(400).json({ error: "ID is required" });
+    return res.status(400).json({ message: "ID is required", data: []});
   }
 
   const imageExist = await prisma.handicraft.findUnique({
@@ -22,13 +22,13 @@ export const updateImageHandicraft = async (req: Request, res: Response) => {
   });
 
   if (!imageExist) {
-    return res.status(404).json({ error: "Handicraft not found" });
+    return res.status(404).json({ message: "Handicraft not found", data: []});
   }
 
   // use id as file name
   const fileExtension = image.originalname.split(".").pop()?.toLowerCase();
   if (!fileExtension || !ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
-    return res.status(400).json({ error: "Invalid file type. Only PNG, JPG, and JPEG are allowed." });
+    return res.status(400).json({ message: "Invalid file type! Only PNG, JPG, and JPEG are allowed.", data: []});
   }
 
   // Construct the file output name using the id and the file extension
@@ -58,7 +58,7 @@ export const updateImageHandicraft = async (req: Request, res: Response) => {
     } catch (rollbackError: any) {
       console.error("Error rolling back file upload:", rollbackError.message);
     }
-    res.status(500).json({ error: "Error updating handicraft image", message: error.message });
+    res.status(500).json({ message: "Error updating handicraft image", data: error.message });
   }
 };
 
@@ -68,7 +68,7 @@ export const updateImageDetailHandicraft = async (req: Request, res: Response) =
   const image = req.file as Express.Multer.File;
 
   if (!id) {
-    return res.status(400).json({ error: "ID is required" });
+    return res.status(400).json({ message: "ID is required", data: []});
   }
 
   const imageExist = await prisma.detail_handicraft.findUnique({
@@ -79,13 +79,13 @@ export const updateImageDetailHandicraft = async (req: Request, res: Response) =
   });
 
   if (!imageExist) {
-    return res.status(404).json({ error: "Detail Handicraft not found" });
+    return res.status(404).json({ message: "Detail Handicraft not found", data: []});
   }
 
   // use id as file name
   const fileExtension = image.originalname.split(".").pop()?.toLowerCase();
   if (!fileExtension || !ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
-    return res.status(400).json({ error: "Invalid file type. Only PNG, JPG, and JPEG are allowed." });
+    return res.status(400).json({ message: "Invalid file type! Only PNG, JPG, and JPEG are allowed.", data: []});
   }
 
   // Construct the file output name using the id and the file extension
@@ -115,7 +115,7 @@ export const updateImageDetailHandicraft = async (req: Request, res: Response) =
     } catch (rollbackError: any) {
       console.error("Error rolling back file upload:", rollbackError.message);
     }
-    res.status(500).json({ error: "Error updating detail handicraft image", message: error.message });
+    res.status(500).json({ message: "Error updating detail handicraft image", data: error.message });
   }
 };
 
@@ -125,7 +125,7 @@ export const updateImageUser = async (req: Request, res: Response) => {
   const image = req.file as Express.Multer.File;
 
   if (!id) {
-    return res.status(400).json({ error: "ID is required" });
+    return res.status(400).json({ message: "ID is required", data: []});
   }
 
   const imageExist = await prisma.users.findUnique({
@@ -136,13 +136,13 @@ export const updateImageUser = async (req: Request, res: Response) => {
   });
 
   if (!imageExist) {
-    return res.status(404).json({ error: "User not found" });
+    return res.status(404).json({ message: "User not found", data: []});
   }
 
   // use id as file name
   const fileExtension = image.originalname.split(".").pop()?.toLowerCase();
   if (!fileExtension || !ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
-    return res.status(400).json({ error: "Invalid file type. Only PNG, JPG, and JPEG are allowed." });
+    return res.status(400).json({ message: "Invalid file type! Only PNG, JPG, and JPEG are allowed.", data: []});
   }
 
   // Construct the file output name using the id and the file extension
@@ -172,6 +172,6 @@ export const updateImageUser = async (req: Request, res: Response) => {
     } catch (rollbackError: any) {
       console.error("Error rolling back file upload:", rollbackError.message);
     }
-    res.status(500).json({ error: "Error updating user image", message: error.message });
+    res.status(500).json({ message: "Error updating user image", data: error.message });
   }
 };
