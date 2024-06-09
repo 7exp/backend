@@ -47,18 +47,6 @@ export const updateImageHandicraft = async (req: Request, res: Response) => {
       },
     });
 
-    // Attempt to delete old image from GCS
-    if (imageExist.image) {
-      const oldFileName = imageExist.image.split("/").pop();
-      const oldFilePath = `handicraft/${oldFileName}`;
-      try {
-        await deleteFileGCS(config.bucketName as string, oldFilePath);
-      } catch (deleteError: any) {
-        // Log error but do not fail the update process
-        console.error("Error deleting old image from GCS:", deleteError.message);
-      }
-    }
-
     res.status(200).json({ message: "Successfully updated Handicraft image", data: updatedHandicraft });
   } catch (error: any) {
     // Handle any error during file upload or database update
@@ -106,7 +94,7 @@ export const updateImageDetailHandicraft = async (req: Request, res: Response) =
   try {
     // Upload new image to GCS
     await uploadFileGCS(config.bucketName as string, image, fileOutputName, "detail-handicraft");
-    const public_url = `https://storage.googleapis.com/${config.bucketName}/detail_handi/${fileOutputName}`;
+    const public_url = `https://storage.googleapis.com/${config.bucketName}/detail_handicraft/${fileOutputName}`;
 
     // Update the database with the new image URL
     const updatedDetailHandicraft = await prisma.detail_handicraft.update({
@@ -116,24 +104,12 @@ export const updateImageDetailHandicraft = async (req: Request, res: Response) =
       },
     });
 
-    // Attempt to delete old image from GCS
-    if (imageExist.image) {
-      const oldFileName = imageExist.image.split("/").pop();
-      const oldFilePath = `detail_handi/${oldFileName}`;
-      try {
-        await deleteFileGCS(config.bucketName as string, oldFilePath);
-      } catch (deleteError: any) {
-        // Log error but do not fail the update process
-        console.error("Error deleting old image from GCS:", deleteError.message);
-      }
-    }
-
     res.status(200).json({ message: "Successfully updated Detail Handicraft image", data: updatedDetailHandicraft });
   } catch (error: any) {
     // Handle any error during file upload or database update
     try {
       // If there's an error after the file upload, delete the new file from GCS
-      const filePath = `detail_handi/${fileOutputName}`;
+      const filePath = `detail_handicraft/${fileOutputName}`;
       await deleteFileGCS(config.bucketName as string, filePath);
       console.log("Rolled back file upload");
     } catch (rollbackError: any) {
@@ -184,18 +160,6 @@ export const updateImageUser = async (req: Request, res: Response) => {
         image: public_url,
       },
     });
-
-    // Attempt to delete old image from GCS
-    if (imageExist.image) {
-      const oldFileName = imageExist.image.split("/").pop();
-      const oldFilePath = `user/${oldFileName}`;
-      try {
-        await deleteFileGCS(config.bucketName as string, oldFilePath);
-      } catch (deleteError: any) {
-        // Log error but do not fail the update process
-        console.error("Error deleting old image from GCS:", deleteError.message);
-      }
-    }
 
     res.status(200).json({ message: "Successfully updated User image", data: updatedUser });
   } catch (error: any) {
