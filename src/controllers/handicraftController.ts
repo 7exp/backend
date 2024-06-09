@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../../prisma/client";
-import { v4 as uuidv4 } from "uuid";
-import { uploadFileGCS, deleteFileGCS } from "../utils/bucketImage";
+import { deleteFileGCS } from "../utils/bucketImage";
 import { config } from "../config";
 
 // create handicraft without image
