@@ -23,7 +23,7 @@ export const createHandicraft = async (req: Request, res: Response) => {
   }
 
   if (!name || !description || !id_user || !waste || !tags) {
-    return res.status(400).json({ error: "All fields are required" });
+    return res.status(400).json({ message: "All fields are required", data: [] });
   }
 
   try {
@@ -73,7 +73,7 @@ export const createHandicraft = async (req: Request, res: Response) => {
 
     res.status(201).json({ message: "Successfully created Handicraft", data: payload });
   } catch (error: any) {
-    res.status(500).json({ error: "Error creating handicraft", message: error.message });
+    res.status(500).json({ message: "Error creating handicraft", data: error.message });
   }
 };
 
@@ -83,7 +83,7 @@ export const updateHandicraft = async (req: Request, res: Response) => {
   const { name, description, id_user, waste = [], tags = [] } = req.body;
 
   if (!id) {
-    return res.status(400).json({ error: "ID is required" });
+    return res.status(400).json({ message: "ID is required", data: []});
   }
 
   try {
@@ -173,7 +173,7 @@ export const updateHandicraft = async (req: Request, res: Response) => {
 
     res.status(200).json({ message: "Successfully updated Handicraft", data: payload });
   } catch (error: any) {
-    res.status(500).json({ error: "Error updating handicraft", message: error.message });
+    res.status(500).json({ message: "Error updating handicraft", data: error.message });
   }
 };
 
@@ -183,7 +183,7 @@ export const getAllHandicrafts = async (req: Request, res: Response) => {
     const handicrafts = await prisma.handicraft.findMany();
     res.status(200).json({ data: handicrafts });
   } catch (error) {
-    res.status(500).json({ error: "Error fetching handicrafts" });
+    res.status(500).json({ message: "Error fetching handicrafts", data: error});
   }
 };
 
@@ -197,7 +197,7 @@ export const getHandicraftById = async (req: Request, res: Response) => {
     });
 
     if (!handicraft) {
-      return res.status(404).json({ error: "Handicraft not found" });
+      return res.status(404).json({ message: "Handicraft not found", data: []});
     }
 
     const user = await prisma.users.findMany({ where: { id: handicraft.id_user } });
@@ -214,7 +214,7 @@ export const getHandicraftById = async (req: Request, res: Response) => {
 
     res.status(200).json({ message: "Successfully fetched Handicraft", data: data });
   } catch (error) {
-    res.status(500).json({ error: "Error fetching handicraft" });
+    res.status(500).json({ message: "Error fetching handicraft", data: error});
   }
 };
 
@@ -226,7 +226,7 @@ export const deleteHandicraft = async (req: Request, res: Response) => {
     const handicraft = await prisma.handicraft.findUnique({ where: { id: id } });
 
     if (!handicraft) {
-      return res.status(404).json({ error: "Handicraft not found" });
+      return res.status(404).json({ message: "Handicraft not found", data: []});
     }
 
     const image = handicraft.image;
@@ -242,9 +242,9 @@ export const deleteHandicraft = async (req: Request, res: Response) => {
     await prisma.detail_handicraft.deleteMany({ where: { id_handicraft: id } });
     await prisma.handicraft.delete({ where: { id: id } });
 
-    res.status(200).json({ message: `Handicraft with id ${id} deleted` });
+    res.status(200).json({ message: `Handicraft with id ${id} deleted`, data: []});
   } catch (error) {
-    res.status(500).json({ error: "Error deleting handicraft" });
+    res.status(500).json({ message: "Error deleting handicraft", data: error});
   }
 };
 
@@ -294,13 +294,13 @@ export const searchHandicraft = async (req: Request, res: Response) => {
     }
 
     if (handicrafts.length === 0) {
-      return res.status(404).json({ message: "No Handicraft Found" });
+      return res.status(404).json({ message: "No Handicraft Found", data: []});
     }
     
 
     res.status(200).json({ mesaage: "Successfully Fetched Handicraft", data: handicrafts });
   } catch (error) {
-    res.status(500).json({ error: "Error fetching handicrafts" });
+    res.status(500).json({ message: "Error fetching handicrafts", data: error});
   }
 };
 
@@ -329,7 +329,7 @@ export const searchHandicraft = async (req: Request, res: Response) => {
 //   }
 
 //   if (!name || !description || !image || !id_user || !waste || !tags) {
-//     return res.status(400).json({ error: "All fields are required" });
+//     return res.status(400).json({ message: "All fields are required" });
 //   }
 
 //   try {
@@ -390,6 +390,6 @@ export const searchHandicraft = async (req: Request, res: Response) => {
 //     } catch (rollbackError) {
 //       console.error("Error rolling back file upload:", rollbackError);
 //     }
-//     res.status(500).json({ error: "Error creating handicraft", message: error.message });
+//     res.status(500).json({ message: "Error creating handicraft", message: error.message });
 //   }
 // };

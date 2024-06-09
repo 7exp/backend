@@ -6,7 +6,7 @@ export const createWasteHandicraft = async (req: Request, res: Response) => {
   const { id_waste } = req.params;
 
   if (!id_waste || !id_handicraft) {
-    return res.status(400).json({ error: "All fields are required" });
+    return res.status(400).json({ message: "All fields are required", data: [] });
   }
 
   try {
@@ -18,6 +18,6 @@ export const createWasteHandicraft = async (req: Request, res: Response) => {
     });
     res.status(201).json({ message: "DetailWaste created", data: newDetailWaste });
   } catch (error: any) {
-    res.status(500).json({ error: "Error creating detailWaste", message: error.message });
+    res.status(500).json({ message: "Error creating detailWaste", data: error.message });
   }
 };

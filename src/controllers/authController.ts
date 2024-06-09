@@ -67,7 +67,7 @@ export const register = async (req: Request, res: Response) => {
   // if user exists then return error
   const user = await prisma.users.findUnique({ where: { email } });
   if (user) {
-    return res.status(400).json({ message: "User already exists" });
+    return res.status(400).json({ message: "User already exists", data: [] });
   } else {
     await prisma.users.create({ data: { name, email, password: hashedPassword } });
     const user = await prisma.users.findUnique({ where: { email } });
@@ -83,11 +83,11 @@ export const login = async (req: Request, res: Response) => {
   const user = await prisma.users.findUnique({ where: { email } });
 
   if (!user) {
-    return res.status(404).json({ message: "User not found" });
+    return res.status(404).json({ message: "User not found", data: [] });
   }
 
   if (!user.password) {
-    return res.status(404).json({ message: "Password not set" });
+    return res.status(404).json({ message: "Password not set", data: [] });
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -97,7 +97,7 @@ export const login = async (req: Request, res: Response) => {
     const token = jwt.sign(payload, config.jwtSecret!, { expiresIn: 60 * 60 * 1 });
     return res.json({ data: { id: user.id, name: user.name, address: user.email }, token });
   } else {
-    return res.status(403).json({ message: "Wrong password" });
+    return res.status(403).json({ message: "Wrong password", data: [] });
   }
 };
 
@@ -106,13 +106,13 @@ export const logout = async (req: Request, res: Response) => {
   const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
-    return res.status(403).json({ message: "Token not found" });
+    return res.status(403).json({ message: "Token not found", data: []});
   }
   try {
     res.clearCookie("token");
     return res.json({ message: "Logout success" });
   } catch (error) {
-    return res.status(500).json({ message: "Logout failed" });
+    return res.status(500).json({ message: "Logout failed", data: error  });
   }
 };
 
@@ -120,7 +120,7 @@ export const getUserInfo = async (req: Request, res: Response) => {
   const token = req.cookies.token;
 
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "Unauthorized", data: []});
   }
 
   try {
@@ -130,11 +130,11 @@ export const getUserInfo = async (req: Request, res: Response) => {
     });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found", data: []});
     }
 
     res.json({ id: user.id, name: user.name, email: user.email, address: user.address, role: user.role, image: user.image });
-  } catch (err) {
-    res.status(401).json({ message: "Unauthorized" });
+  } catch (error) {
+    res.status(401).json({ message: "Unauthorized", data: error });
   }
 };
