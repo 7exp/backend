@@ -53,43 +53,43 @@ export const fyp = async (req: Request, res: Response): Promise<void> => {
       },
     });
 
-    res.json(recommendedHandicrafts);
-  } catch (err) {
-    console.error("Error executing query", err);
-    res.status(500).send("Internal Server Error");
-  } finally {
-    await prisma.$disconnect();
+    res.status(200).json({ message: "Successfully fetched recommended handicrafts", data: recommendedHandicrafts });
+  } catch (error: any) {
+    res.status(500).json({ message: "Error fetching recommended handicrafts", error: error.message });
   }
 };
 
 // tranding handicraft
 export const trendingHandicrafts = async (req: Request, res: Response): Promise<void> => {
   try {
-    // Mengambil kerajinan tangan yang memiliki jumlah like terbanyak
+    // get the top 5 handicrafts that have been liked the most in the last 14 days
     const trendingHandicrafts = await prisma.handicraft.findMany({
-      orderBy: {
-        likes: {
-          _count: "desc",
+      where: {
+        createdAt: {
+          gte: new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000),
         },
       },
-      // Mengambil hanya beberapa informasi penting dari kerajinan tangan
+      orderBy: {
+        likes: {
+          _count: "desc", // Sort by the number of likes in descending order
+        },
+      },
       select: {
         id: true,
         name: true,
         description: true,
         image: true,
         createdAt: true,
-        likes: true,
+        likes: {
+          select: {
+            id: true,
+          },
+        },
       },
-      // Mengambil lima kerajinan tangan teratas yang paling populer
-      take: 5,
+      take: 5, // Limit to 5 handicrafts
     });
-
-    res.json(trendingHandicrafts);
-  } catch (err) {
-    console.error("Error executing query", err);
-    res.status(500).send("Internal Server Error");
-  } finally {
-    await prisma.$disconnect();
+    res.status(200).json({ message: "Successfully fetched trending handicrafts", data: trendingHandicrafts });
+  } catch (error: any) {
+    res.status(500).json({ message: "Error fetching trending handicrafts", error: error.message });
   }
 };
