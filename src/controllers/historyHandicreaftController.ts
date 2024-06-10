@@ -6,7 +6,7 @@ export const createHistoryHandicraft = async (req: Request, res: Response) => {
   const { id_handicraft, id_user, step_number } = req.body;
 
   if (!id_handicraft || !id_user || !step_number) {
-    return res.status(400).json({ message: "All fields are required", data: []});
+    return res.status(400).json({ message: "All fields are required", data: [] });
   }
 
   const id_handicraftExists = await prisma.handicraft.findUnique({
@@ -16,7 +16,7 @@ export const createHistoryHandicraft = async (req: Request, res: Response) => {
   });
 
   if (!id_handicraftExists) {
-    return res.status(404).json({ message: "Handicraft not found", data: []});
+    return res.status(404).json({ message: "Handicraft not found", data: [] });
   }
 
   const id_userExists = await prisma.users.findUnique({
@@ -26,7 +26,7 @@ export const createHistoryHandicraft = async (req: Request, res: Response) => {
   });
 
   if (!id_userExists) {
-    return res.status(404).json({ message: "User not found", data: []});
+    return res.status(404).json({ message: "User not found", data: [] });
   }
 
   const step_numberExists = await prisma.history_handicraft.findMany({
@@ -75,7 +75,11 @@ export const getHistoryHandicraft = async (req: Request, res: Response) => {
 // get all history handicraft
 export const getAllHistoryHandicraft = async (req: Request, res: Response) => {
   try {
-    const historyHandicraft = await prisma.history_handicraft.findMany();
+    const historyHandicraft = await prisma.history_handicraft.findMany({
+      orderBy: {
+        updatedAt: "desc",
+      },
+    });
 
     res.status(200).json({ message: "History Handicraft list", data: historyHandicraft });
   } catch (error: any) {
@@ -89,7 +93,7 @@ export const editHistoryHandicraft = async (req: Request, res: Response) => {
   const { done } = req.body;
 
   if (!id) {
-    return res.status(400).json({ message: "ID is required", data: []});
+    return res.status(400).json({ message: "ID is required", data: [] });
   }
 
   const historyHandicraft = await prisma.history_handicraft.findUnique({
@@ -97,7 +101,7 @@ export const editHistoryHandicraft = async (req: Request, res: Response) => {
   });
 
   if (!historyHandicraft) {
-    return res.status(404).json({ message: "History Handicraft not found", data: []});
+    return res.status(404).json({ message: "History Handicraft not found", data: [] });
   }
 
   try {
@@ -123,7 +127,7 @@ export const deleteHistoryHandicraft = async (req: Request, res: Response) => {
       where: { id },
     });
 
-    res.status(200).json({ message: "Successfully deleted History Handicraft", data: []});
+    res.status(200).json({ message: "Successfully deleted History Handicraft", data: [] });
   } catch (error: any) {
     res.status(500).json({ message: "Error deleting history handicraft", data: error.message });
   }
@@ -134,7 +138,7 @@ export const deleteAllHistoryHandicraft = async (req: Request, res: Response) =>
   const { id_user } = req.body;
 
   if (!id_user) {
-    return res.status(400).json({ message: "ID is required", data: []});
+    return res.status(400).json({ message: "ID is required", data: [] });
   }
 
   try {
@@ -142,7 +146,7 @@ export const deleteAllHistoryHandicraft = async (req: Request, res: Response) =>
       where: { id_user },
     });
 
-    res.status(200).json({ message: "Successfully deleted all History Handicraft", data: []});
+    res.status(200).json({ message: "Successfully deleted all History Handicraft", data: [] });
   } catch (error: any) {
     res.status(500).json({ message: "Error deleting all history handicraft", data: error.message });
   }
