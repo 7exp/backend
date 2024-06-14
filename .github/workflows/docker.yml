@@ -3,15 +3,15 @@ name: Docker Build
 on:
   workflow_run:
     workflows: ["Node.js CI"]
-    types: 
+    types:
       - completed
 
 permissions:
-      contents: read
-      packages: write
+  contents: read
+  packages: write
 
 env:
-  VER_TAG: v0.1.1
+  VER_TAG: v0.1.2
 jobs:
   docker:
     runs-on: ubuntu-latest

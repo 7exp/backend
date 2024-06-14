@@ -29,13 +29,17 @@ export const createHistoryHandicraft = async (req: Request, res: Response) => {
     return res.status(404).json({ message: "User not found", data: [] });
   }
 
-  const step_numberExists = await prisma.history_handicraft.findMany({
+  // jika id handicraft dan id user sudah ada di history handicraft maka tidak bisa membuat history handicraft baru
+  const historyHandicraftExists = await prisma.history_handicraft.findMany({
     where: {
       id_handicraft: id_handicraft,
       id_user: id_user,
-      step_number: step_number,
     },
   });
+
+  if (historyHandicraftExists.length > 0) {
+    return res.status(400).json({ message: "History Handicraft already exists", data: [] });
+  }
 
   try {
     const newHistoryHandicraft = await prisma.history_handicraft.create({

@@ -21,7 +21,7 @@ export const createLike = async (req: Request, res: Response) => {
       where: {
         id: likeExist.id,
       },
-    })
+    });
 
     res.status(200).json({ message: "Successfully removed like", data: removeLike });
   } else {
