@@ -1351,6 +1351,26 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[3],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[1],
+                },
+                {
+                  id_tag: tagid[5],
+                },
+                {
+                  id_tag: tagid[6],
+                },
+              ],
+            },
           },
           {
             name: "Cardboard Lampshade",
@@ -1398,6 +1418,23 @@ async function main() {
                   name: "Step 6 Hanging Up Your Lampshade",
                   description:
                     "In the last step, you have to turn off the lights. Unplug your socket and put the wire through the hole in the top. Re-attach your socket and turn on the lights. Make sure you connect the right colors! If you've followed the steps correctly, it should look like the lampshade I've made! I hope you've enjoyed it and don't forget to comment or give it a like!",
+                },
+              ],
+            },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[0],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[2],
+                },
+                {
+                  id_tag: tagid[5],
                 },
               ],
             },
@@ -1462,6 +1499,20 @@ async function main() {
                   image: "https://content.instructables.com/FWC/OA0D/LWKOZBDJ/FWCOA0DLWKOZBDJ.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
                   name: "Step 9: Bask in Glory",
                   description: "Fold it back out and you should have something that looks like this. Fly this around and impress your friends with your skills. If you want some modifications for this, let me know!",
+                },
+              ],
+            },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[3],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[3],
                 },
               ],
             },
@@ -1576,6 +1627,23 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[3],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[1],
+                },
+                {
+                  id_tag: tagid[4],
+                },
+              ],
+            },
           },
           {
             name: "How to Make a Cardboard Laptop Stand",
@@ -1626,6 +1694,23 @@ async function main() {
                 },
               ],
             },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[0],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[0],
+                },
+                {
+                  id_tag: tagid[1],
+                },
+              ],
+            },
           },
           {
             name: 'Cardboard Pencil Holder "Stabb-it"',
@@ -1661,6 +1746,23 @@ async function main() {
                   name: "Step 4: Stab the Stabb-it and Twist It!",
                   description:
                     "Now that your Stabb-it is complete, feel free to stab it with your pen, pencils, and other small tools! As it gets older and wears out, it will start to look like an old book with old pages and get a new look! You can also twist your pencil holder and obtain interesting shapes and have your own little modern art sculpture on your desk! :)",
+                },
+              ],
+            },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[0],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[0],
+                },
+                {
+                  id_tag: tagid[1],
                 },
               ],
             },
@@ -1703,6 +1805,23 @@ async function main() {
                   image: "https://content.instructables.com/FST/E6RT/LW3JP46A/FSTE6RTLW3JP46A.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
                   name: "Step 5: Finalizing the Project",
                   description: "Hang the finished strings on the metal rod.",
+                },
+              ],
+            },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[3],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[5],
+                },
+                {
+                  id_tag: tagid[6],
                 },
               ],
             },
@@ -1811,6 +1930,26 @@ async function main() {
                   name: "Step 14: Variations",
                   description:
                     "If you are varying the page number, the stitching pattern is easily adaptable for more signatures. Try to keep the signatures below 8 sheets each to keep the page ends aligned. Try cutting out designs with plain printer paper and gluing them on the cover. Go crazy!",
+                },
+              ],
+            },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[0],
+                },
+                {
+                  id_waste: wasteid[3],
+                }
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[0],
+                },
+                {
+                  id_tag: tagid[1],
                 },
               ],
             },
