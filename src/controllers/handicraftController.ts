@@ -186,9 +186,11 @@ export const getAllHandicrafts = async (req: Request, res: Response) => {
         const user = await prisma.users.findMany({ where: { id: handicraft.id_user } });
         const waste = await prisma.waste_handicraft.findMany({ where: { id_handicraft: handicraft.id } });
         const tags = await prisma.tag_handicraft.findMany({ where: { id_handicraft: handicraft.id } });
+        // count total images user have uploaded for each handicraft
+        const totalImages = await prisma.handicraft.count({ where: { id_user: handicraft.id_user } });
+
         const likes = await prisma.likes.count({ where: { id_handicraft: handicraft.id } });
         const totalStep = await prisma.detail_handicraft.count({ where: { id_handicraft: handicraft.id } });
-        const totalImages = await prisma.detail_handicraft.count({ where: { id_handicraft: handicraft.id } });
 
         const data = { ...handicraft, createdBy: user[0].name, totalImages, waste: waste.map((waste) => waste.id_waste), tags: tags.map((tag) => tag.id_tag), likes, totalStep };
         const wasteName = await prisma.waste.findMany({ where: { id: { in: waste.map((waste) => waste.id_waste) } } });
