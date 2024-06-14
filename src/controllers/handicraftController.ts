@@ -227,7 +227,7 @@ export const getHandicraftById = async (req: Request, res: Response) => {
     const likes = await prisma.likes.count({ where: { id_handicraft: id } });
     const totalStep = await prisma.detail_handicraft.count({ where: { id_handicraft: id } });
 
-    const data = { ...handicraft, createdBy: user[0].name, waste: waste.map((waste) => waste.id_waste), tags: tags.map((tag) => tag.id_tag), likes, totalStep };
+    const data = { ...handicraft, createdBy: user[0].name, image_user: user[0].image, waste: waste.map((waste) => waste.id_waste), tags: tags.map((tag) => tag.id_tag), likes, totalStep };
     const wasteName = await prisma.waste.findMany({ where: { id: { in: waste.map((waste) => waste.id_waste) } } });
     data.waste = wasteName.map((waste) => waste.name);
     const tagsName = await prisma.tag.findMany({ where: { id: { in: tags.map((tag) => tag.id_tag) } } });
@@ -298,7 +298,8 @@ export const searchHandicraft = async (req: Request, res: Response) => {
           const likes = await prisma.likes.count({ where: { id_handicraft: handicraft.id } });
           const totalStep = await prisma.detail_handicraft.count({ where: { id_handicraft: handicraft.id } });
 
-          const data = { ...handicraft, createdBy: user[0].name, waste: waste.map((waste) => waste.id_waste), tags: tags.map((tag) => tag.id_tag), likes, totalStep };
+          const data = { ...handicraft, createdBy: user[0].name, image_user: user[0].image, waste: waste.map((waste) => waste.id_waste), tags: tags.map((tag) => tag.id_tag), likes, totalStep };
+
           const wasteName = await prisma.waste.findMany({ where: { id: { in: waste.map((waste) => waste.id_waste) } } });
           data.waste = wasteName.map((waste) => waste.name);
           const tagsName = await prisma.tag.findMany({ where: { id: { in: tags.map((tag) => tag.id_tag) } } });
@@ -320,93 +321,3 @@ export const searchHandicraft = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error fetching handicrafts", data: error });
   }
 };
-
-// Create Handicraft include image
-// export const createHandicraft = async (req: Request, res: Response) => {
-//   const { name, description, id_user } = req.body;
-//   const waste = req.body.waste.split(",");
-//   const tags = req.body.tags.split(",");
-//   const image = req.file as Express.Multer.File;
-
-//   let id_handicraft = "";
-//   const filename = image?.originalname;
-//   const fileOutputName = `${uuidv4()}-${filename}`;
-
-//   // tag is array of string, add 1 by 1 in table tag
-//   for (let i = 0; i < tags.length; i++) {
-//     // if tag already exist, skip
-//     const tag = await prisma.tag.findUnique({ where: { name: tags[i] } });
-//     if (tag) continue;
-//     await prisma.tag.create({
-//       data: {
-//         name: tags[i],
-//       },
-//     });
-//     // console.log("tag created");
-//   }
-
-//   if (!name || !description || !image || !id_user || !waste || !tags) {
-//     return res.status(400).json({ message: "All fields are required" });
-//   }
-
-//   try {
-//     await uploadFileGCS(config.bucketName as string, image, fileOutputName as string, "handicraft");
-//     const public_url = `https://storage.googleapis.com/${config.bucketName}/handicraft/${fileOutputName}`;
-//     const newHandicraft = await prisma.handicraft.create({
-//       data: {
-//         name,
-//         description,
-//         image: public_url,
-//         id_user,
-//       },
-//     });
-
-//     id_handicraft = newHandicraft.id;
-
-//     for (let i = 0; i < waste.length; i++) {
-//       const wastename = await prisma.waste.findMany({ where: { name: waste[i] } });
-//       if (wastename) {
-//         await prisma.waste_handicraft.create({
-//           data: {
-//             id_handicraft: id_handicraft,
-//             id_waste: wastename[0].id,
-//           },
-//         });
-//       }
-//     }
-
-//     for (let i = 0; i < tags.length; i++) {
-//       const tag = await prisma.tag.findUnique({ where: { name: tags[i] } });
-//       if (tag) {
-//         await prisma.tag_handicraft.create({
-//           data: {
-//             id_handicraft: id_handicraft,
-//             id_tag: tag.id,
-//           },
-//         });
-//       }
-//     }
-
-//     const payload = {
-//       id: id_handicraft,
-//       name: name,
-//       description: description,
-//       image: public_url,
-//       id_user: id_user,
-//       waste: waste,
-//       tags: tags,
-//     };
-
-//     res.status(201).json({ message: "Successfully created Handicraft", data: payload });
-//   } catch (error: any) {
-//     // If there's an error after the file upload, delete the file from GCS
-//     const filePath = `handicraft/${fileOutputName}`;
-//     try {
-//       await deleteFileGCS(config.bucketName as string, filePath);
-//       console.log("Rolled back file upload");
-//     } catch (rollbackError) {
-//       console.error("Error rolling back file upload:", rollbackError);
-//     }
-//     res.status(500).json({ message: "Error creating handicraft", message: error.message });
-//   }
-// };
