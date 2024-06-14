@@ -86,7 +86,7 @@ export const trendingHandicrafts = async (req: Request, res: Response): Promise<
           },
         },
       },
-      take: 5, // Limit to 5 handicrafts
+      take: 10, // Limit to 5 handicrafts
     });
     res.status(200).json({ message: "Successfully fetched trending handicrafts", data: trendingHandicrafts });
   } catch (error: any) {

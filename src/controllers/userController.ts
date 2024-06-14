@@ -15,7 +15,7 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const getUsers = async (req: Request, res: Response) => {
   const result = await prisma.users.findMany({
-    select: { id: true, name: true, email: true, address: true },
+    select: { id: true, name: true, email: true, address: true, image: true },
   });
   res.json({ message: "User list", data: result });
 };
@@ -24,7 +24,7 @@ export const getUsersById = async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await prisma.users.findUnique({
     where: { id: id },
-    select: { id: true, name: true, email: true, address: true },
+    select: { id: true, name: true, email: true, address: true, image: true },
   });
   res.json({ message: "User list", data: result });
 };
@@ -35,7 +35,7 @@ export const updateUser = async (req: Request, res: Response) => {
   // if user not found return error
   const user = await prisma.users.findUnique({ where: { id: id } });
   if (!user) {
-    return res.status(404).json({ message: "User not found", data: []});
+    return res.status(404).json({ message: "User not found", data: [] });
   } else {
     const result = await prisma.users.update({
       data: { name, email, address },
@@ -52,7 +52,7 @@ export const updateUserRole = async (req: Request, res: Response) => {
   // if user not found return error
   const user = await prisma.users.findUnique({ where: { id: id } });
   if (!user) {
-    return res.status(404).json({ message: "User not found", data: []});
+    return res.status(404).json({ message: "User not found", data: [] });
   } else {
     const result = await prisma.users.update({
       data: { role },
@@ -69,10 +69,10 @@ export const updatePassword = async (req: Request, res: Response) => {
   // if user not found return error
   const user = await prisma.users.findUnique({ where: { id: id } });
   if (!user) {
-    return res.status(404).json({ message: "User not found", data: []});
+    return res.status(404).json({ message: "User not found", data: [] });
   } else {
     if (oldPassword !== user.password) {
-      return res.status(400).json({ message: "Old password is incorrect", data: []});
+      return res.status(400).json({ message: "Old password is incorrect", data: [] });
     }
     const result = await prisma.users.update({
       data: { password: newPassword },
