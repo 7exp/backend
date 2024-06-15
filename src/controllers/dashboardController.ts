@@ -4,8 +4,12 @@ import prisma from "../../prisma/client";
 export const fyp = async (req: Request, res: Response): Promise<void> => {
   try {
     const { userId } = req.params;
+    const { page = 1, pageSize = 10 } = req.query;
 
-    // Mengambil semua kerajinan tangan dan data terkait
+    // Menghitung offset berdasarkan nomor halaman dan ukuran halaman
+    const offset = (Number(page) - 1) * Number(pageSize);
+
+    // Mengambil semua kerajinan tangan dan data terkait dengan pagination
     const allHandicrafts = await prisma.handicraft.findMany({
       include: {
         users: true,
@@ -21,11 +25,15 @@ export const fyp = async (req: Request, res: Response): Promise<void> => {
           },
         },
       },
-      take: 10,
+      skip: offset,
+      take: Number(pageSize),
     });
 
-    // Mengambil semua tag yang dimiliki oleh pengguna
-    const userTags: string[] = allHandicrafts.reduce((acc: string[], curr) => {
+    // Mengambil hanya 30 data teratas dari hasil query
+    const limitedHandicrafts = allHandicrafts.slice(0, 30);
+
+    // Mengambil semua tag yang dimiliki oleh pengguna dari semua kerajinan tangan
+    const userTags: string[] = limitedHandicrafts.reduce((acc: string[], curr) => {
       curr.tag_handicraft.forEach((th) => {
         if (!acc.includes(th.tag.name)) {
           acc.push(th.tag.name);
@@ -35,7 +43,7 @@ export const fyp = async (req: Request, res: Response): Promise<void> => {
     }, []);
 
     // Memfilter kerajinan tangan berdasarkan tag yang sama atau mirip
-    const filteredHandicrafts = allHandicrafts.filter((h) => {
+    const filteredHandicrafts = limitedHandicrafts.filter((h) => {
       const handicraftTags = h.tag_handicraft.map((th) => th.tag.name);
       return (handicraftTags.some((tag) => userTags.includes(tag)) || h.history_handicraft.some((history) => history.id_user === userId)) && h.id_user !== userId; // Mengecualikan kerajinan tangan yang dibuat oleh pengguna itu sendiri
     });
@@ -86,7 +94,22 @@ export const fyp = async (req: Request, res: Response): Promise<void> => {
       })
     );
 
-    res.status(200).json({ message: "Successfully fetched FYP", data: recommendedHandicrafts });
+    // Menghitung total jumlah data untuk pagination
+    const totalCount = await prisma.handicraft.count();
+
+    // Menghitung jumlah halaman terakhir berdasarkan total data dan ukuran halaman
+    const lastPage = Math.ceil(totalCount / 10); // Karena kita menetapkan 10 data per halaman
+
+    res.status(200).json({
+      message: "Successfully fetched FYP",
+      data: recommendedHandicrafts,
+      pagination: {
+        page,
+        pageSize,
+        totalCount,
+        lastPage,
+      },
+    });
   } catch (error: any) {
     res.status(500).json({ message: "Error while fetching FYP", error: error.message });
   }
@@ -97,6 +120,24 @@ export const trendingHandicrafts = async (req: Request, res: Response) => {
     // Get the date one month ago from today
     const oneMonthAgo = new Date();
     oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+
+    // Get pagination parameters
+    const page = parseInt(req.query.page as string) || 1;
+    const pageSize = Math.min(parseInt(req.query.pageSize as string) || 10, 50); // Ensure pageSize is not more than 50
+
+    const totalCount = await prisma.handicraft.count({
+      where: {
+        likes: {
+          some: {
+            createdAt: {
+              gte: oneMonthAgo,
+            },
+          },
+        },
+      },
+    });
+
+    const offset = (page - 1) * pageSize;
 
     const handicrafts = await prisma.handicraft.findMany({
       where: {
@@ -113,7 +154,8 @@ export const trendingHandicrafts = async (req: Request, res: Response) => {
           _count: "desc",
         },
       },
-      take: 10,
+      take: pageSize,
+      skip: offset,
     });
     const data = await Promise.all(
       handicrafts.map(async (handicraft) => {
@@ -123,16 +165,37 @@ export const trendingHandicrafts = async (req: Request, res: Response) => {
         const likes = await prisma.likes.count({ where: { id_handicraft: handicraft.id } });
         const totalStep = await prisma.detail_handicraft.count({ where: { id_handicraft: handicraft.id } });
 
-        const data = { ...handicraft, createdBy: user[0].name, image_user: user[0].image, waste: waste.map((waste) => waste.id_waste), tags: tags.map((tag) => tag.id_tag), likes, totalStep };
+        const data = {
+          ...handicraft,
+          createdBy: user[0].name,
+          image_user: user[0].image,
+          waste: waste.map((waste) => waste.id_waste),
+          tags: tags.map((tag) => tag.id_tag),
+          likes,
+          totalStep,
+        };
         const wasteName = await prisma.waste.findMany({ where: { id: { in: waste.map((waste) => waste.id_waste) } } });
         data.waste = wasteName.map((waste) => waste.name);
+
         const tagsName = await prisma.tag.findMany({ where: { id: { in: tags.map((tag) => tag.id_tag) } } });
         data.tags = tagsName.map((tag) => tag.name);
 
         return data;
       })
     );
-    res.status(200).json({ message: "Successfully fetched Handicrafts trending", data: data });
+    const lastPage = Math.ceil(totalCount / pageSize);
+
+    // Send response with data and pagination information
+    res.status(200).json({
+      message: "Successfully fetched Handicrafts trending",
+      data,
+      pagination: {
+        page,
+        pageSize,
+        totalCount,
+        lastPage,
+      },
+    });
   } catch (error: any) {
     res.status(500).json({ message: "Error while fetching Handicrafts trending", error: error.message });
   }
@@ -141,6 +204,21 @@ export const trendingHandicrafts = async (req: Request, res: Response) => {
 // continue
 export const continueHandicraft = async (req: Request, res: Response) => {
   try {
+    const page = parseInt(req.query.page as string) || 1;
+    const pageSize = parseInt(req.query.pageSize as string) || 10;
+
+    const totalCount = await prisma.handicraft.count({
+      where: {
+        history_handicraft: {
+          some: {
+            done: false,
+          },
+        },
+      },
+    });
+
+    const offset = (page - 1) * pageSize;
+
     const handicrafts = await prisma.handicraft.findMany({
       where: {
         history_handicraft: {
@@ -155,6 +233,8 @@ export const continueHandicraft = async (req: Request, res: Response) => {
           _count: "desc",
         },
       },
+      take: pageSize,
+      skip: offset,
     });
     const data = await Promise.all(
       handicrafts.map(async (handicraft) => {
@@ -175,7 +255,18 @@ export const continueHandicraft = async (req: Request, res: Response) => {
       })
     );
 
-    res.status(200).json({ message: "Successfully fetched Handicrafts trending", data: data });
+    const lastPage = Math.ceil(totalCount / pageSize);
+
+    res.status(200).json({
+      message: "Successfully fetched Handicrafts to continue",
+      data,
+      pagination: {
+        page,
+        pageSize,
+        totalCount,
+        lastPage,
+      },
+    });
   } catch (error: any) {
     res.status(500).json({ message: "Error while fetching Handicrafts trending", error: error.message });
   }
