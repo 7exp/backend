@@ -65,6 +65,11 @@ export const recognition = async (req: Request, res: Response) => {
             tag: true,
           },
         },
+        waste_handicraft: {
+          include: {
+            waste: true,
+          },
+        },
         likes: true,
       },
     });
@@ -82,8 +87,10 @@ export const recognition = async (req: Request, res: Response) => {
         image: handicraft.users.image,
       },
       tags: handicraft.tag_handicraft.map((tagHandicraft) => ({
-        id: tagHandicraft.tag.id,
         name: tagHandicraft.tag.name,
+      })),
+      wastes: handicraft.waste_handicraft.map((wasteHandicraft) => ({
+        name: wasteHandicraft.waste.name,
       })),
       likesCount: handicraft.likes.length,
     }));
