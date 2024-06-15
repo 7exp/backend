@@ -184,11 +184,15 @@ export const continueHandicraft = async (req: Request, res: Response) => {
 // recently added
 export const recentlyAdded = async (req: Request, res: Response) => {
   try {
+    const { page = 1, pageSize = 10 } = req.query;
+    const totalCount = await prisma.handicraft.count();
+    const offset = (Number(page) - 1) * Number(pageSize);
     const handicrafts = await prisma.handicraft.findMany({
       orderBy: {
         createdAt: "desc",
       },
-      take: 20,
+      take: Number(pageSize),
+      skip: offset,
     });
     const data = await Promise.all(
       handicrafts.map(async (handicraft) => {
@@ -207,8 +211,18 @@ export const recentlyAdded = async (req: Request, res: Response) => {
         return data;
       })
     );
+    const lastPage = Math.ceil(totalCount / Number(pageSize));
 
-    res.status(200).json({ message: "Successfully fetched Handicrafts trending", data: data });
+    res.status(200).json({
+      message: "Successfully fetched Handicrafts trending",
+      data,
+      pagination: {
+        page,
+        pageSize,
+        totalCount,
+        lastPage,
+      },
+    });
   } catch (error: any) {
     res.status(500).json({ message: "Error while fetching Handicrafts trending", error: error.message });
   }
