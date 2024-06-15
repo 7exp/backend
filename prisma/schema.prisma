@@ -121,6 +121,7 @@ model detail_recognition {
 model waste {
   id               String             @id @default(uuid())
   name             String             @unique @db.VarChar(255)
+  label            String             @db.VarChar(255)
   image            String             @default("") @db.VarChar(255)
   createdAt        DateTime           @default(now()) @db.Timestamp(0)
   updatedAt        DateTime           @default(now()) @db.Timestamp(0)
