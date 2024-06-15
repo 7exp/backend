@@ -72,6 +72,7 @@ export const createWaste = async (req: Request, res: Response) => {
       data: {
         image: public_url,
         name: name,
+        label: name,
       },
     });
 
