@@ -10,14 +10,18 @@ import imageUploadRoutes from "./routes/imageUploadRoutes";
 import health from "./routes/healthRoutes";
 import historHandicraft from "./routes/historyHandicraftRoutes";
 import dashboard from "./routes/dashboardRoutes";
+import recognition from "./routes/recognitionRoutes";
 import { config } from "./config";
 import multer from "multer";
+import path from "path";
 
 import cookieParser from "cookie-parser"; // Import cookie-parser
 
 const app = express();
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
+
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.use(express.json());
 app.use(corsMiddleware);
@@ -31,6 +35,7 @@ app.use("/likes", likeRoutes);
 app.use("/health", health);
 app.use("/image", imageUploadRoutes);
 app.use("/dashboard", dashboard);
+app.use("/recognition", recognition);
 app.use("/history/handicraft", historHandicraft);
 app.listen(config.port, () => {
   console.log(`Server running on port ${config.port}`);

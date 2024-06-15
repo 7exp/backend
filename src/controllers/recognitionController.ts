@@ -1,35 +1,74 @@
 import { Request, Response } from "express";
 import prisma from "../../prisma/client";
+import axios from "axios";
+import { config } from "../config";
+import path from "path";
+import fs from "fs";
+import FormData from "form-data";
 
+
+// save upload axios post ke url config.BASE_URL_BACKEND_ML
 export const recognition = async (req: Request, res: Response) => {
-  const { wasteNames } = req.body; // Ambil array nama bahan bekas dari request body
+  const image = req.file as Express.Multer.File;
+
+  if (!image) {
+    return res.status(400).json({ message: "Image is required", data: [] });
+  }
+
+  const fileExtension = image.originalname.split(".").pop()?.toLowerCase();
+  const allowedExtensions = ["png", "jpg", "jpeg"];
+  if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
+    return res.status(400).json({ message: "Invalid file type! Only PNG, JPG, and JPEG are allowed.", data: [] });
+  }
 
   try {
-    // Cari karya kerajinan yang terkait dengan bahan bekas yang diberikan
+    // Create FormData object
+    const formData = new FormData();
+    formData.append("image", image.buffer, {
+      filename: image.originalname,
+      contentType: image.mimetype,
+    });
+
+    // Send POST request using Axios without explicitly setting headers
+    const response = await axios.post(`${config.backendMlUrl}/predict` as string, formData, {
+      headers: {
+        ...formData.getHeaders(),
+      },
+    });
+
+    // Assuming the response contains detections array
+    const { detections } = response.data;
+
+    // Log detections to console
+    // Log detections to console
+    const sampah = detections.map((detection: any, index: number) => detection.object);
+
+    console.log("Detected objects:", sampah);
+
+    // gunakan sampah untuk mencari karya kerajinan yang terkait
     const handicrafts = await prisma.handicraft.findMany({
       where: {
         waste_handicraft: {
           some: {
             waste: {
               name: {
-                in: wasteNames, // Filter berdasarkan nama bahan bekas
+                in: sampah,
               },
             },
           },
         },
       },
       include: {
-        users: true, // Sertakan informasi pengguna
+        users: true,
         tag_handicraft: {
           include: {
-            tag: true, // Sertakan informasi tag
+            tag: true,
           },
         },
-        likes: true, // Sertakan jumlah suka
+        likes: true,
       },
     });
 
-    // Menyusun data untuk respons sesuai dengan kebutuhan array [] dari handicrafts
     const result = handicrafts.map((handicraft) => ({
       id: handicraft.id,
       name: handicraft.name,
@@ -50,9 +89,8 @@ export const recognition = async (req: Request, res: Response) => {
     }));
 
     // Kirim respons dengan data karya kerajinan yang ditemukan
-    res.status(200).json({ handicrafts: result });
-  } catch (error) {
-    console.error("Error retrieving handicrafts:", error);
-    res.status(500).json({ error: "Failed to retrieve handicrafts" });
+    res.status(200).json({ message: "Image uploaded successfully", data: result });
+  } catch (error: any) {
+    return res.status(500).json({ message: "Error uploading image", data: error.message });
   }
 };

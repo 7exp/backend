@@ -13,4 +13,5 @@ export const config = {
   bucketName: process.env.BUCKET_NAME,
   projectId: process.env.PROJECT_ID,
   keyFilename: process.env.KEYFILENAME,
+  backendMlUrl: process.env.BASE_URL_BACKEND_ML,
 };
