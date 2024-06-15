@@ -26,10 +26,16 @@ COPY --from=builder /app/dist ./
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/key ./key
 
-ENV DATABASE_URL=mysql://root:abogoboga@10.1.1.13:3306/project_bacngkit
 ENV GOOGLE_CLIENT_ID=
 ENV GOOGLE_CLIENT_SECRET=
 ENV JWT_SECRET=
+ENV DATABASE_URL=mysql://user:password@db:3306/db_craft
+ENV GOOGLE_CALLBACK_URL=
+ENV BASE_URL_FRONTEND_ADMIN=
+ENV BASE_URL_FRONTEND_USER=
+ENV PROJECT_ID=
+ENV BUCKET_NAME=
+ENV KEYFILENAME='./key/gcp-key.json'
 VOLUME ["/app/key"] 
 
 EXPOSE 5000
