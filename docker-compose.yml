@@ -32,11 +32,11 @@ services:
       - 5001:5001
     depends_on:
       - db
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
-    #   interval: 60s
-    #   timeout: 10s
-    #   retries: 5
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 60s
+      timeout: 10s
+      retries: 5
     restart: unless-stopped
 
   db:
