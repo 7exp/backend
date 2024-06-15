@@ -51,7 +51,7 @@ export const recognition = async (req: Request, res: Response) => {
         waste_handicraft: {
           some: {
             waste: {
-              name: {
+              label: {
                 in: sampah,
               },
             },
