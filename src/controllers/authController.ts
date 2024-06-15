@@ -51,7 +51,7 @@ export const googleCallback = async (req: Request, res: Response) => {
 
   // Simpan informasi pengguna ke sesi
   const payload = { id: user.id, name: user.name, address: user.address, role: user.role, image: user.image };
-  const token = jwt.sign(payload, config.jwtSecret!, { expiresIn: 60 * 60 * 1 });
+  const token = jwt.sign(payload, config.jwtSecret!, { expiresIn: 60 * 60 * 24 * 30 });
 
   res.cookie("token", token);
 
@@ -94,8 +94,16 @@ export const login = async (req: Request, res: Response) => {
 
   if (isPasswordValid) {
     const payload = { id: user.id, name: user.name, address: user.address, role: user.role };
-    const token = jwt.sign(payload, config.jwtSecret!, { expiresIn: 60 * 60 * 1 });
-    return res.json({ data: { id: user.id, name: user.name, address: user.email }, token });
+    const token = jwt.sign(payload, config.jwtSecret!, { expiresIn: 60 * 60 * 24 * 30 });
+    // Ensure the token length is 255 characters
+    const token255 = token.slice(0, 255);
+
+    // Store the token in the database
+    await prisma.users.update({
+      where: { id: user.id },
+      data: { token: token255 },
+    });
+    return res.json({ data: { id: user.id, name: user.name, address: user.email }, token: token255 });
   } else {
     return res.status(403).json({ message: "Wrong password", data: [] });
   }
@@ -106,13 +114,13 @@ export const logout = async (req: Request, res: Response) => {
   const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
-    return res.status(403).json({ message: "Token not found", data: []});
+    return res.status(403).json({ message: "Token not found", data: [] });
   }
   try {
     res.clearCookie("token");
     return res.json({ message: "Logout success" });
   } catch (error) {
-    return res.status(500).json({ message: "Logout failed", data: error  });
+    return res.status(500).json({ message: "Logout failed", data: error });
   }
 };
 
@@ -120,7 +128,7 @@ export const getUserInfo = async (req: Request, res: Response) => {
   const token = req.cookies.token;
 
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized", data: []});
+    return res.status(401).json({ message: "Unauthorized", data: [] });
   }
 
   try {
@@ -130,7 +138,7 @@ export const getUserInfo = async (req: Request, res: Response) => {
     });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found", data: []});
+      return res.status(404).json({ message: "User not found", data: [] });
     }
 
     res.json({ id: user.id, name: user.name, email: user.email, address: user.address, role: user.role, image: user.image });
