@@ -1188,6 +1188,45 @@
 		},
 		{
 			"name": "fyp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6626e388-700a-46e3-bed4-ed8dd689717f",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"pm.test(\"Id is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data[0].id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");",
+							"});",
+							"",
+							"pm.test(\"Tags should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData[0].tags).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Waste should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "f19daf4f-dc8c-4df3-8480-21c2a477189d",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -1227,6 +1266,44 @@
 		},
 		{
 			"name": "continue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1d6e84e5-e793-40f4-b8d9-1757079ed3d8",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data[0].id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tags should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData[0].tags).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Waste should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "a875d23f-fc26-42fd-85d3-ae7a5a2ac971",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -1252,8 +1329,7 @@
 					"query": [
 						{
 							"key": "page",
-							"value": "1",
-							"type": "text"
+							"value": "1"
 						}
 					]
 				}
@@ -1268,7 +1344,20 @@
 					"script": {
 						"id": "6d9c338a-04bf-4a44-a69f-ff6ef7aa823f",
 						"exec": [
-							""
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});"
 						],
 						"type": "text/javascript",
 						"packages": {}
