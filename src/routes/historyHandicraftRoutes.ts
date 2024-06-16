@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createHistoryHandicraft, deleteHistoryHandicraft, editHistoryHandicraft, getAllHistoryHandicraft, getHistoryHandicraft } from "../controllers/historyHandicreaftController";
+import { createHistoryHandicraft, deleteHistoryHandicraft, editHistoryHandicraft, getAllHistoryHandicraft, getHistoryHandicraft } from "../controllers/historyHandicraftController";
 import { accessValidation } from "../middleware/authMiddleware";
 import { historyHandicraftValidation } from "../middleware/historyHandicraftController";
 import { handicraftValidation } from "../middleware/handicraftMiddleware";

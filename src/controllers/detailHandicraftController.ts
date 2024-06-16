@@ -105,7 +105,7 @@ export const deleteDetailHandicraft = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).json({ message: `DetailHandicraft with id ${id} deleted`, data: [] });
+    res.status(200).json({ message: `DetailHandicraft with id ${id} deleted successfully`, data: [] });
   } catch (error) {
     res.status(500).json({ message: "Error deleting detailHandicraft", data: error });
   }

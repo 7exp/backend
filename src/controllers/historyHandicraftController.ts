@@ -122,7 +122,7 @@ export const getHistoryHandicraft = async (req: Request, res: Response) => {
     const lastPage = Math.ceil(totalCount / Number(pageSize));
 
     res.status(200).json({
-      message: "History Handicraft found",
+      message: "Getting History Handicrafts successfully",
       data,
       pagination: {
         page: Number(page),
@@ -158,7 +158,7 @@ export const getAllHistoryHandicraft = async (req: Request, res: Response) => {
     const lastPage = Math.ceil(totalCount / Number(pageSize));
 
     res.status(200).json({
-      message: "History Handicraft list",
+      message: "Getting History Handicrafts successfully",
       data: historyHandicrafts,
       pagination: {
         page: Number(page),
@@ -223,7 +223,7 @@ export const deleteAllHistoryHandicraft = async (req: Request, res: Response) =>
   const { id_user } = req.body;
 
   if (!id_user) {
-    return res.status(400).json({ message: "ID is required", data: [] });
+    return res.status(400).json({ message: "User Id is required", data: [] });
   }
 
   try {
