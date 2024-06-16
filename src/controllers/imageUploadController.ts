@@ -47,7 +47,51 @@ export const updateImageHandicraft = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).json({ message: "Successfully updated Handicraft image", data: updatedHandicraft });
+    const getHandicraftById = await prisma.handicraft.findUnique({
+      where: { id },
+      include: {
+        waste_handicraft: {
+          select: {
+            id_waste: true,
+            waste: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+        tag_handicraft: {
+          select: {
+            id_tag: true,
+            tag: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+        _count: {
+          select: {
+            likes: true,
+            detail_handicraft: true,
+          },
+        },
+      },
+    });
+
+    const payload = {
+      id: getHandicraftById?.id,
+      name: getHandicraftById?.name,
+      description: getHandicraftById?.description,
+      image: getHandicraftById?.image,
+      id_user: getHandicraftById?.id_user,
+      waste: getHandicraftById?.waste_handicraft.map((waste) => waste.waste.name),
+      tags: getHandicraftById?.tag_handicraft.map((tag) => tag.tag.name),
+      likes: getHandicraftById?._count.likes,
+      totalStep: getHandicraftById?._count.detail_handicraft,
+    };
+
+    res.status(200).json({ message: "Successfully updated Handicraft image", data: payload });
   } catch (error: any) {
     // Handle any error during file upload or database update
     try {
