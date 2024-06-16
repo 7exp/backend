@@ -263,6 +263,7 @@ export const deleteHandicraft = async (req: Request, res: Response) => {
       await deleteFileGCS(config.bucketName as string, filePath);
     }
 
+    await prisma.history_handicraft.deleteMany({ where: { id_handicraft: id } });
     await prisma.waste_handicraft.deleteMany({ where: { id_handicraft: id } });
     await prisma.tag_handicraft.deleteMany({ where: { id_handicraft: id } });
     await prisma.likes.deleteMany({ where: { id_handicraft: id } });

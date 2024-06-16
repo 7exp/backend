@@ -11,7 +11,7 @@ permissions:
   packages: write
 
 env:
-  VER_TAG: v0.1.3
+  VER_TAG: v0.1.4
 jobs:
   docker:
     runs-on: ubuntu-latest

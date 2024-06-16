@@ -3,8 +3,12 @@ import prisma from "../../prisma/client";
 
 export const fyp = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { userId } = req.params;
+    const { id } = req.params;
     const { page = 1, pageSize = 10 } = req.query;
+
+    if (!id) {
+      res.status(400).json({ message: "UserId is required!" });
+    }
 
     // Menghitung offset berdasarkan nomor halaman dan ukuran halaman
     const offset = (Number(page) - 1) * Number(pageSize);
@@ -21,7 +25,7 @@ export const fyp = async (req: Request, res: Response): Promise<void> => {
         },
         history_handicraft: {
           where: {
-            id_user: userId,
+            id_user: id,
           },
         },
       },
@@ -45,7 +49,7 @@ export const fyp = async (req: Request, res: Response): Promise<void> => {
     // Memfilter kerajinan tangan berdasarkan tag yang sama atau mirip
     const filteredHandicrafts = limitedHandicrafts.filter((h) => {
       const handicraftTags = h.tag_handicraft.map((th) => th.tag.name);
-      return (handicraftTags.some((tag) => userTags.includes(tag)) || h.history_handicraft.some((history) => history.id_user === userId)) && h.id_user !== userId; // Mengecualikan kerajinan tangan yang dibuat oleh pengguna itu sendiri
+      return (handicraftTags.some((tag) => userTags.includes(tag)) || h.history_handicraft.some((history) => history.id_user === id)) && h.id_user !== id; // Mengecualikan kerajinan tangan yang dibuat oleh pengguna itu sendiri
     });
 
     // Menghitung jumlah likes dan metrik lainnya
@@ -58,8 +62,8 @@ export const fyp = async (req: Request, res: Response): Promise<void> => {
     // Mengurutkan berdasarkan kriteria (likes oleh pengguna, likes oleh orang lain, dan riwayat pengguna)
     const sortedHandicrafts = handicraftMetrics.sort((a, b) => {
       // Logika peringkat khusus di sini
-      const aUserLikes = a.likes.filter((like) => like.id_user === userId).length;
-      const bUserLikes = b.likes.filter((like) => like.id_user === userId).length;
+      const aUserLikes = a.likes.filter((like) => like.id_user === id).length;
+      const bUserLikes = b.likes.filter((like) => like.id_user === id).length;
 
       if (aUserLikes !== bUserLikes) return bUserLikes - aUserLikes;
       if (a.likesCount !== b.likesCount) return b.likesCount - a.likesCount;
@@ -77,6 +81,8 @@ export const fyp = async (req: Request, res: Response): Promise<void> => {
         const waste = await prisma.waste_handicraft.findMany({ where: { id_handicraft: h.id } });
         const wasteNames = await prisma.waste.findMany({ where: { id: { in: waste.map((w) => w.id_waste) } } });
         const totalStep = await prisma.detail_handicraft.count({ where: { id_handicraft: h.id } });
+        // filter data where id_user = id do not show
+        // filteredHandicrafts.filter((h) => h.id_user !== id);
 
         return {
           id: h.id,
@@ -101,7 +107,7 @@ export const fyp = async (req: Request, res: Response): Promise<void> => {
     const lastPage = Math.ceil(totalCount / 10); // Karena kita menetapkan 10 data per halaman
 
     res.status(200).json({
-      message: "Successfully fetched FYP",
+      message: "Successfully fetched FYP wkwkwkk",
       data: recommendedHandicrafts,
       pagination: {
         page,
@@ -114,6 +120,7 @@ export const fyp = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ message: "Error while fetching FYP", error: error.message });
   }
 };
+
 // tranding handicraft
 export const trendingHandicrafts = async (req: Request, res: Response) => {
   try {
