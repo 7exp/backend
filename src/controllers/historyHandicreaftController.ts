@@ -55,37 +55,118 @@ export const createHistoryHandicraft = async (req: Request, res: Response) => {
   }
 };
 
-// get one history handicraft
 export const getHistoryHandicraft = async (req: Request, res: Response) => {
-  const { id } = req.params;
-
   try {
-    const historyHandicraft = await prisma.history_handicraft.findUnique({
+    const { idUser } = req.params;
+    const { page = 1, pageSize = 10 } = req.query;
+    const offset = (Number(page) - 1) * Number(pageSize);
+
+    const totalCount = await prisma.history_handicraft.count({
       where: {
-        id: id,
+        id_user: idUser,
       },
     });
 
+    const historyHandicraft = await prisma.history_handicraft.findMany({
+      where: {
+        id_user: idUser,
+      },
+      orderBy: {
+        updatedAt: "desc",
+      },
+      take: Number(pageSize),
+      skip: offset,
+    });
+
     if (!historyHandicraft) {
-      return res.status(404).json({ message: "History Handicraft not found" });
+      return res.status(404).json({ message: "History Handicraft not found", data: [] });
     }
 
-    res.status(200).json({ message: "History Handicraft found", data: historyHandicraft });
+    const handicrafts = await prisma.handicraft.findMany({
+      where: {
+        history_handicraft: {
+          some: {
+            id_user: idUser,
+          },
+        },
+      },
+    });
+
+    const data = await Promise.all(
+      handicrafts.map(async (handicraft) => {
+        const user = await prisma.users.findUnique({ where: { id: handicraft.id_user } });
+        const waste = await prisma.waste_handicraft.findMany({ where: { id_handicraft: handicraft.id } });
+        const tags = await prisma.tag_handicraft.findMany({ where: { id_handicraft: handicraft.id } });
+        const likes = await prisma.likes.count({ where: { id_handicraft: handicraft.id } });
+        const totalStep = await prisma.detail_handicraft.count({ where: { id_handicraft: handicraft.id } });
+
+        const data = {
+          ...handicraft,
+          createdBy: user?.name,
+          image_user: user?.image,
+          waste: waste.map((waste) => waste.id_waste),
+          tags: tags.map((tag) => tag.id_tag),
+          likes,
+          totalStep,
+        };
+
+        const wasteName = await prisma.waste.findMany({ where: { id: { in: waste.map((waste) => waste.id_waste) } } });
+        data.waste = wasteName.map((waste) => waste.name);
+        const tagsName = await prisma.tag.findMany({ where: { id: { in: tags.map((tag) => tag.id_tag) } } });
+        data.tags = tagsName.map((tag) => tag.name);
+
+        return data;
+      })
+    );
+
+    const lastPage = Math.ceil(totalCount / Number(pageSize));
+
+    res.status(200).json({
+      message: "History Handicraft found",
+      data,
+      pagination: {
+        page: Number(page),
+        pageSize: Number(pageSize),
+        totalCount,
+        lastPage,
+      },
+    });
   } catch (error: any) {
     res.status(500).json({ message: "Error getting history handicraft", data: error.message });
   }
 };
 
 // get all history handicraft
+// Get all history handicraft with pagination
 export const getAllHistoryHandicraft = async (req: Request, res: Response) => {
   try {
-    const historyHandicraft = await prisma.history_handicraft.findMany({
+    const { page = 1, pageSize = 10 } = req.query;
+    const offset = (Number(page) - 1) * Number(pageSize);
+
+    // Count total history handicrafts
+    const totalCount = await prisma.history_handicraft.count();
+
+    // Query history handicrafts with pagination
+    const historyHandicrafts = await prisma.history_handicraft.findMany({
       orderBy: {
         updatedAt: "desc",
       },
+      take: Number(pageSize),
+      skip: offset,
     });
 
-    res.status(200).json({ message: "History Handicraft list", data: historyHandicraft });
+    const lastPage = Math.ceil(totalCount / Number(pageSize));
+
+    res.status(200).json({
+      message: "History Handicraft list",
+      data: historyHandicrafts,
+      pagination: {
+        page: Number(page),
+        pageSize: Number(pageSize),
+        totalCount,
+        lastPage,
+      },
+    });
   } catch (error: any) {
     res.status(500).json({ message: "Error getting history handicraft", data: error.message });
   }
