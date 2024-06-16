@@ -1940,7 +1940,7 @@ async function main() {
                 },
                 {
                   id_waste: wasteid[3],
-                }
+                },
               ],
             },
             tag_handicraft: {
@@ -1950,6 +1950,369 @@ async function main() {
                 },
                 {
                   id_tag: tagid[1],
+                },
+              ],
+            },
+          },
+          {
+            name: "Recycle Plastic Grocery Bags, Wire Hangers and Newspaper Into Loons!",
+            description:
+              "ou can do your bit to re-use and recycle them. There are the normal ways - i.e. use them again, or give them up all together by using cloth bags. However, here's one off-beat way to use them up and create something completely different! You can use them when making papier-mache loons. Of course you will need a few other rubbish things too....",
+            image: "https://content.instructables.com/FXK/D429/FGAGY8VQ/FXKD429FGAGY8VQ.jpg?auto=webp&frame=1&fit=bounds&md=07168eff904cde0c86fca0a8c5a8a20b",
+
+            detail_handicraft: {
+              create: [
+                {
+                  step_number: 1,
+                  image: "",
+                  name: "Crafting Staples",
+                  description:
+                    "While commercially available notebooks have a nice polished feel to them, they are extremely expensive. If you use a large number of them, there is a considerable savings from making your own. If you professionally print the paper stock for them, they have the added benefit of customizable page layouts, for example, storyboards, grids, plain paper or normal lined paper.",
+                },
+                {
+                  step_number: 2,
+                  image: "https://content.instructables.com/FAS/TW7Q/FEMY2RHU/FASTW7QFEMY2RHU.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=c9eb59b8d42018b6df1e6ad9d3a056af",
+                  name: "Step 2: Things You Will Need!",
+                  description:
+                    "You will need Lots of old newspapers Lots of old plastic grocery bags (don't you hate these?) One(or maybe two)nasty wire hangers from the dry cleaners A few small pieces of cardboard from old boxes, i.e. cereal boxes, cat food boxes, or any old box you could normally recycle.Flour, salt and water from your kitchen.Masking tape (you probably have some lurking in the basement! You can even use the empty roll of tape for strengthening the neck!) A mixing bowl Patience!(and a few old paints and paint brushes to finish off!)",
+                },
+                {
+                  step_number: 3,
+                  image: "https://content.instructables.com/FRJ/COH5/FENTSO6V/FRJCOH5FENTSO6V.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=bf69f557228312ea21f7d351987a10d8",
+                  name: "Step 3: Take the Nasty Wire Coat Hanger!",
+                  description: "Take one of those nasty wire coat hangers, that come from the dry cleaners, and twist it into a shape similar to the one in the photograph (cat audience optional!) Take care with the pointed ends!",
+                },
+                {
+                  step_number: 4,
+                  image: "https://content.instructables.com/FEG/11I3/FENTSO7I/FEG11I3FENTSO7I.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=136e14cec49e5f72c730b6524380756c",
+                  name: "Step 4: Stuff the Bags!",
+                  description: "Choose one of the bags to be the stuffee! Stuff the other bags inside it. The finished stuffed bag must be a bit moldable, so don't stuff the life out of it!",
+                },
+                {
+                  step_number: 5,
+                  image: "https://content.instructables.com/FCJ/A7F1/FENTSO7R/FCJA7F1FENTSO7R.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=136e14cec49e5f72c730b6524380756c",
+                  name: "Step 5: Stuff the Coat Hanger!",
+                  description:
+                    "When you have enough bags stuffed in the first bag, put your nasty old coat hanger shape into the bag! Push it down and pull the bags around it, so the bottom is flat and you have a sort of rounded loon body. You can insert an oval of thin cardboard at the bottom if you wish. Keep bags in place round the neck with a piece of masking tape. See picture two for what it should now look like...(again cat is optional).",
+                },
+                {
+                  step_number: 6,
+                  image: "https://content.instructables.com/FGD/KX5W/FENTSO8N/FGDKX5WFENTSO8N.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=b35f53fffd8675506209f250b6ba0d61",
+                  name: "Step 6:  Creating the Neck",
+                  description:
+                    "Take another plastic grocery bag and bind round the exposed part of the coat hanger to form the basis of the neck. Keep the bag in place by using masking tape. You do not have to be neat at this point in the process!",
+                },
+                {
+                  step_number: 7,
+                  image: "https://content.instructables.com/FC0/B68T/FENTSOBA/FC0B68TFENTSOBA.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=a01d6724b2f73555884fd3bec8f075f3",
+                  name: "Step 7: Binding the Body With Masking Tape!",
+                  description:
+                    "Now you have to cover the body completely with masking tape! Every piece of the plastic grocery bags must be covered. Do not leave any gaps. This is now a controlled form for creating a papier mache critter. You will be able to adjust the shape you want if the bag is not too full. Another reason for covering with masking tape is because the strips of newspaper and paste will stick more effectively to the tape. It is difficult to stick them to the plastic bag.Using a coloured grocery bag helps as it makes it easy to see if you have covered all of your form. By the way you can always adjust the shape of your loon when it comes to the papier-mache-ing bit!",
+                },
+                {
+                  step_number: 8,
+                  image: "https://content.instructables.com/FTH/1XC0/FENTSOBZ/FTH1XC0FENTSOBZ.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=17efb413c54f2b5eec0ff748624d3a6a",
+                  name: "Step 8: Making the Flour and Water Paste",
+                  description:
+                    "When you have your basic loon form, prepare a mixture of paste out of flour, water and a spoonful of salt (salt helps prevent your creation from going mouldy after it has dried out).When you mix your paste, take a bowl and put another of those grocery bags in it. This is a good idea, as when you have finished with your paste, you can take the grocery bag and just throw it in the garbage, leaving very little mess in the bowl or anywhere else. Of course if you don't want to waste a grocery bag, just clean up the bowl afterwards and use that bag to help make another loon! Recipe for paste1/2 cup of flour and a large spoonful of salt in the bowl.Add 1 cup of warm water and mix it up with your hands.It should be like thick creamy soup. Add more flour to thicken it or more water to thin it. If you want more paste just double or triple up the ingredients in this ratio.",
+                },
+                {
+                  step_number: 9,
+                  image: "https://content.instructables.com/F4L/4MDC/FENTSOCK/F4L4MDCFENTSOCK.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=6f63405ca0ab801c0730bbd40fdfa496",
+                  name: "Step 9: Using Up Your Old Newspapers",
+                  description:
+                    "Although most places will let you recycle your newspapers with trash pick-ups, you can use them up this way instead - it's still not a waste! So take your old newspapers and start tearing them into thinnish strips. Tearing is better than cutting, as the torn edges will meld and blend better as you apply them to your loon with the paste.You need to have smaller irregular shapes too! (By the way I read recently that in 2007 a record 56 % of used paper in the US was recycled. That's 360 pounds for every man, woman and child in the country! However, we need to work on reclaiming that 44% still out there which is being wasted!)Every ton of paper recycled saves more than 3.3 cubic yards of landfill space ",
+                },
+                {
+                  step_number: 10,
+                  image: "https://content.instructables.com/FBQ/2LCQ/FEMY2RWC/FBQ2LCQFEMY2RWC.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=8eb3f21771fd5874faa1b3667b867f2e",
+                  name: "Apply the Newspapers to Your Loon Using the Paste!",
+                  description:
+                    "Take the strips, or pieces, one at a time and paste them onto the loon shape. You can either dangle the strips in the paste and then apply, or you can use a brush or piece of foam to apply the paste to the loon and then put the paper on that way. Overlap the pieces well. Smooth the paper strips or pieces with your hands with paste on your fingers too! Make sure you cover the entire form, with NO masking tape showing at all! This will be your first coating of papier-mache. You will probably have to apply three or four coats of paper before you are through and after each application you have to let the form dry. This is where the patience comes in, as at this time of year you can't dry outside unless you are somewhere warm (which I am not!) If you strategically dry with a hair drier, you are wasting electricity!",
+                },
+                {
+                  step_number: 11,
+                  image: "",
+                  name: "Step 11: The First Layer of Newspaper Has Been Applied!",
+                  description:
+                    "Here you can see that I have applied the first layer of newspaper all over the loon shape (including the underside, which you can't see) It is very wet. You will need to let this dry before adding another coating of newspaper. I hate this waiting part!As you build up the extra layers you can fill in any lumps, bumps or dips in your form by adding extra layers of newpapers in a selective manner. I will need to build up my loon's head and neck as it is too small at the moment, and I can do this by using the scrap pieces of cardboard strategically affixed with masking tape and then covered over with the newspaper and paste mix. I can even pad the head and neck part out with extra plastic grocery bags and reapply the tape, etc. until I get a shape I am happy with.",
+                },
+                {
+                  step_number: 12,
+                  image: "https://content.instructables.com/FZP/ZZFT/FEMY2T5N/FZPZZFTFEMY2T5N.jpg?auto=webp&frame=1&width=1024&fit=bounds&md=5ca70d46593be84ff23745173d82fbeb",
+                  name: "Step 12: Revamping the Neck and Head",
+                  description:
+                    "As I was not satisfied with the shape of the head and neck, I took another piece of grocery bag (a corner) and fashioned it into a better head and taped it on with the masking tape. I will now have to go over this new part with more of the newspaper papier-mache, but that's o.k. However, I now have a form that I really like. I also strengthened and reinforced the neck by cutting pieces off the empty roll from one of the rolls of masking tape and taping them on. This makes the neck really strong and thicker too.",
+                },
+                {
+                  step_number: 13,
+                  image: "https://content.instructables.com/F00/7FJM/FEMY2UBQ/F007FJMFEMY2UBQ.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=131e95181598e2d0775c73832d590551",
+                  name: "Step 13: Final Coat of Papier-mache Has Been Applied",
+                  description:
+                    "I have now applied 4 coats of papier-mache to my loon. Now I have to wait for it to be completely dry before painting. If it were warm and sunny outside, I could dry it quickly using the sun's energy, which is free! As it is still wintery here in NY, I have been placing my wet loon overnight in the cupboard with the gas heating boiler, where the heat from there has been drying the papier-mache nicely. Before you paint, get a piece of sand paper and rub over your loon to smooth out any rough spots, and bumps. Make sure the loon is completely dry before you do this, or you will rip it apart!",
+                },
+                {
+                  step_number: 14,
+                  image: "https://content.instructables.com/F7I/SJHH/FEVP6UTM/F7ISJHHFEVP6UTM.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=c223499b62279fbf489229f9f2f2f32f",
+                  name: "Step 14: Paint the Loon White!",
+                  description:
+                    "I have put a base coat of white acrylic paint on the top side of my loon. When it's dry I will turn upside down and paint the underside. I would recommend a couple of coats to get a smooth finish and to hide the newsprint that shows through. Even if you are going to paint it red, white and blue, I would recommend a coat of white paint first.....Then put on a coat of black paint over the head and back. You can add the white dots and black lines later.",
+                },
+                {
+                  step_number: 15,
+                  image: "https://content.instructables.com/FHR/JF1D/FF48NULZ/FHRJF1DFF48NULZ.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=38e1748f46f7f991fd35975d893fb5ed",
+                  name: "Step 15: Painting the Loon",
+                  description: "Add the details to your loon. I use cheap acrylic paint. If you make a mistake you can always wait for the paint to dry and re-do. Don't forget loons always have red eyes!",
+                },
+                {
+                  step_number: 16,
+                  image: "https://content.instructables.com/F2U/MW9E/FFFKNK0B/F2UMW9EFFFKNK0B.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=afc4fdbfa292e820dfa970e3a4c43655",
+                  name: "Step 16: The Finished Loon (and Friends)",
+                  description:
+                    "Here is the finished loon in glorious black and white (and red eye!). However you can do your own thing. You can make a psychdelic bird - you are the artist! You can make anything you like out of those grocery bags if you use this instructable as a guide.To preserve your critters for the next generation, you can cover them with a clear varnish, which makes them nice and shiny as well. (Do not use one of those spray varnishes, as these are definitely NOT green!) Behold, you have created art out of trash!",
+                },
+              ],
+            },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[1],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[5],
+                },
+                {
+                  id_tag: tagid[6],
+                },
+              ],
+            },
+          },
+          {
+            name: "How to Make a Plastic Bullet Kite",
+            description: "A super easy and cheap to make that also flies like a mighty eagle on a sunny day. Not to mention it's rather good at demonstrating some basics of aerodynamic theory: lift, gravity and drag.",
+            image: "https://content.instructables.com/FQ1/OHES/G825RF4C/FQ1OHESG825RF4C.jpg?auto=webp&frame=1&fit=bounds&md=3194d8d29e01e5244f1ea99a7ea5fa05",
+
+            detail_handicraft: {
+              create: [
+                {
+                  step_number: 1,
+                  image: "",
+                  name: "Crafting Staples",
+                  description:
+                    "While commercially available notebooks have a nice polished feel to them, they are extremely expensive. If you use a large number of them, there is a considerable savings from making your own. If you professionally print the paper stock for them, they have the added benefit of customizable page layouts, for example, storyboards, grids, plain paper or normal lined paper.",
+                },
+                {
+                  step_number: 2,
+                  image: "https://content.instructables.com/FJW/392B/F5GE3D06/FJW392BF5GE3D06.jpg?auto=webp&frame=1&fit=bounds&md=687b77e435e18cc2054daf1fdfd80726",
+                  name: "Step 2: Things You Will Need...",
+                  description:
+                    "In order to make your kite you will need:-A sheet of plastic that measures 33 1/2 by 24. I used a very large plastic bag but a sturdy black bin bag is about right too -A smaller sheet of plastic measuring 19 1/2 by 26. This is about the size of a standard carrier bag, but again bin bags or any plastic sheeting is good.-3 balsa wood dowels 24 long. I've used 6mm dowels, but larger ones will also work. Balsa dowels are available from craft shops and hardware shops, but if neither are available, garden canes are also a good alternative (the green sticks to keep plants on the straight an narrow)-Sticky tape, double sided sticky tape and reinforced sticky tape. I used a heavy duty cloth gaffer tape, but gaffer tape or all weather tape of any sort will work well.-Kite line and handle. Available from specialists and some toy shops and online. In the UK, Kite Shop has a massive range or stuff. A mid weight fishing line can also be used and is a bit cheaper and re-usable.-Hole punch, scissors, marker pen and tape measure",
+                },
+                {
+                  step_number: 3,
+                  image: "https://content.instructables.com/FIV/LLY0/F5GE3D1Y/FIVLLY0F5GE3D1Y.jpg?auto=webp&frame=1&fit=bounds&md=1effeb7109dac5c4876fbd1f8db42d49",
+                  name: "Step 3: Making Your Pattern...",
+                  description:
+                    "Fold your larger sheet or plastic in half and mark the pattern on to it. I use white board marker to mark my measurements and then permanent marker in a different colour to mark my cutting line. This comes from many years of cutting down the wrong line and having some very squint patterns.Once you are happy with your patter cut it out. Make sure the fold stays in the same place. You might want to tape the fold together to stop any movement or rather than use a fold draw out the entire kite pattern as a whole and cut it out that way.Do the same for the sleeve pattern using the smaller sheet of plastic. The line down the middle of this pattern is not a cutting line. It is just the marker for the middle of the sleeve, you'll see why in a bit...",
+                },
+                {
+                  step_number: 4,
+                  image: "https://content.instructables.com/FRJ/L39D/F5HVHPO9/FRJL39DF5HVHPO9.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=b873e79beae4848c2ad0fc83a0aacc8b",
+                  name: "Step 4: Putting the Dowels in Place",
+                  description:
+                    "Position the 3 dowels in place as shown in the photo and sticky tape them in place. Use as much sticky tape as you feel necessary. I put 3 wide strips of it on the top, bottom and middle of the dowels.Make sure that the sticky tape goes right round the dowel and sticks to the plastic. You don't want your dowels falling out mid flight. Loosing an eye by kite is not cool. I find a rolling motion when sticking the tape down eliminates this risk.",
+                },
+                {
+                  step_number: 5,
+                  image: "https://content.instructables.com/FUV/DWG9/F5HVHPOX/FUVDWG9F5HVHPOX.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=5d53cb6148ce4ce946ffccb65f000291",
+                  name: "Step 5: Attaching the Sleeve",
+                  description:
+                    "Put a strip of double sided sticky tape down the entire length of the centre dowel. This is were the centre line you marked on the sleeve comes in handy.You need to match the centre line to the line of double sided sticky tape. Since the double sided sticky tape is by nature, very sticky, you only get one shot at this, particularly since the plastic is liable to stretch and tear if you try and remove it if wrongly positioned.The easiest way to do the is to fold the sleeve in half along the centre line and place it on the double sided sticky tape, taking care to align top and bottom.",
+                },
+                {
+                  step_number: 6,
+                  image: "https://content.instructables.com/F9A/0AXE/F5HVHPPG/F9A0AXEF5HVHPPG.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=a1fd0033dcb1d959f936d06f0f0b8d59",
+                  name: "Step 6:  Securing the Sleeve",
+                  description:
+                    "The sleeve needs to be secured on both sides in order to create tunnels for the wind to pass through and give the kite lift.The sleeve is secured with sticky tape on either side, as close to the dowels as possible.To prevent accidentally sticking in the wrong place, Fold the kite underneath itself, out of the way and attach the length of sticky tape to the sleeve. Once the tape is in place, hold it out of the way and unfold the kite back in to place. Carefully line up the edge of the sleeve with the outside of the dowel and secure into place. Make sure the sticky tape runs from top to bottom, any spaces will allow air to escape from the tunnels and hinder your kites flight.",
+                },
+                {
+                  step_number: 7,
+                  image: "https://content.instructables.com/FIM/PK1P/F5HVHPQU/FIMPK1PF5HVHPQU.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=2774ad0fa566240a646cf78cb4916124",
+                  name: "Step 7: Reinforce Your Kite",
+                  description:
+                    "If your turn your kite over, you'll realise it is now looking very kitey indeed.To make sure you don't loose your kite on it's maiden flight, you need to reinforce all the points of stress. This includes where bridle will be tied and where the spars are.A bridle is the string or line that is permanently attached to the kite. It is this which you attach to your line in order to fly it. A kite has a bridle so that it is easy to attach and detach from a line rather than tying fiddly knots all the time.The spars are what your doweling becomes as soon as it is attached in place. They give the kite it's structure, although not all kites have spars.But, reinforcing. The picture shows you all the points that need to be reinforced with the reinforced sticky tape. This won't always look particularly pretty, but you won't see it once it's in the sky. If there is any overhang of tape, just trim it.",
+                },
+                {
+                  step_number: 8,
+                  image: "https://content.instructables.com/F4D/DK98/F5HVHPRZ/F4DDK98F5HVHPRZ.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=4425f73e636fe99df0ab282d8562b24b",
+                  name: "Step 8: Punching Holes",
+                  description:
+                    "Punch the holes for your bridle to go through.Using the hole punch, line up the corner of the kite, which you reinforced in the previous step and punch a hole. Make sure the hole isn't too close to the edges.",
+                },
+                {
+                  step_number: 9,
+                  image: "https://content.instructables.com/FBQ/NSNS/F5HVHPT8/FBQNSNSF5HVHPT8.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=eae82e9fbc77e4e60476fba348d359c0",
+                  name: "Step 9: What Your Kite Should Look Like by Now",
+                  description:
+                    "You are now ready to attached the bridle line to the kite. This is the string that stays permanatly attached to the kite that allows a kite line and handle to be attached to when ready for use.There are various methods for doing this. A length of kite line should be attached between points A and B. Tie a loop in this string, this is where you will attach your standard kite line to in order to fly your kite.",
+                },
+              ],
+            },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[1],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[3],
+                },
+              ],
+            },
+          },
+          {
+            name: "Plastic Wrap Sculptures!",
+            description: "Sculptures made of plastic wrap and packing tape, how odd...As I'm sure some of you, maybe many of you, have not seen a plastic wrap sculpture before, I will show you some pictures first.",
+            image: "https://content.instructables.com/FYE/PSQD/FIQAOIYG/FYEPSQDFIQAOIYG.jpg?auto=webp&frame=1&fit=bounds&md=c39f921fa61b77d1d62cd174ae9f1e63",
+
+            detail_handicraft: {
+              create: [
+                {
+                  step_number: 1,
+                  image: "",
+                  name: "Crafting Staples",
+                  description:
+                    "While commercially available notebooks have a nice polished feel to them, they are extremely expensive. If you use a large number of them, there is a considerable savings from making your own. If you professionally print the paper stock for them, they have the added benefit of customizable page layouts, for example, storyboards, grids, plain paper or normal lined paper.",
+                },
+                {
+                  step_number: 2,
+                  image: "https://content.instructables.com/FTX/ZV66/FIQAOIZP/FTXZV66FIQAOIZP.jpg?auto=webp&frame=1&width=1024&fit=bounds&md=f7090a6dd08fc297bb418b94e90a9890",
+                  name: "Step 2: Materials",
+                  description:
+                    "This project uses only a few cheap materials (depending on where you get them)...Plastic wrap (What brand is up to you, some sticks better than others and sometimes you may not want that... so it's all up to you)Packing tape (go for the clear packing tape for a nice clean look)Scissors (it's not pictured but you need 'em)An item to wrap (if it is your first/second try make sure to have something you don't mind getting cut a little. After you have some practice it is easier not to cut things)",
+                },
+                {
+                  step_number: 3,
+                  image: "https://content.instructables.com/FXR/17CX/FIQAOJ0A/FXR17CXFIQAOJ0A.jpg?auto=webp&frame=1&height=1024&fit=bounds&md=f7090a6dd08fc297bb418b94e90a9890",
+                  name: "Step 3: Wrapping...",
+                  description:
+                    "The first real step is to wrap your model in the plastic wrap. Get EVERY nook and cranny. Believe me, if you don't you WILL regret it. It is nearly impossible to correct that mistake later on....Do not worry about detail in this step, for now just get the plastic wrap around the model not too tight.And remember, don't be afraid to wrap it twice!",
+                },
+                {
+                  step_number: 4,
+                  image: "https://content.instructables.com/FQW/B16J/FIQAOJ1E/FQWB16JFIQAOJ1E.jpg?auto=webp&frame=1&width=1024&fit=bounds&md=f1b94d0dcd1d195a11c5dfec4db7b4f2",
+                  name: "Step 4: Packing Tape...",
+                  description:
+                    "After you have double checked that is completely covered with the plastic wrap, bring out the scissors and the tape.You will be taping everywhere on the model. Everywhere. This is another thing you don't want to muss up. If you don't get a spot the first time around you can come back with more tape. But after this step there is nearly no turning back.Use your fingers to press down on the tape in certain areas where you want detail. The tape will typically stay depending on the brand.If some tape is sticking out, feel free to just cut it off and tape over the area.",
+                },
+                {
+                  step_number: 5,
+                  image: "https://content.instructables.com/FZ4/Y9XK/FIQAOJ3H/FZ4Y9XKFIQAOJ3H.jpg?auto=webp&frame=1&width=1024&fit=bounds&md=14a9eda9f010a4126e090616fb0f4e4b",
+                  name: "Step 5: Removing the Model...",
+                  description:
+                    "Now that you have (hopefully) successfully finished all the wrapping, we need to remove the model. This is achieved by cutting a few simple lines in the wrap.Cut a small hole in the plastic and cut through to create an opening. Depending on how complex your sculpture is, you may need more cuts to allow for easier removal. Just keep in mind, it may be easier to remove but it is harder to put back together with more cuts.",
+                },
+                {
+                  step_number: 6,
+                  image: "https://content.instructables.com/FGL/0Y4H/FIQAOJ8L/FGL0Y4HFIQAOJ8L.jpg?auto=webp&frame=1&width=1024&fit=bounds&md=2ebde9a7b0edbf6cde178eb00c7271b3",
+                  name: "Step 6: Taping It Back...",
+                  description:
+                    "In the previous step you cut up your sculpture and now you presumably have a mess of plastic that may or may not look how you want it to... This is how you put it back together.Using just a small strip of plastic at a time, connect two corresponding sides of the plastic and place the tape on top. For better results, place your hand inside and press upward while the other hand presses downward on the tape.Continue this process until it is all taped up.",
+                },
+                {
+                  step_number: 7,
+                  image: "https://content.instructables.com/FX9/DID4/FIQAOJA1/FX9DID4FIQAOJA1.jpg?auto=webp&frame=1&width=1024&fit=bounds&md=2ebde9a7b0edbf6cde178eb00c7271b3",
+                  name: "Step 7: Finished!",
+                  description: "Now you're finished! Put it somewhere fun!",
+                },
+              ],
+            },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[1],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[5],
+                },
+              ],
+            },
+          },
+          {
+            name: "Knit Plastic Bag Handbag",
+            description: "This project explains how to spin yarn from ordinary plastic grocery bags. This yarn can then be knit into a handbag.",
+            image: "https://content.instructables.com/F9G/QATB/F68BAEZG/F9GQATBF68BAEZG.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=90a5326d2d26b3f8c7d8798068dcde88",
+
+            detail_handicraft: {
+              create: [
+                {
+                  step_number: 1,
+                  image: "",
+                  name: "Crafting Staples",
+                  description:
+                    "While commercially available notebooks have a nice polished feel to them, they are extremely expensive. If you use a large number of them, there is a considerable savings from making your own. If you professionally print the paper stock for them, they have the added benefit of customizable page layouts, for example, storyboards, grids, plain paper or normal lined paper.",
+                },
+                {
+                  step_number: 2,
+                  image: "https://content.instructables.com/FFB/BEN0/F68BAEZH/FFBBEN0F68BAEZH.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=7bf83d53655dbe0c8a9c904adf56bcb1",
+                  name: "Step 2: Cut Plastic Bags Into Strips",
+                  description: "Follow a spiral pattern around the bag to get one long strip from the entire bag. Don't use your best sewing scissors for this. Cutting plastic bags dulls scissors quickly.",
+                },
+                {
+                  step_number: 3,
+                  image: "https://content.instructables.com/FB7/HZ5T/F68BAEZI/FB7HZ5TF68BAEZI.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=269c50f874b5aae60c4efbb2bffce036",
+                  name: "Step 3: Attach End of Plastic Strip to Spindle Tip and Spin",
+                  description:
+                    "Spindles are the simplest way to spin fiber, or plastic bags. The pictured spindle is a round piece of wood with a dowel glued through it. The end of the dowel has two narrow saw cuts at the end to attach the end of the string to .Once attached, grab the spindle by the point of attachment and spin between your fingers. The weight on the bottom keeps the spindle spinning. Hold the plastic strip in your other hand and pay out the strip as it twists into yarn.",
+                },
+                {
+                  step_number: 4,
+                  image: "https://content.instructables.com/FXF/YHAW/F68BAEZE/FXFYHAWF68BAEZE.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=9cc0b572dcb25c1580fb732410e62857",
+                  name: "Step 4:  Continue Spinning",
+                  description: "As the spun yarn gets longer, wrap the yarn around the stick portion of the spindle and re-attach at the tip. Keep goiing.",
+                },
+                {
+                  step_number: 5,
+                  image: "https://content.instructables.com/FED/397C/F68BAEZA/FED397CF68BAEZA.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=d35ffc8e32df2516f157868a1e28e935",
+                  name: "Step 5: RSpin Together Two Strips of Plastic.",
+                  description:
+                    "When you get to the end of one strip of plastic, you don't need to tie one strip to the next. Just overlap the two ends, fold them together and continue spinning. The twisting together will be enough to join the two strips.",
+                },
+                {
+                  step_number: 6,
+                  image: "",
+                  name: "Step 6: Knit Your Plastic Yarn",
+                  description:
+                    "Sadly, I don't have action pictures of this step. The bag shown has a very simple pattern. The body of the bag is a long strip of nothing but knit stitch. The handles are another long strip of the same stitch. The two pieces were sewn together using more plastic yarn.This bag was a first attempt. Some suggestions for improvement.1. The fabric is surprisingly heavy duty. Keep to purse size, or make something you don't plan on lugging around. This large tote bag is a little bulky.2. Have fun with color.",
+                },
+              ],
+            },
+            waste_handicraft: {
+              create: [
+                {
+                  id_waste: wasteid[1],
+                },
+              ],
+            },
+            tag_handicraft: {
+              create: [
+                {
+                  id_tag: tagid[0],
+                },
+                {
+                  id_tag: tagid[4],
                 },
               ],
             },
