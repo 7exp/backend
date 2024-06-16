@@ -236,6 +236,20 @@ export const continueHandicraft = async (req: Request, res: Response) => {
       take: pageSize,
       skip: offset,
     });
+
+    if (handicrafts.length === 0) {
+      return res.status(200).json({
+        message: "No Handicrafts to continue",
+        data: [],
+        pagination: {
+          page,
+          pageSize,
+          totalCount,
+          lastPage: 1,
+        },
+      });
+    }
+
     const data = await Promise.all(
       handicrafts.map(async (handicraft) => {
         const user = await prisma.users.findMany({ where: { id: handicraft.id_user } });
@@ -305,7 +319,7 @@ export const recentlyAdded = async (req: Request, res: Response) => {
     const lastPage = Math.ceil(totalCount / Number(pageSize));
 
     res.status(200).json({
-      message: "Successfully fetched Handicrafts trending",
+      message: "Successfully fetched recently added Handicrafts",
       data,
       pagination: {
         page,
