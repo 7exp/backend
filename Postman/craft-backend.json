@@ -494,6 +494,31 @@
 			"response": []
 		},
 		{
+			"name": "Get All User",
+			"id": "fd1c82b5-f4e7-4d1e-a895-cc4bcc90f13c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyNTUyNzk4LWMyNzItNDZiOS04YjY5LTgzOWMzYmIyNjdhYyIsIm5hbWUiOiJKb2huIERvZSIsImFkZHJlc3MiOm51bGwsImlhdCI6MTcxNzIxMDkwOCwiZXhwIjoxNzE3MjE0NTA4fQ.OljZGHGgDowUvZAgOtYwEQs9RkRnOw_jAyzo_Zq95zM",
+						"disabled": true
+					}
+				],
+				"url": "{{BaseUrl}}/users/"
+			},
+			"response": []
+		},
+		{
 			"name": "Create Handicrafts",
 			"event": [
 				{
@@ -1025,6 +1050,47 @@
 		},
 		{
 			"name": "search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8854165-5e80-4ef5-9364-0f53ed985fd3",
+						"exec": [
+							"// Fixed the test for checking the response status code\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data[0].id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tags should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData[0].tags).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Waste should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "a8213239-cd6b-4ab8-b912-c33f9c2836f4",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -1054,31 +1120,6 @@
 						}
 					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get All User",
-			"id": "fd1c82b5-f4e7-4d1e-a895-cc4bcc90f13c",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "{{Token}}"
-					}
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyNTUyNzk4LWMyNzItNDZiOS04YjY5LTgzOWMzYmIyNjdhYyIsIm5hbWUiOiJKb2huIERvZSIsImFkZHJlc3MiOm51bGwsImlhdCI6MTcxNzIxMDkwOCwiZXhwIjoxNzE3MjE0NTA4fQ.OljZGHGgDowUvZAgOtYwEQs9RkRnOw_jAyzo_Zq95zM",
-						"disabled": true
-					}
-				],
-				"url": "{{BaseUrl}}/users/"
 			},
 			"response": []
 		},
