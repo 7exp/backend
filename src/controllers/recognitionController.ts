@@ -34,13 +34,13 @@ export const recognition = async (req: Request, res: Response) => {
         ...formData.getHeaders(),
       },
     });
-
-    // Assuming the response contains detections array
+    
     const { detections } = response.data;
-
-    // Log detections to console
+    
     const sampah = detections.map((detection: any) => detection.object);
-    console.log("Detected objects:", sampah);
+    if (sampah.length === 0) {
+      return res.status(404).json({ message: "Image detected successfully but don't matches any waste", data: [] });
+    }
 
     // Pagination parameters
     const { page = 1, pageSize = 10 } = req.query;
@@ -93,6 +93,7 @@ export const recognition = async (req: Request, res: Response) => {
       skip: offset,
     });
 
+
     const result = handicrafts.map((handicraft) => ({
       id: handicraft.id,
       name: handicraft.name,
@@ -113,7 +114,7 @@ export const recognition = async (req: Request, res: Response) => {
 
     // Kirim respons dengan data karya kerajinan yang ditemukan
     res.status(200).json({
-      message: "Image uploaded successfully",
+      message: "Image detected successfully",
       data: result,
       pagination: {
         page: Number(page),
