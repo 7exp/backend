@@ -1056,7 +1056,6 @@
 					"script": {
 						"id": "f8854165-5e80-4ef5-9364-0f53ed985fd3",
 						"exec": [
-							"// Fixed the test for checking the response status code\r",
 							"pm.test(\"Response status code is 200\", function () {\r",
 							"  pm.response.to.have.status(200);\r",
 							"});\r",
