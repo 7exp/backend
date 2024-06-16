@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import prisma from "../../prisma/client";
+import { deleteFileGCS } from "../utils/bucketImage";
+import { config } from "../config";
 
 export const createUser = async (req: Request, res: Response) => {
   const { name, email, address } = req.body;
@@ -83,7 +85,26 @@ export const updatePassword = async (req: Request, res: Response) => {
 };
 
 export const deleteUser = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const result = await prisma.users.delete({ where: { id: id } });
-  res.json({ message: `Successfully deleted user`, data: id });
+  try {
+    const { id } = req.params;
+    const user = await prisma.users.findUnique({ where: { id: id } });
+    if (!user) {
+      return res.status(404).json({ message: "User not found", data: [] });
+    } else {
+      await prisma.users.delete({ where: { id } });
+
+      if (user.image) {
+        const fileName = user.image.split("/").pop() || "";
+        const filePath = `user/${fileName}`;
+
+        // Cek apakah filePath adalah default.png
+        if (filePath !== "user/default.png") {
+          await deleteFileGCS(config.bucketName as string, filePath);
+        }
+      }
+      res.json({ message: `Successfully deleted user`, data: [] });
+    }
+  } catch (error: any) {
+    res.status(500).json({ message: "Error deleting user", data: error.message });
+  }
 };

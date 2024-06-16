@@ -64,7 +64,6 @@ export const createHandicraft = async (req: Request, res: Response) => {
       id: id_handicraft,
       name: name,
       description: description,
-      Image: newHandicraft.image,
       id_user: id_user,
       waste: waste,
       tags: tags,

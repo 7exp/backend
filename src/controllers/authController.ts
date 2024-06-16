@@ -103,7 +103,7 @@ export const login = async (req: Request, res: Response) => {
       where: { id: user.id },
       data: { token: token255 },
     });
-    return res.json({ data: { id: user.id, name: user.name, address: user.email }, token: token255 });
+    return res.json({ message: "Login success", data: { id: user.id, name: user.name, address: user.email }, token: token255 });
   } else {
     return res.status(403).json({ message: "Wrong password", data: [] });
   }
