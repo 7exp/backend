@@ -1,0 +1,1592 @@
+{
+	"info": {
+		"_postman_id": "566f7e73-6ef0-455d-a1e8-69082e0defa1",
+		"name": "Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register 200",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "030d96cb-83e1-45d1-892c-ec996b2d17c3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "de7e9fea-f063-444b-b095-d045fcb5e20f",
+						"exec": [
+							"// Updated response time test",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body has the required fields - id, name, and email\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data).to.have.property('id');",
+							"    pm.expect(responseData.data).to.have.property('name');",
+							"    pm.expect(responseData.data).to.have.property('email');",
+							"});",
+							"",
+							"pm.test(\"Id is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.data.id).to.be.a('string').and.to.not.be.empty;",
+							"});",
+							"",
+							"pm.test(\"Email is in a valid email format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;",
+							"    ",
+							"    pm.expect(responseData.data.email).to.match(emailPattern);",
+							"});",
+							"",
+							"if (pm.response.json().data) {",
+							"  var userId = pm.response.json().data.id;",
+							"  pm.environment.set(\"UserId\", userId);",
+							"  pm.test(\"User ID is set in the environment variable 'UserId'\", function () {",
+							"    var userIdValue = pm.environment.get(\"UserId\");",
+							"    pm.expect(userIdValue).to.equal(userId);",
+							"  });",
+							"} else {",
+							"  console.warn(\"The JSON response does not contain data. User ID not set.\");",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "eedd059b-d646-40ba-ac28-404c87a5a64c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/auth/register",
+				"description": "### Register User\n\nThis endpoint allows the client to register a new user.\n\n#### Request Body\n\n- `name` (string, required): The name of the user.\n    \n- `email` (string, required): The email address of the user.\n    \n- `password` (string, required): The password for the user account.\n    \n\n#### Response\n\n- Status: 200 OK\n    \n- Content-Type: application/json\n    \n\n##### Success Response\n\n``` json\n{\n    \"message\": \"Success message\",\n    \"data\": {\n        \"id\": \"user_id\",\n        \"name\": \"user_name\",\n        \"email\": \"user_email\"\n    }\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "Register 400",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "030d96cb-83e1-45d1-892c-ec996b2d17c3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "de7e9fea-f063-444b-b095-d045fcb5e20f",
+						"exec": [
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"  pm.expect(pm.response.code).to.equal(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required field - message\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "dd595651-67be-45ea-a765-7cd827095b80",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/auth/register"
+			},
+			"response": []
+		},
+		{
+			"name": "Login 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "72c51725-9c08-4822-a1fa-3b64e9a2ef9d",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields - id, name, address, and token\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.data.id).to.exist;\r",
+							"    pm.expect(responseData.data.name).to.exist;\r",
+							"    pm.expect(responseData.data.address).to.exist;\r",
+							"    pm.expect(responseData.token).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.data.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should be a non-empty string\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Token is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.token).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Token should not be empty\");\r",
+							"});\r",
+							"\r",
+							"// Copy the token value to the environment variable 'Token'\r",
+							"var token = pm.response.json().token;\r",
+							"pm.environment.set(\"Token\", token);\r",
+							"// Test to check the expected behavior when the token is set in the environment\r",
+							"pm.test(\"Token is set in the environment variable 'Token'\", function () {\r",
+							"    var tokenValue = pm.environment.get(\"Token\");\r",
+							"    pm.expect(tokenValue).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Token should be set in the environment\");\r",
+							"});\r",
+							"\r",
+							"if (pm.response.json().data) {\r",
+							"  var userId = pm.response.json().data.id;\r",
+							"  pm.environment.set(\"UserId\", userId);\r",
+							"  pm.test(\"User ID is set in the environment variable 'UserId'\", function () {\r",
+							"    var userIdValue = pm.environment.get(\"UserId\");\r",
+							"    pm.expect(userIdValue).to.equal(userId);\r",
+							"  });\r",
+							"} else {\r",
+							"  console.warn(\"The JSON response does not contain data. User ID not set.\");\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ca77559b-8745-46c0-b1aa-55d008e1ad15",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "45f2fad5-cf84-40f5-a2a5-7de955269c06",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Login Wrong Email 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "72c51725-9c08-4822-a1fa-3b64e9a2ef9d",
+						"exec": [
+							"pm.test(\"Response status code is 404\", function () {",
+							"    pm.expect(pm.response.code).to.equal(404);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response schema is valid\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.exist.and.to.be.a('string');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is within the acceptable range\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "e1baa87d-3941-4e86-a181-3ccc69d0bc0a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"john.doel@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Login Wrong Password 403",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "72c51725-9c08-4822-a1fa-3b64e9a2ef9d",
+						"exec": [
+							"pm.test(\"Response status code is 403\", function () {\r",
+							"  pm.expect(pm.response.code).to.equal(403);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required field 'message'\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is within an acceptable range\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response body should have the expected schema\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData).to.be.an('object');\r",
+							"  pm.expect(responseData.message).to.exist.and.to.be.a('string');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "a897bcc5-00a3-406a-a46a-dd819031520a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"wrongpass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Update User 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9315678e-575f-468b-b6f1-c6a5b7eaf9ce",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Content type header is set to application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Data is not null or empty\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.data).to.exist.and.to.not.be.null.and.to.not.be.empty;",
+							"});",
+							"",
+							"pm.test(\"Email is in a valid email format\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.email).to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Image is either null or a valid image format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data.image).to.satisfy((value) => {",
+							"        return value === null || (typeof value === 'string' && (value.endsWith('.png') || value.endsWith('.jpg') || value.endsWith('.jpeg') || value.endsWith('.gif')));",
+							"    }, \"Image should be either null or a valid image format\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "9f426b22-bb65-42e0-b7d9-f725706ee4a1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\" : \"John Doe\",\r\n  \"email\" : \"john.doe@example.com\",\r\n  \"address\" : \"aowkokaokwa\",\r\n  \"role\" : \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/users/{{UserId}}"
+			},
+			"response": []
+		},
+		{
+			"name": "update user image",
+			"id": "cce3fbc5-d270-466f-a5fd-12e7477f3f97",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "postman-cloud:///1ee9c797-58b6-46b0-abda-1ea42212294d"
+						}
+					]
+				},
+				"url": "{{BaseUrl}}/image/user/{{UserId}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Handicrafts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "19b8d085-e9a2-4cdb-bb7d-bbbca2c53db5",
+						"exec": [
+							"// Fixed the test for checking the response status code",
+							"pm.test(\"Response status code is 201\", function () {",
+							"  pm.response.to.have.status(201);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Id is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Tags should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData.tags).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Waste should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData.waste).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.environment.set(\"HandicraftId\", pm.response.json().data.id);",
+							"pm.test(\"Id is set in the environment variable HandicraftId\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    pm.expect(responseData.id).to.equal(pm.environment.get(\"HandicraftId\"));",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "b9769638-075d-40e4-9aa8-2e0f8fae0367",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"kerajinan A\",\r\n    \"description\": \"Deskripsi kerajinan tangan yang baru\",\r\n    \"id_user\": \"{{UserId}}\",\r\n    \"waste\": [\r\n        \"paper\",\r\n        \"plastic\"\r\n    ],\r\n    \"tags\": [\r\n        \"batik\",\r\n        \"tas\",\r\n        \"suvenir\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/handicrafts"
+			},
+			"response": []
+		},
+		{
+			"name": "update handicraft",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b6572d9-2c63-4eae-bee4-a45267ccfd56",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id in the response matches HandicraftId\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    const envHandicraftId = pm.environment.get('HandicraftId');\r",
+							"    \r",
+							"    pm.expect(responseData.id).to.equal(envHandicraftId, \"Id in the response should match the 'env handicraftid'\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tags should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData.tags).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Waste should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData.waste).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "15f6fe20-b753-4a0d-ab3f-83ef1a66df97",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"New Handicraft Name\",\r\n    \"waste\": [\r\n        \"plastic\",\r\n        \"paper\"\r\n    ],\r\n    \"tags\": [\r\n        \"tas\",\r\n        \"souvenir\",\r\n        \"batik\"\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/handicrafts/{{HandicraftId}}"
+			},
+			"response": []
+		},
+		{
+			"name": "upload image handicraft",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3026762c-7044-44b6-a0bd-2930bae96be0",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id in the response matches HandicraftId\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    const envHandicraftId = pm.environment.get('HandicraftId');\r",
+							"    \r",
+							"    pm.expect(responseData.id).to.equal(envHandicraftId, \"Id in the response should match the 'env handicraftid'\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Image is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    pm.expect(responseData.image).to.not.be.null;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "f78a8c81-dae3-45d7-b3f9-df6e84380465",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "postman-cloud:///1ee9c797-58b6-46b0-abda-1ea42212294d"
+						}
+					]
+				},
+				"url": "{{BaseUrl}}/image/handicraft/{{HandicraftId}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Detail Handicraft",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1c886902-2783-4d75-bea4-61fc6b56aa25",
+						"exec": [
+							"pm.test(\"Response status code is 201\", function () {\r",
+							"  pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Data is an object and has Id\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"DetailHandicraftId\", pm.response.json().data.id);\r",
+							"pm.test(\"Id is set in the environment variable DetailHandicraftId\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    pm.expect(responseData.id).to.equal(pm.environment.get(\"DetailHandicraftId\"));\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "03b25755-b817-46e7-98f5-9eb265269b78",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"step 1\",\r\n    \"description\": \"deskripsi step\",\r\n    \"image\": \"image 1.jpg\",\r\n    \"step_number\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/handicrafts/detail/{{HandicraftId}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Detail Handicraft",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a2ff0504-e756-498f-a41f-99b439dcab3a",
+						"exec": [
+							"// Fixed the response data property used for matching the environment HandicraftId\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Data is an object and has Id\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id in the response matches DetailHandicraftId\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    const envHandicraftId = pm.environment.get('DetailHandicraftId');\r",
+							"    \r",
+							"    pm.expect(responseData.id).to.equal(envHandicraftId, \"Id in the response should match the 'DetailHandicraftId'\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "c83a31c0-92e5-4ef9-a085-a1f664c9c120",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"step 1\",\r\n    \"description\": \"hadeh ganti\",\r\n    \"image\": \"image 1.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/handicrafts/detail/{{DetailHandicraftId}}"
+			},
+			"response": []
+		},
+		{
+			"name": "update image detail handi",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "759ecd73-5bfd-4444-81cb-0af303edf825",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id in the response matches DetailHandicraftId\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    const envHandicraftId = pm.environment.get('DetailHandicraftId');\r",
+							"    \r",
+							"    pm.expect(responseData.id).to.equal(envHandicraftId, \"Id in the response should match the 'DetailHandicraftId'\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Image is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    pm.expect(responseData.image).to.not.be.null;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "a2366ea7-6417-4945-ae40-cb5c95a84919",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "postman-cloud:///1ee9c698-a85d-45b0-9fc5-2683d30c9c0b"
+						}
+					]
+				},
+				"url": "{{BaseUrl}}/image/detailhandicraft/{{DetailHandicraftId}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Like",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "51af4d2f-00f8-4a4c-8598-51886b689c00",
+						"exec": [
+							"pm.test(\"Response status code is 200 or 201\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id user in the response matches UserId\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    const envUserId = pm.environment.get('UserId');\r",
+							"    \r",
+							"    pm.expect(responseData.id_user).to.equal(envUserId, \"Id user in the response should match the 'UserId'\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id handicraft in the response matches HandicraftId\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    const envHandicraftId = pm.environment.get('HandicraftId');\r",
+							"    \r",
+							"    pm.expect(responseData.id_handicraft).to.equal(envHandicraftId, \"Id handicraft in the response should match the 'HandicraftId'\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "066182ad-1427-48df-aedf-32fa060a5e3f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_user\" : \"{{UserId}}\",\r\n    \"id_handicraft\" : \"{{HandicraftId}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/likes"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Handicraft Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "917d8b7b-939c-4133-b41f-cacb6f784f68",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message contains 'Successfully fetched Handicraft'\", function () {\r",
+							"    pm.expect(pm.response.json().message).to.include('Successfully fetched Handicraft');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Data object is not empty or null\", function () {\r",
+							"    pm.expect(pm.response.json().data).to.not.be.null.and.to.not.be.empty;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "f1a94b98-0798-46b8-9c55-17c1bf6056f7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/handicrafts/{{HandicraftId}}"
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"id": "a8213239-cd6b-4ab8-b912-c33f9c2836f4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/handicrafts/search?query=can",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"handicrafts",
+						"search"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "can"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All User",
+			"id": "fd1c82b5-f4e7-4d1e-a895-cc4bcc90f13c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyNTUyNzk4LWMyNzItNDZiOS04YjY5LTgzOWMzYmIyNjdhYyIsIm5hbWUiOiJKb2huIERvZSIsImFkZHJlc3MiOm51bGwsImlhdCI6MTcxNzIxMDkwOCwiZXhwIjoxNzE3MjE0NTA4fQ.OljZGHGgDowUvZAgOtYwEQs9RkRnOw_jAyzo_Zq95zM",
+						"disabled": true
+					}
+				],
+				"url": "{{BaseUrl}}/users/"
+			},
+			"response": []
+		},
+		{
+			"name": "Create history Handicraft",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea2236d5-5934-443d-a609-e7222216675c",
+						"exec": [
+							"// Fixed the test for checking the response status code\r",
+							"pm.test(\"Response status code is 201\", function () {\r",
+							"  pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"HistoryHandicraftId\", pm.response.json().data.id);\r",
+							"pm.test(\"Id is set in the environment variable HistoryHandicraftId\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    pm.expect(responseData.id).to.equal(pm.environment.get(\"HistoryHandicraftId\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "9d3b8ef7-4fd7-4945-b6a3-f06b9a8ce723",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_handicraft\" : \"{{HandicraftId}}\",\r\n    \"id_user\" : \"{{UserId}}\",\r\n    \"step_number\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/history/handicraft"
+			},
+			"response": []
+		},
+		{
+			"name": "fyp",
+			"id": "f19daf4f-dc8c-4df3-8480-21c2a477189d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/dashboard/fyp/{{UserId}}?page=1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"dashboard",
+						"fyp",
+						"{{UserId}}"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "continue",
+			"id": "a875d23f-fc26-42fd-85d3-ae7a5a2ac971",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{BaseUrl}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/dashboard/continue?page=1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"dashboard",
+						"continue"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit History Handicraft",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d9c338a-04bf-4a44-a69f-ff6ef7aa823f",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "70aa4179-40ed-4f3d-bfa7-4b43ba36337a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"done\" : true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/history/handicraft/{{HistoryHandicraftId}}"
+			},
+			"response": []
+		},
+		{
+			"name": "trending",
+			"id": "f3c51db2-613a-40e7-9951-19106d18e063",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/dashboard/trending?page=1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"dashboard",
+						"trending"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recent",
+			"id": "a4d33a19-c10d-4cbe-a9aa-436f67e257d2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/dashboard/recently?page=1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"dashboard",
+						"recently"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "history handicraft",
+			"id": "a2a3e527-8876-45b6-ba3f-b7705dff9113",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{BaseUrl}}/history/handicraft/{{UserId}}"
+			},
+			"response": []
+		},
+		{
+			"name": "recognition",
+			"id": "3e1e04a6-5729-4107-83df-eb06200fd33d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+							"filesNotInWorkingDirectory": [
+								"/C:/Users/mynam/Downloads/00000001.jpg"
+							],
+							"src": "postman-cloud:///1ef2b270-93fa-46a0-8ee1-35768df1f420"
+						}
+					]
+				},
+				"url": "{{BaseUrl}}/recognition"
+			},
+			"response": []
+		},
+		{
+			"name": "delete handicraft",
+			"id": "288e0bc1-a4a0-472c-8e47-6ba5b3e92f69",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "{{BaseUrl}}/handicrafts/{{HandicraftId}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f292dfb8-63b6-4721-87a8-51fd6ea6c23d",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is within an acceptable range\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields - message and data\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.have.property('message');",
+							"    pm.expect(responseData).to.have.property('data');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Message is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Data is not null or empty\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.data).to.exist.and.to.not.be.null.and.to.not.be.empty;",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "19246886-30e2-4642-8fe5-89ee1c10d86c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "{{BaseUrl}}/users/{{UserId}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bc8f17b9-d17d-4c0a-80b8-e68cad58ba01",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 300ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required field 'message'\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.have.property('message');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message field is a non-empty string\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "124aa274-c778-4d33-8690-22055f328731",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": "{{BaseUrl}}/auth/logout"
+			},
+			"response": []
+		},
+		{
+			"name": "Predict Python",
+			"id": "3fabf3d6-eaef-459c-af00-ee2aa2dd1df7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/yogan/OneDrive/Kuliah/Semester 6/Bangkit Project/object-detection-service/uploads/00000001.jpg"
+						}
+					]
+				},
+				"url": "http://192.168.192.151:5001/predict"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Handicraft",
+			"id": "1cb28c8e-bbf1-43f2-a4f5-f47b8bf59b16",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{BaseUrl}}/handicrafts"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{Token}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "5f13aba8-6940-422c-aa18-6fbec7e57272",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "db891489-9482-4cd7-a21a-53024d52ea55",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
