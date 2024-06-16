@@ -13,7 +13,7 @@ model users {
   email              String               @unique(map: "email") @db.VarChar(255)
   address            String?              @db.VarChar(255)
   password           String?              @db.VarChar(255)
-  image              String?              @default("https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png") @db.VarChar(255)
+  image              String?              @default("https://storage.googleapis.com/capstone-craft/user/default.png") @db.VarChar(255)
   role               Role                 @default(user)
   token              String?              @db.VarChar(255)
   createdAt          DateTime             @default(now()) @db.Timestamp(0)

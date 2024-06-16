@@ -14,4 +14,5 @@ export const config = {
   projectId: process.env.PROJECT_ID,
   keyFilename: process.env.KEYFILENAME,
   backendMlUrl: process.env.BASE_URL_BACKEND_ML,
+  DefaultImage: process.env.DEFAULT_IMAGE,
 };

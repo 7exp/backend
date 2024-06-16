@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import prisma from "../../prisma/client";
+import { deleteFileGCS } from "../utils/bucketImage";
+import { config } from "../config";
 
 // create detailHandicraft
 export const createDetailHandicraft = async (req: Request, res: Response) => {
@@ -99,12 +101,19 @@ export const deleteDetailHandicraft = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    await prisma.detail_handicraft.delete({
+    const detail_handicraft = await prisma.detail_handicraft.delete({
       where: {
         id: id,
       },
     });
 
+    // delete image from GCS
+    const image = detail_handicraft.image;
+    if (image) {
+      const fileName = image.split("/").pop();
+      const filePath = `detail-handicraft/${fileName}`;
+      await deleteFileGCS(config.bucketName as string, filePath);
+    }
     res.status(200).json({ message: `DetailHandicraft with id ${id} deleted successfully`, data: [] });
   } catch (error) {
     res.status(500).json({ message: "Error deleting detailHandicraft", data: error });
