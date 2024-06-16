@@ -1392,6 +1392,44 @@
 		},
 		{
 			"name": "trending",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "063c80df-12dc-4983-94ea-3c1c63756ad0",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data[0].id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tags should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData[0].tags).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Waste should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "f3c51db2-613a-40e7-9951-19106d18e063",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -1417,8 +1455,7 @@
 					"query": [
 						{
 							"key": "page",
-							"value": "1",
-							"type": "text"
+							"value": "1"
 						}
 					]
 				}
@@ -1427,6 +1464,44 @@
 		},
 		{
 			"name": "Recent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "358eaf6d-c219-49db-85ed-667bc1580062",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data[0].id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tags should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData[0].tags).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Waste should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "a4d33a19-c10d-4cbe-a9aa-436f67e257d2",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -1455,6 +1530,44 @@
 		},
 		{
 			"name": "history handicraft",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5e1ead7a-173d-43ae-b404-e167a8a4d2be",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data[0].id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tags should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData[0].tags).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Waste should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "a2a3e527-8876-45b6-ba3f-b7705dff9113",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -1474,6 +1587,44 @@
 		},
 		{
 			"name": "recognition",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f0ca127f-37a9-41fa-ba95-000e1ec15420",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data[0].id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tags should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData[0].tags).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Waste should be an array with at least one element\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    \r",
+							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "3e1e04a6-5729-4107-83df-eb06200fd33d",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
