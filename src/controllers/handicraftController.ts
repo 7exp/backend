@@ -19,7 +19,6 @@ export const createHandicraft = async (req: Request, res: Response) => {
         name: tags[i],
       },
     });
-    console.log("tag created");
   }
 
   if (!name || !description || !id_user || !waste || !tags) {
@@ -158,6 +157,12 @@ export const updateHandicraft = async (req: Request, res: Response) => {
             },
           },
         },
+        _count: {
+          select: {
+            likes: true,
+            detail_handicraft: true,
+          },
+        },
       },
     });
 
@@ -169,6 +174,8 @@ export const updateHandicraft = async (req: Request, res: Response) => {
       id_user: getHandicraftById?.id_user,
       waste: getHandicraftById?.waste_handicraft.map((waste) => waste.waste.name),
       tags: getHandicraftById?.tag_handicraft.map((tag) => tag.tag.name),
+      likes: getHandicraftById?._count.likes,
+      totalStep: getHandicraftById?._count.detail_handicraft,
     };
 
     res.status(200).json({ message: "Successfully updated Handicraft", data: payload });

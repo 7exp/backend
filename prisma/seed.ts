@@ -13,22 +13,27 @@ async function main() {
       {
         id: wasteid[0],
         name: "Cardboard Box",
+        label: "cardboard",
       },
       {
         id: wasteid[1],
         name: "Plastic",
+        label: "plastic",
       },
       {
         id: wasteid[2],
         name: "Plastic Bottles",
+        label: "plasticbottle",
       },
       {
         id: wasteid[3],
         name: "Paper",
+        label: "paper",
       },
       {
         id: wasteid[4],
-        name: "Canned Drink",
+        name: "Aluminum Can",
+        label: "alumuniumcan",
       },
     ],
     skipDuplicates: true,
