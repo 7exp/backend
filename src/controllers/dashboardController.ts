@@ -109,7 +109,7 @@ export const fyp = async (req: Request, res: Response): Promise<void> => {
     const lastPage = Math.ceil(totalCount / Number(pageSize)); // Karena kita menetapkan 10 data per halaman
 
     res.status(200).json({
-      message: "Successfully fetched FYP wkwkwkk",
+      message: "Successfully fetched FYP",
       data: recommendedHandicrafts,
       pagination: {
         page: Number(page),
