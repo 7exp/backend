@@ -11,7 +11,7 @@ export const updateImageHandicraft = async (req: Request, res: Response) => {
   const image = req.file as Express.Multer.File;
 
   if (!id) {
-    return res.status(400).json({ message: "ID is required", data: []});
+    return res.status(400).json({ message: "ID is required", data: [] });
   }
 
   const imageExist = await prisma.handicraft.findUnique({
@@ -22,13 +22,13 @@ export const updateImageHandicraft = async (req: Request, res: Response) => {
   });
 
   if (!imageExist) {
-    return res.status(404).json({ message: "Handicraft not found", data: []});
+    return res.status(404).json({ message: "Handicraft not found", data: [] });
   }
 
   // use id as file name
   const fileExtension = image.originalname.split(".").pop()?.toLowerCase();
   if (!fileExtension || !ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
-    return res.status(400).json({ message: "Invalid file type! Only PNG, JPG, and JPEG are allowed.", data: []});
+    return res.status(400).json({ message: "Invalid file type! Only PNG, JPG, and JPEG are allowed.", data: [] });
   }
 
   // Construct the file output name using the id and the file extension
@@ -112,7 +112,7 @@ export const updateImageDetailHandicraft = async (req: Request, res: Response) =
   const image = req.file as Express.Multer.File;
 
   if (!id) {
-    return res.status(400).json({ message: "ID is required", data: []});
+    return res.status(400).json({ message: "ID is required", data: [] });
   }
 
   const imageExist = await prisma.detail_handicraft.findUnique({
@@ -123,13 +123,13 @@ export const updateImageDetailHandicraft = async (req: Request, res: Response) =
   });
 
   if (!imageExist) {
-    return res.status(404).json({ message: "Detail Handicraft not found", data: []});
+    return res.status(404).json({ message: "Detail Handicraft not found", data: [] });
   }
 
   // use id as file name
   const fileExtension = image.originalname.split(".").pop()?.toLowerCase();
   if (!fileExtension || !ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
-    return res.status(400).json({ message: "Invalid file type! Only PNG, JPG, and JPEG are allowed.", data: []});
+    return res.status(400).json({ message: "Invalid file type! Only PNG, JPG, and JPEG are allowed.", data: [] });
   }
 
   // Construct the file output name using the id and the file extension
@@ -169,7 +169,7 @@ export const updateImageUser = async (req: Request, res: Response) => {
   const image = req.file as Express.Multer.File;
 
   if (!id) {
-    return res.status(400).json({ message: "ID is required", data: []});
+    return res.status(400).json({ message: "ID is required", data: [] });
   }
 
   const imageExist = await prisma.users.findUnique({
@@ -180,13 +180,13 @@ export const updateImageUser = async (req: Request, res: Response) => {
   });
 
   if (!imageExist) {
-    return res.status(404).json({ message: "User not found", data: []});
+    return res.status(404).json({ message: "User not found", data: [] });
   }
 
   // use id as file name
   const fileExtension = image.originalname.split(".").pop()?.toLowerCase();
   if (!fileExtension || !ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
-    return res.status(400).json({ message: "Invalid file type! Only PNG, JPG, and JPEG are allowed.", data: []});
+    return res.status(400).json({ message: "Invalid file type! Only PNG, JPG, and JPEG are allowed.", data: [] });
   }
 
   // Construct the file output name using the id and the file extension
@@ -212,9 +212,8 @@ export const updateImageUser = async (req: Request, res: Response) => {
       // If there's an error after the file upload, delete the new file from GCS
       const filePath = `user/${fileOutputName}`;
       await deleteFileGCS(config.bucketName as string, filePath);
-      console.log("Rolled back file upload");
     } catch (rollbackError: any) {
-      console.error("Error rolling back file upload:", rollbackError.message);
+      res.status(500).json({ message: "Error deleting image", data: rollbackError.message });
     }
     res.status(500).json({ message: "Error updating user image", data: error.message });
   }
