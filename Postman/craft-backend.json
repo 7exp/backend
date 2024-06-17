@@ -1922,6 +1922,25 @@
 				"url": "{{BaseUrl}}/handicrafts"
 			},
 			"response": []
+		},
+		{
+			"name": "get like",
+			"id": "91864fda-ede6-4919-9eb9-735ba3ad38e1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{BaseUrl}}/likes/{{UserId}}"
+			},
+			"response": []
 		}
 	],
 	"auth": {
