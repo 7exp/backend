@@ -1334,13 +1334,13 @@
 							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);",
 							"});",
 							"",
-							"pm.test(\"Response must be detected as 'aluminum can'\", function () {",
+							"pm.test(\"Response must be detected as 'Cardboard Box'\", function () {",
 							"    const responseData = pm.response.json().detected.name;",
 							"    ",
 							"    if(responseData && responseData.length > 0){",
 							"        responseData.forEach((item) => {",
 							"            const description = item.description ? item.description.toLowerCase() : '';",
-							"            pm.expect(description).to.include('aluminum can');",
+							"            pm.expect(description).to.include('Cardboard Box');",
 							"        });",
 							"    }",
 							"});",
@@ -1370,7 +1370,94 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "postman-cloud:///1ef2c62e-58d6-4200-9705-af26a3b95f3e"
+							"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+							"filesNotInWorkingDirectory": [
+								"/C:/Users/yogan/Downloads/cardboard.jpg"
+							],
+							"src": "postman-cloud:///1ef2c63f-01b7-4350-9338-82ff90988b31"
+						}
+					]
+				},
+				"url": "{{BaseUrl}}/recognition"
+			},
+			"response": []
+		},
+		{
+			"name": "Recognition Plastic Bottle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f0ca127f-37a9-41fa-ba95-000e1ec15420",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"pm.test(\"Id is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data[0].id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");",
+							"});",
+							"",
+							"pm.test(\"Tags should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData[0].tags).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Waste should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Response must be detected as 'Cardboard Box'\", function () {",
+							"    const responseData = pm.response.json().detected.name;",
+							"    ",
+							"    if(responseData && responseData.length > 0){",
+							"        responseData.forEach((item) => {",
+							"            const description = item.description ? item.description.toLowerCase() : '';",
+							"            pm.expect(description).to.include('Cardboard Box');",
+							"        });",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "84ae0f26-a529-499a-9a29-709aee40d4da",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+							"filesNotInWorkingDirectory": [
+								"/C:/Users/yogan/Downloads/cardboard.jpg"
+							],
+							"src": "postman-cloud:///1ef2c63f-01b7-4350-9338-82ff90988b31"
 						}
 					]
 				},
