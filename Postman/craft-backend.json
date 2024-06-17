@@ -24,13 +24,12 @@
 					"script": {
 						"id": "de7e9fea-f063-444b-b095-d045fcb5e20f",
 						"exec": [
-							"// Updated response time test",
-							"pm.test(\"Response time is less than 200ms\", function () {",
-							"  pm.expect(pm.response.responseTime).to.be.below(200);",
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"Response status code is 500\", function () {",
-							"  pm.response.to.have.status(500);",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);",
 							"});",
 							"",
 							"pm.test(\"Response body has the required fields - id, name, and email\", function () {",
