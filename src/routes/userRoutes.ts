@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { createUser, getUsers, updateUser, deleteUser, getUsersById, updatePassword, updateUserRole } from "../controllers/userController";
-import { accessValidation, accessValidationAdmin } from "../middleware/authMiddleware";
+import { createUser, getUsers, updateUser, deleteUser, getUsersById, updatePassword, updateUserRole, deleteSelf } from "../controllers/userController";
+import { accessValidation, accessValidationAdmin, accessValidationSelf } from "../middleware/authMiddleware";
 
 const router = Router();
 
@@ -12,5 +12,6 @@ router.post("/", accessValidationAdmin, createUser);
 router.delete("/:id", accessValidationAdmin, deleteUser);
 router.put("/:id/updatePassword", accessValidation, updatePassword);
 router.put("/:id/updateRole", accessValidationAdmin, updateUserRole);
+router.delete("/deleteSelf/:id", accessValidationSelf, deleteSelf);
 
 export default router;
