@@ -323,7 +323,7 @@ export const searchHandicraft = async (req: Request, res: Response) => {
       return res.status(404).json({ message: "No Handicraft Found", data: [] });
     }
 
-    res.status(200).json({ mesaage: "Successfully Fetched Handicraft", data: handicrafts });
+    res.status(200).json({ message: "Successfully Fetched Handicraft", data: handicrafts });
   } catch (error) {
     res.status(500).json({ message: "Error fetching handicrafts", data: error });
   }

@@ -17,7 +17,6 @@ export const handicraftValidation = async (req: Request, res: Response, next: Ne
 
   const { id_handicraft } = req.params;
   const id_user = validationReq.userData?.id;
-  console.log(id_handicraft, id_user);
 
   try {
     const handicraft = await prisma.handicraft.findFirst({
