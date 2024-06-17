@@ -1700,6 +1700,12 @@
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": "{{BaseUrl}}/history/handicraft/{{UserId}}"
