@@ -220,15 +220,17 @@ export const deleteHistoryHandicraft = async (req: Request, res: Response) => {
 
 // delete all history handicraft where user id is logged in
 export const deleteAllHistoryHandicraft = async (req: Request, res: Response) => {
-  const { id_user } = req.body;
+  const { id } = req.params;
 
-  if (!id_user) {
+  if (!id) {
     return res.status(400).json({ message: "User Id is required", data: [] });
   }
 
   try {
     await prisma.history_handicraft.deleteMany({
-      where: { id_user },
+      where: {
+        id_user: id,
+      },
     });
 
     res.status(200).json({ message: "Successfully deleted all History Handicraft", data: [] });
