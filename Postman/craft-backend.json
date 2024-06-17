@@ -2437,6 +2437,69 @@
 			"response": []
 		},
 		{
+			"name": "Create history Handicraft Again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea2236d5-5934-443d-a609-e7222216675c",
+						"exec": [
+							"// Fixed the test for checking the response status code\r",
+							"pm.test(\"Response status code is 201\", function () {\r",
+							"  pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"HistoryHandicraftId\", pm.response.json().data.id);\r",
+							"pm.test(\"Id is set in the environment variable HistoryHandicraftId\", function () {\r",
+							"    const responseData = pm.response.json().data;\r",
+							"    pm.expect(responseData.id).to.equal(pm.environment.get(\"HistoryHandicraftId\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "5b30d7b9-298f-4555-831d-961d9ce79a3b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_handicraft\" : \"{{HandicraftId}}\",\r\n    \"id_user\" : \"{{UserId}}\",\r\n    \"step_number\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/history/handicraft"
+			},
+			"response": []
+		},
+		{
 			"name": "Delete All History Handicraft By User",
 			"event": [
 				{
