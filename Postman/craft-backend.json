@@ -1417,13 +1417,13 @@
 							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);",
 							"});",
 							"",
-							"pm.test(\"Response must be detected as 'Cardboard Box'\", function () {",
+							"pm.test(\"Response must be detected as 'Plastic Bottles'\", function () {",
 							"    const responseData = pm.response.json().detected.name;",
 							"    ",
 							"    if(responseData && responseData.length > 0){",
 							"        responseData.forEach((item) => {",
 							"            const description = item.description ? item.description.toLowerCase() : '';",
-							"            pm.expect(description).to.include('Cardboard Box');",
+							"            pm.expect(description).to.include('Plastic Bottles');",
 							"        });",
 							"    }",
 							"});",
@@ -1455,9 +1455,146 @@
 							"type": "file",
 							"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
 							"filesNotInWorkingDirectory": [
-								"/C:/Users/yogan/Downloads/cardboard.jpg"
+								"/C:/Users/yogan/Downloads/bottle.jpg"
 							],
-							"src": "postman-cloud:///1ef2c63f-01b7-4350-9338-82ff90988b31"
+							"src": "postman-cloud:///1ef2c645-f403-4590-b57c-2922c81c1e72"
+						}
+					]
+				},
+				"url": "{{BaseUrl}}/recognition"
+			},
+			"response": []
+		},
+		{
+			"name": "Recognition Paper",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f0ca127f-37a9-41fa-ba95-000e1ec15420",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"pm.test(\"Id is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data[0].id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");",
+							"});",
+							"",
+							"pm.test(\"Tags should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData[0].tags).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Waste should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Response must be detected as 'Paper'\", function () {",
+							"    const responseData = pm.response.json().detected.name;",
+							"    ",
+							"    if(responseData && responseData.length > 0){",
+							"        responseData.forEach((item) => {",
+							"            const description = item.description ? item.description.toLowerCase() : '';",
+							"            pm.expect(description).to.include('Paper');",
+							"        });",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "4b7d6563-3817-4886-b85f-caa8dc5a35cc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+							"filesNotInWorkingDirectory": [
+								"/C:/Users/yogan/Downloads/paper.jpg"
+							],
+							"src": "postman-cloud:///1ef2c646-9c27-4c80-b549-f4f8d48e3163"
+						}
+					]
+				},
+				"url": "{{BaseUrl}}/recognition"
+			},
+			"response": []
+		},
+		{
+			"name": "Recognition Failed 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f0ca127f-37a9-41fa-ba95-000e1ec15420",
+						"exec": [
+							"pm.test(\"Response status code is 404\", function () {",
+							"  pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "1e30a3c7-7802-465f-ba4b-e92f15ce42c1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+							"filesNotInWorkingDirectory": [
+								"/C:/Users/yogan/Pictures/1666430971.jpg"
+							],
+							"src": "postman-cloud:///1ef2c648-95ad-4d80-a560-da8d7a3b9b38"
 						}
 					]
 				},
