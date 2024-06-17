@@ -1142,7 +1142,7 @@
 			"response": []
 		},
 		{
-			"name": "recognition Plastic",
+			"name": "Recognition Plastic",
 			"event": [
 				{
 					"listen": "test",
@@ -1176,7 +1176,7 @@
 							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);",
 							"});",
 							"",
-							"pm.test(\"Response contains the word 'plastic'\", function () {",
+							"pm.test(\"Response must be detected as 'plastic'\", function () {",
 							"    const responseData = pm.response.json().detected.name;",
 							"    ",
 							"    if(responseData && responseData.length > 0){",
@@ -1221,7 +1221,7 @@
 			"response": []
 		},
 		{
-			"name": "recognition Alluminum",
+			"name": "Recognition Alluminum",
 			"event": [
 				{
 					"listen": "test",
@@ -1255,7 +1255,7 @@
 							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);",
 							"});",
 							"",
-							"pm.test(\"Response contains the word 'plastic'\", function () {",
+							"pm.test(\"Response must be detected as 'aluminum can'\", function () {",
 							"    const responseData = pm.response.json().detected.name;",
 							"    ",
 							"    if(responseData && responseData.length > 0){",
@@ -1273,6 +1273,85 @@
 				}
 			],
 			"id": "11b679c9-cbdc-405f-8712-e3f7aed213c7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "postman-cloud:///1ef2c62e-58d6-4200-9705-af26a3b95f3e"
+						}
+					]
+				},
+				"url": "{{BaseUrl}}/recognition"
+			},
+			"response": []
+		},
+		{
+			"name": "Recognition Cardboard Box",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f0ca127f-37a9-41fa-ba95-000e1ec15420",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"pm.test(\"Id is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data[0].id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");",
+							"});",
+							"",
+							"pm.test(\"Tags should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData[0].tags).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Waste should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Response must be detected as 'aluminum can'\", function () {",
+							"    const responseData = pm.response.json().detected.name;",
+							"    ",
+							"    if(responseData && responseData.length > 0){",
+							"        responseData.forEach((item) => {",
+							"            const description = item.description ? item.description.toLowerCase() : '';",
+							"            pm.expect(description).to.include('aluminum can');",
+							"        });",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "6ca9f3e4-71d0-4025-a6d9-9f26ed0f8a0c",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
