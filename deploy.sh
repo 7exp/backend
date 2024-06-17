@@ -20,13 +20,22 @@ else
   error_message "Failed to pull Docker images"
 fi
 
+# Stop development Docker containers
+echo "Stopping Craft-Backend-Dev containers..."
+sudo docker-compose -f docker-compose-dev.yml down
+if [ $? -eq 0 ]; then
+  success_message "Craft-Backend-Dev containers stopped"
+else
+  error_message "Failed to stop Craft-Backend-Dev containers"
+fi
+
 # Start your Docker containers
-echo "Starting Docker containers..."
+echo "Starting production containers..."
 sudo docker-compose up -d
 if [ $? -eq 0 ]; then
-  success_message "Docker containers started"
+  success_message "Production containers started"
 else
-  error_message "Failed to start Docker containers (check logs with 'docker-compose logs')"
+  error_message "Failed to start production containers (check logs with 'docker-compose logs')"
 fi
 
 # Remove unused Docker images

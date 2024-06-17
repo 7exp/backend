@@ -129,8 +129,6 @@ export const logout = async (req: Request, res: Response) => {
     const token = authorization!.split(" ")[1];
     const jwtDecode = jwt.decode(token) as UserData;
 
-    console.log(jwtDecode.id);
-
     const user = await prisma.users.findUnique({ where: { id: jwtDecode.id } });
 
     if (!user) {
