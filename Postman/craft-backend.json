@@ -1924,7 +1924,7 @@
 			"response": []
 		},
 		{
-			"name": "get like",
+			"name": "Get User Likes",
 			"id": "91864fda-ede6-4919-9eb9-735ba3ad38e1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
