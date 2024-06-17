@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  backend:
+    image: ghcr.io/7exp/craft-backend:latest
+    container_name: craft-backend-dev
+    networks:
+      - craft-network
+    ports:
+      - 5002:5000
+    env_file:
+      - .env
+    volumes: 
+      - ./key:/app/key
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 60s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+
+networks:
+  craft-network:
+    external: true
+
