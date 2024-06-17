@@ -19,7 +19,7 @@ jobs:
                 sudo docker-compose -f docker-compose-dev.yml up -d
             - uses: matt-ball/newman-action@master
               with:
-                collection: Postman/craft-backend.json
+                collection: Postman/craft-backend-dev.json
                 environment: Postman/CraftBackend.postman_environment.json
                 delay-request: 1000
             - name: Deploy to production
