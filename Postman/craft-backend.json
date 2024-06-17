@@ -465,7 +465,7 @@
 			"response": []
 		},
 		{
-			"name": "update user image",
+			"name": "Update User Image",
 			"id": "cce3fbc5-d270-466f-a5fd-12e7477f3f97",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -490,31 +490,6 @@
 					]
 				},
 				"url": "{{BaseUrl}}/image/user/{{UserId}}"
-			},
-			"response": []
-		},
-		{
-			"name": "Get All User",
-			"id": "fd1c82b5-f4e7-4d1e-a895-cc4bcc90f13c",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "{{Token}}"
-					}
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyNTUyNzk4LWMyNzItNDZiOS04YjY5LTgzOWMzYmIyNjdhYyIsIm5hbWUiOiJKb2huIERvZSIsImFkZHJlc3MiOm51bGwsImlhdCI6MTcxNzIxMDkwOCwiZXhwIjoxNzE3MjE0NTA4fQ.OljZGHGgDowUvZAgOtYwEQs9RkRnOw_jAyzo_Zq95zM",
-						"disabled": true
-					}
-				],
-				"url": "{{BaseUrl}}/users/"
 			},
 			"response": []
 		},
@@ -596,7 +571,7 @@
 			"response": []
 		},
 		{
-			"name": "update handicraft",
+			"name": "Update Handicraft",
 			"event": [
 				{
 					"listen": "test",
@@ -672,7 +647,7 @@
 			"response": []
 		},
 		{
-			"name": "upload image handicraft",
+			"name": "Upload Image Handicraft",
 			"event": [
 				{
 					"listen": "test",
@@ -864,7 +839,7 @@
 			"response": []
 		},
 		{
-			"name": "update image detail handicraft",
+			"name": "Update Image Detail Handicraft",
 			"event": [
 				{
 					"listen": "test",
@@ -1708,7 +1683,7 @@
 			"response": []
 		},
 		{
-			"name": "fyp",
+			"name": "FYP",
 			"event": [
 				{
 					"listen": "test",
@@ -1786,7 +1761,7 @@
 			"response": []
 		},
 		{
-			"name": "continue",
+			"name": "Continue History",
 			"event": [
 				{
 					"listen": "test",
@@ -1912,7 +1887,7 @@
 			"response": []
 		},
 		{
-			"name": "trending",
+			"name": "Trending",
 			"event": [
 				{
 					"listen": "test",
@@ -2050,7 +2025,7 @@
 			"response": []
 		},
 		{
-			"name": "history handicraft",
+			"name": "History Handicraft",
 			"event": [
 				{
 					"listen": "test",
