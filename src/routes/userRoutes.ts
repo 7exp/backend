@@ -12,6 +12,6 @@ router.post("/", accessValidationAdmin, createUser);
 router.delete("/:id", accessValidationAdmin, deleteUser);
 router.put("/:id/updatePassword", accessValidation, updatePassword);
 router.put("/:id/updateRole", accessValidationAdmin, updateUserRole);
-router.delete("/deleteSelf/:id", accessValidationSelf, deleteSelf);
+router.delete("/deleteself/:id", accessValidationSelf, deleteSelf);
 
 export default router;

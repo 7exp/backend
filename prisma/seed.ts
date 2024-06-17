@@ -83,6 +83,18 @@ async function main() {
   });
   console.log(`Created many tag with ids: ${tag}`);
 
+  const deleteduser = await prisma.users.create({
+    data: {
+      id: "deleteduser",
+      name: "Deleted User",
+      email: "deleteduser@email.com",
+      address: "Deleted User Address",
+      password: "deleteduser",
+      image: "https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png",
+      role: "user",
+    }
+  });
+
   const user = await prisma.users.upsert({
     where: { id: userid },
     update: {},

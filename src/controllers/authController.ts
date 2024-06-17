@@ -15,6 +15,17 @@ const authorizationUrl = oauth2Client.generateAuthUrl({
   include_granted_scopes: true,
 });
 
+interface UserData {
+  id: string;
+  name: string;
+  role: string;
+  address: string;
+}
+
+interface ValidationRequest extends Request {
+  userData?: UserData;
+}
+
 export const googleAuth = (req: Request, res: Response) => {
   res.redirect(authorizationUrl);
 };
@@ -111,14 +122,26 @@ export const login = async (req: Request, res: Response) => {
 
 // buatkan logout juga menggunakan jwt menghapus token dari client
 export const logout = async (req: Request, res: Response) => {
-  const token = req.headers.authorization?.split(" ")[1];
-
-  if (!token) {
-    return res.status(403).json({ message: "Token not found", data: [] });
-  }
+  const validationReq = req as ValidationRequest;
+  const { authorization } = validationReq.headers;
+  
   try {
-    res.clearCookie("token");
-    return res.json({ message: "Logout success" });
+    const token = authorization!.split(" ")[1];
+    const jwtDecode = jwt.verify(token, config.jwtSecret!) as UserData;
+
+    console.log(jwtDecode.id);
+
+    const user = await prisma.users.findUnique({ where: { id: jwtDecode.id } });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found", data: [] });
+    }
+
+    const deletetoken = await prisma.users.update({
+      where: { id: user.id},
+      data: { token: null },
+    });
+    return res.json({ message: "Logout success", data: []});
   } catch (error) {
     return res.status(500).json({ message: "Logout failed", data: error });
   }

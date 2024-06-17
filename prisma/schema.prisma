@@ -21,7 +21,6 @@ model users {
   handicraft         handicraft[]
   likes              likes[]
   history_handicraft history_handicraft[]
-  recognition        recognition[]
 }
 
 enum Role {
@@ -42,7 +41,6 @@ model handicraft {
   tag_handicraft     tag_handicraft[]
   likes              likes[]
   history_handicraft history_handicraft[]
-  recognition        recognition[]
   waste_handicraft   waste_handicraft[]
 }
 
@@ -96,26 +94,6 @@ model history_handicraft {
   updatedAt     DateTime   @default(now()) @db.Timestamp(0)
   users         users      @relation(fields: [id_user], references: [id])
   handicraft    handicraft @relation(fields: [id_handicraft], references: [id])
-}
-
-model recognition {
-  id                 String               @id @default(uuid())
-  id_user            String               @db.VarChar(255)
-  id_handicraft      String               @db.VarChar(255)
-  createdAt          DateTime             @default(now()) @db.Timestamp(0)
-  updatedAt          DateTime             @default(now()) @db.Timestamp(0)
-  users              users                @relation(fields: [id_user], references: [id])
-  handicraft         handicraft           @relation(fields: [id_handicraft], references: [id])
-  detail_recognition detail_recognition[]
-}
-
-model detail_recognition {
-  id             String      @id @default(uuid())
-  id_recognition String      @db.VarChar(255)
-  id_waste       String      @db.VarChar(255)
-  createdAt      DateTime    @default(now()) @db.Timestamp(0)
-  updatedAt      DateTime    @default(now()) @db.Timestamp(0)
-  recognition    recognition @relation(fields: [id_recognition], references: [id])
 }
 
 model waste {
