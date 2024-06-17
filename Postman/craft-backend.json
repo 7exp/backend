@@ -932,6 +932,25 @@
 			"response": []
 		},
 		{
+			"name": "Get Detail Handicraft",
+			"id": "3689ecfa-dc76-45c2-b429-4916460d0e87",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{BaseUrl}}/handicrafts/detail/{{DetailHandicraftId}}"
+			},
+			"response": []
+		},
+		{
 			"name": "Create Like",
 			"event": [
 				{
