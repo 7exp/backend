@@ -1013,6 +1013,41 @@
 			"response": []
 		},
 		{
+			"name": "Get User Likes",
+			"id": "91864fda-ede6-4919-9eb9-735ba3ad38e1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/likes/{{UserId}}?page=1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"likes",
+						"{{UserId}}"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get Handicraft Id",
 			"event": [
 				{
@@ -1562,6 +1597,13 @@
 							"",
 							"pm.test(\"Response time is less than 500ms\", function () {",
 							"  pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"pm.test(\"Response includes a non-empty 'message' field\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.exist.and.to.not.be.empty;",
 							"});",
 							"",
 							""
@@ -2268,83 +2310,6 @@
 				"method": "POST",
 				"header": [],
 				"url": "{{BaseUrl}}/auth/logout"
-			},
-			"response": []
-		},
-		{
-			"name": "Predict Python",
-			"id": "3fabf3d6-eaef-459c-af00-ee2aa2dd1df7",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "image",
-							"type": "file",
-							"src": "/C:/Users/yogan/OneDrive/Kuliah/Semester 6/Bangkit Project/object-detection-service/uploads/00000001.jpg"
-						}
-					]
-				},
-				"url": "http://192.168.192.151:5001/predict"
-			},
-			"response": []
-		},
-		{
-			"name": "Get All Handicraft",
-			"id": "1cb28c8e-bbf1-43f2-a4f5-f47b8bf59b16",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "{{Token}}"
-					}
-				},
-				"method": "GET",
-				"header": [],
-				"url": "{{BaseUrl}}/handicrafts"
-			},
-			"response": []
-		},
-		{
-			"name": "Get User Likes",
-			"id": "91864fda-ede6-4919-9eb9-735ba3ad38e1",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "{{Token}}"
-					}
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{BaseUrl}}/likes/{{UserId}}?page=1",
-					"host": [
-						"{{BaseUrl}}"
-					],
-					"path": [
-						"likes",
-						"{{UserId}}"
-					],
-					"query": [
-						{
-							"key": "page",
-							"value": "1",
-							"type": "text"
-						}
-					]
-				}
 			},
 			"response": []
 		}
