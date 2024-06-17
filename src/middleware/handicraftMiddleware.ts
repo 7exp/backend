@@ -26,11 +26,11 @@ export const handicraftValidation = async (req: Request, res: Response, next: Ne
       },
     });
     if (!handicraft) {
-      return res.status(403).json({ message: "You are not authorized to access this handicraft" });
+      return res.status(403).json({ message: "You are not authorized to access this handicraft", data: [] });
     }
 
     next();
   } catch (error) {
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error", data: [] });
   }
 };
