@@ -167,105 +167,6 @@
 			"response": []
 		},
 		{
-			"name": "Login 200",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "72c51725-9c08-4822-a1fa-3b64e9a2ef9d",
-						"exec": [
-							"pm.test(\"Response status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"\r",
-							"pm.test(\"Response time is less than 500ms\", function () {\r",
-							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
-							"});\r",
-							"\r",
-							"\r",
-							"pm.test(\"Response has the required fields - id, name, address, and token\", function () {\r",
-							"    const responseData = pm.response.json();\r",
-							"\r",
-							"    pm.expect(responseData).to.be.an('object');\r",
-							"    pm.expect(responseData.data).to.exist.and.to.be.an('object');\r",
-							"    pm.expect(responseData.data.id).to.exist;\r",
-							"    pm.expect(responseData.data.name).to.exist;\r",
-							"    pm.expect(responseData.data.address).to.exist;\r",
-							"    pm.expect(responseData.token).to.exist;\r",
-							"});\r",
-							"\r",
-							"\r",
-							"pm.test(\"Id is a non-empty string\", function () {\r",
-							"  const responseData = pm.response.json();\r",
-							"  \r",
-							"  pm.expect(responseData.data.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should be a non-empty string\");\r",
-							"});\r",
-							"\r",
-							"\r",
-							"pm.test(\"Token is a non-empty string\", function () {\r",
-							"    const responseData = pm.response.json();\r",
-							"    \r",
-							"    pm.expect(responseData.token).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Token should not be empty\");\r",
-							"});\r",
-							"\r",
-							"// Copy the token value to the environment variable 'Token'\r",
-							"var token = pm.response.json().token;\r",
-							"pm.environment.set(\"Token\", token);\r",
-							"// Test to check the expected behavior when the token is set in the environment\r",
-							"pm.test(\"Token is set in the environment variable 'Token'\", function () {\r",
-							"    var tokenValue = pm.environment.get(\"Token\");\r",
-							"    pm.expect(tokenValue).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Token should be set in the environment\");\r",
-							"});\r",
-							"\r",
-							"if (pm.response.json().data) {\r",
-							"  var userId = pm.response.json().data.id;\r",
-							"  pm.environment.set(\"UserId\", userId);\r",
-							"  pm.test(\"User ID is set in the environment variable 'UserId'\", function () {\r",
-							"    var userIdValue = pm.environment.get(\"UserId\");\r",
-							"    pm.expect(userIdValue).to.equal(userId);\r",
-							"  });\r",
-							"} else {\r",
-							"  console.warn(\"The JSON response does not contain data. User ID not set.\");\r",
-							"}"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "ca77559b-8745-46c0-b1aa-55d008e1ad15",
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"id": "45f2fad5-cf84-40f5-a2a5-7de955269c06",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"password123\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "{{BaseUrl}}/auth/login"
-			},
-			"response": []
-		},
-		{
 			"name": "Login Wrong Email 404",
 			"event": [
 				{
@@ -389,6 +290,105 @@
 			"response": []
 		},
 		{
+			"name": "Login 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "72c51725-9c08-4822-a1fa-3b64e9a2ef9d",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields - id, name, address, and token\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.data.id).to.exist;\r",
+							"    pm.expect(responseData.data.name).to.exist;\r",
+							"    pm.expect(responseData.data.address).to.exist;\r",
+							"    pm.expect(responseData.token).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Id is a non-empty string\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.data.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should be a non-empty string\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Token is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.token).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Token should not be empty\");\r",
+							"});\r",
+							"\r",
+							"// Copy the token value to the environment variable 'Token'\r",
+							"var token = pm.response.json().token;\r",
+							"pm.environment.set(\"Token\", token);\r",
+							"// Test to check the expected behavior when the token is set in the environment\r",
+							"pm.test(\"Token is set in the environment variable 'Token'\", function () {\r",
+							"    var tokenValue = pm.environment.get(\"Token\");\r",
+							"    pm.expect(tokenValue).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Token should be set in the environment\");\r",
+							"});\r",
+							"\r",
+							"if (pm.response.json().data) {\r",
+							"  var userId = pm.response.json().data.id;\r",
+							"  pm.environment.set(\"UserId\", userId);\r",
+							"  pm.test(\"User ID is set in the environment variable 'UserId'\", function () {\r",
+							"    var userIdValue = pm.environment.get(\"UserId\");\r",
+							"    pm.expect(userIdValue).to.equal(userId);\r",
+							"  });\r",
+							"} else {\r",
+							"  console.warn(\"The JSON response does not contain data. User ID not set.\");\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ca77559b-8745-46c0-b1aa-55d008e1ad15",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "45f2fad5-cf84-40f5-a2a5-7de955269c06",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/auth/login"
+			},
+			"response": []
+		},
+		{
 			"name": "Update User 200",
 			"event": [
 				{
@@ -461,6 +461,82 @@
 					}
 				},
 				"url": "{{BaseUrl}}/users/{{UserId}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9315678e-575f-468b-b6f1-c6a5b7eaf9ce",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Content type header is set to application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Data is not null or empty\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.data).to.exist.and.to.not.be.null.and.to.not.be.empty;",
+							"});",
+							"",
+							"pm.test(\"Email is in a valid email format\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.email).to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Image is either null or a valid image format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data.image).to.satisfy((value) => {",
+							"        return value === null || (typeof value === 'string' && (value.endsWith('.png') || value.endsWith('.jpg') || value.endsWith('.jpeg') || value.endsWith('.gif')));",
+							"    }, \"Image should be either null or a valid image format\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "96434857-b19f-41a0-aa10-8907c56a0b8b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"oldPassword\" : \"password123\",\r\n  \"newPassword\" : \"password321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/users/{{UserId}}/updatePassword"
 			},
 			"response": []
 		},
