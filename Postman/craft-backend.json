@@ -2340,6 +2340,44 @@
 		},
 		{
 			"name": "Delete Detail Handicraft",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f10b0b40-a90d-43e5-ad4d-3acb41b8c4da",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields - message and data\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.exist;\r",
+							"    pm.expect(responseData.data).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Data is an array and not empty\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data).to.be.an('array').and.to.have.lengthOf.at.least(1, \"Data should not be empty\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "0bee04d5-3edf-4b90-9546-fcc0c2ade2f8",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
