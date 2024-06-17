@@ -1708,12 +1708,12 @@
 				},
 				"method": "DELETE",
 				"header": [],
-				"url": "{{BaseUrl}}/history/handicraft/1add5775-1662-4454-b20b-b72de804cd73"
+				"url": "{{BaseUrl}}/history/handicraft/{{HistoryHandicraftId}}"
 			},
 			"response": []
 		},
 		{
-			"name": "Delete All History Handicraft",
+			"name": "Delete All History Handicraft By User",
 			"id": "a8fda2f6-a523-4130-a4d2-a2211dd5e68b",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -1736,7 +1736,7 @@
 						}
 					}
 				},
-				"url": "{{BaseUrl}}/history/handicraft/delteAll/f6e9cc3d7-5958-479f-bce2-6882c68f4d18"
+				"url": "{{BaseUrl}}/history/handicraft/deleteAll/{{UserId}}"
 			},
 			"response": []
 		},
