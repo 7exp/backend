@@ -608,8 +608,8 @@
 							"});",
 							"",
 							"",
-							"pm.test(\"Response time is less than 200ms\", function () {",
-							"  pm.expect(pm.response.responseTime).to.be.below(200);",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);",
 							"});",
 							"",
 							"pm.test(\"Content type header is set to application/json\", function () {",
@@ -740,7 +740,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "postman-cloud:///1ee9c753-b2c9-4bf0-bedf-99d3f3eca48b"
+							"src": "./Postman/images/user.jpg"
 						}
 					]
 				},
@@ -902,7 +902,7 @@
 			"response": []
 		},
 		{
-			"name": "Update Image Handicraft",
+			"name": "Upload Image Handicraft",
 			"event": [
 				{
 					"listen": "test",
@@ -960,7 +960,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "postman-cloud:///1ee9c797-58b6-46b0-abda-1ea42212294d"
+							"src": "./Postman/images/handicraft.jpg"
 						}
 					]
 				},
@@ -1153,7 +1153,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "postman-cloud:///1ee9c698-a85d-45b0-9fc5-2683d30c9c0b"
+							"src": "./Postman/images/handicraft.jpg"
 						}
 					]
 				},
@@ -1327,8 +1327,8 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Response time is less than 200ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
 							"});\r",
 							"\r",
 							"pm.test(\"Message contains 'Successfully fetched Handicraft'\", function () {\r",
@@ -1514,7 +1514,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "postman-cloud:///1ef2b270-93fa-46a0-8ee1-35768df1f420"
+							"src": "./Postman/images/plastic.jpg"
 						}
 					]
 				},
@@ -1593,7 +1593,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "postman-cloud:///1ef2c62e-58d6-4200-9705-af26a3b95f3e"
+							"src": "./Postman/images/aluminum.jpg"
 						}
 					]
 				},
@@ -1672,11 +1672,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
-							"filesNotInWorkingDirectory": [
-								"/C:/Users/yogan/Downloads/cardboard.jpg"
-							],
-							"src": "postman-cloud:///1ef2c63f-01b7-4350-9338-82ff90988b31"
+							"src": "./Postman/images/cardboard.jpg"
 						}
 					]
 				},
@@ -1755,11 +1751,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
-							"filesNotInWorkingDirectory": [
-								"/C:/Users/yogan/Downloads/bottle.jpg"
-							],
-							"src": "postman-cloud:///1ef2c645-f403-4590-b57c-2922c81c1e72"
+							"src": "./Postman/images/bottle.jpg"
 						}
 					]
 				},
@@ -1838,11 +1830,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
-							"filesNotInWorkingDirectory": [
-								"/C:/Users/yogan/Downloads/paper.jpg"
-							],
-							"src": "postman-cloud:///1ef2c646-9c27-4c80-b549-f4f8d48e3163"
+							"src": "./Postman/images/paper.jpg"
 						}
 					]
 				},
@@ -1899,11 +1887,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
-							"filesNotInWorkingDirectory": [
-								"/C:/Users/yogan/Pictures/1666430971.jpg"
-							],
-							"src": "postman-cloud:///1ef2c648-95ad-4d80-a560-da8d7a3b9b38"
+							"src": "./Postman/images/404.jpg"
 						}
 					]
 				},

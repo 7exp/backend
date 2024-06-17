@@ -124,12 +124,10 @@ export const login = async (req: Request, res: Response) => {
 export const logout = async (req: Request, res: Response) => {
   const validationReq = req as ValidationRequest;
   const { authorization } = validationReq.headers;
-  
+
   try {
     const token = authorization!.split(" ")[1];
-    const jwtDecode = jwt.verify(token, config.jwtSecret!) as UserData;
-
-    console.log(jwtDecode.id);
+    const jwtDecode = jwt.decode(token) as UserData;
 
     const user = await prisma.users.findUnique({ where: { id: jwtDecode.id } });
 
@@ -141,7 +139,7 @@ export const logout = async (req: Request, res: Response) => {
       where: { id: user.id},
       data: { token: null },
     });
-    return res.json({ message: "Logout success", data: []});
+    return res.json({ message: "Logout success", data: deletetoken});
   } catch (error) {
     return res.status(500).json({ message: "Logout failed", data: error });
   }
