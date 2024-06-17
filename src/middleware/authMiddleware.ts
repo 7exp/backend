@@ -44,10 +44,12 @@ export const accessValidation = async (req: Request, res: Response, next: NextFu
     return res.status(401).json({ message: "Token is undefined or invalid", data: [] });
   }
 
+  // console.log("auth", authorization, "sec", config.jwtSecret);
+
   const token = authorization.split(" ")[1];
 
   try {
-    const jwtDecode = jwt.verify(token, config.jwtSecret!);
+    const jwtDecode = jwt.decode(token);
 
     if (typeof jwtDecode !== "string") {
       const userData = jwtDecode as UserData;
@@ -62,7 +64,7 @@ export const accessValidation = async (req: Request, res: Response, next: NextFu
       validationReq.userData = userData;
     }
   } catch (error) {
-    return res.status(401).json({ message: "Unauthorized", data: [] });
+    return res.status(401).json({ message: "Auth Error", data: error });
   }
 
   next();
@@ -109,7 +111,7 @@ export const accessValidationSelf = async (req: Request, res: Response, next: Ne
   const token = authorization.split(" ")[1];
 
   try {
-    const jwtDecode = jwt.verify(token, config.jwtSecret!) as UserData;
+    const jwtDecode = jwt.decode(token) as UserData;
 
     // Fetch user from the database using user ID
     const user = await prisma.users.findUnique({ where: { id: jwtDecode.id } });
@@ -121,7 +123,7 @@ export const accessValidationSelf = async (req: Request, res: Response, next: Ne
     validationReq.userData = jwtDecode;
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Unauthorized", data: [] });
+    return res.status(401).json({ message: "Unauthorized", data: error });
   }
 };
 

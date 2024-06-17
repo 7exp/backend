@@ -148,7 +148,7 @@ export const deleteSelf = async (req: Request, res: Response) => {
     }
 
     const token = authorization!.split(" ")[1];
-    const jwtDecode = jwt.verify(token, config.jwtSecret!) as UserData;
+    const jwtDecode = jwt.decode(token) as UserData;
 
     if (!user || user.token !== token) {
       return res.status(401).json({ message: "Your login credentials do not match the user you are trying to delete", data: [] });
