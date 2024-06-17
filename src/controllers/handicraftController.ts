@@ -84,6 +84,12 @@ export const updateHandicraft = async (req: Request, res: Response) => {
     return res.status(400).json({ message: "ID is required", data: [] });
   }
 
+  // check if handicraft exists
+  const handicraft = await prisma.handicraft.findUnique({ where: { id } });
+  if (!handicraft) {
+    return res.status(404).json({ message: "Handicraft not found", data: [] });
+  }
+
   try {
     // Only update fields if they are provided
     const updateData: any = {};
