@@ -453,7 +453,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"name\" : \"John Doe\",\r\n  \"email\" : \"john.doe@example.com\",\r\n  \"address\" : \"aowkokaokwa\"\r\n//   \"role\" : \"admin\"\r\n}",
+					"raw": "{\r\n  \"name\" : \"John Doe\",\r\n  \"email\" : \"john.doe@example.com\",\r\n  \"address\" : \"udah di update\"\r\n//   \"role\" : \"admin\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
