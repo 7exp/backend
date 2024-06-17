@@ -79,6 +79,17 @@ export const editDetailHandicraft = async (req: Request, res: Response) => {
     return res.status(400).json({ message: "All fields are required", data: [] });
   }
 
+  // check if detailHandicraft exists
+  const detailHandicraftExists = await prisma.detail_handicraft.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  if (!detailHandicraftExists) {
+    return res.status(404).json({ message: "DetailHandicraft not found", data: [] });
+  }
+
   try {
     const updatedDetailHandicraft = await prisma.detail_handicraft.update({
       where: {
