@@ -1894,6 +1894,34 @@
 				"url": "{{BaseUrl}}/handicrafts"
 			},
 			"response": []
+		},
+		{
+			"name": "Delete All History Handicraft",
+			"id": "a8fda2f6-a523-4130-a4d2-a2211dd5e68b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/history/handicraft/delteAll/{{UserId}}"
+			},
+			"response": []
 		}
 	],
 	"auth": {
