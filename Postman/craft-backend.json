@@ -388,6 +388,25 @@
 			"response": []
 		},
 		{
+			"name": "Auth Info",
+			"id": "3d336b11-964e-480d-867f-1d0d24e135d1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{BaseUrl}}/auth/info"
+			},
+			"response": []
+		},
+		{
 			"name": "Update User Password",
 			"event": [
 				{
@@ -2861,25 +2880,6 @@
 					}
 				},
 				"url": "{{BaseUrl}}/users/deleteself/{{UserId}}"
-			},
-			"response": []
-		},
-		{
-			"name": "Auth Info",
-			"id": "3d336b11-964e-480d-867f-1d0d24e135d1",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "{{Token}}"
-					}
-				},
-				"method": "GET",
-				"header": [],
-				"url": "{{BaseUrl}}/auth/self"
 			},
 			"response": []
 		}
