@@ -741,7 +741,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "./Postman/images/user.jpg"
+							"src": "./image/user.jpg"
 						}
 					]
 				},
