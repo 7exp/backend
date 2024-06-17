@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import prisma from "../../prisma/client";
+import { datacatalog } from "googleapis/build/src/apis/datacatalog";
 
 interface UserData {
   id: string;
@@ -26,12 +27,12 @@ export const historyHandicraftValidation = async (req: Request, res: Response, n
       },
     });
     if (!historyHandicraft) {
-      return res.status(403).json({ message: "You are not authorized to access this history handicraft" });
+      return res.status(403).json({ message: "You are not authorized to access this history handicraft", data: [] });
     }
 
     next();
   } catch (error) {
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error", data: [] });
   }
 };
 
@@ -43,7 +44,7 @@ export const historyHandicraftValidationByidUser = async (req: Request, res: Res
   try {
     // Verify if the logged-in user's ID matches the ID in the route parameter
     if (id_user !== id) {
-      return res.status(403).json({ message: "You are not authorized to access this history handicraft" });
+      return res.status(403).json({ message: "You are not authorized to access this history handicraft", data: [] });
     }
 
     // Check if the history_handicraft record exists for the logged-in user
@@ -54,11 +55,11 @@ export const historyHandicraftValidationByidUser = async (req: Request, res: Res
     });
 
     if (!historyHandicraft) {
-      return res.status(403).json({ message: "You are not authorized to access this history handicraft" });
+      return res.status(403).json({ message: "You are not authorized to access this history handicraft", data: [] });
     }
 
     next();
   } catch (error) {
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error", data: [] });
   }
 };

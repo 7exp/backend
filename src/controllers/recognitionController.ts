@@ -93,6 +93,17 @@ export const recognition = async (req: Request, res: Response) => {
       skip: offset,
     });
 
+    const detectedWaste = await prisma.waste.findMany({
+      where: {
+        label: {
+          in: sampah,
+        },
+      },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
 
     const result = handicrafts.map((handicraft) => ({
       id: handicraft.id,
@@ -115,6 +126,7 @@ export const recognition = async (req: Request, res: Response) => {
     // Kirim respons dengan data karya kerajinan yang ditemukan
     res.status(200).json({
       message: "Image detected successfully",
+      detected: detectedWaste,
       data: result,
       pagination: {
         page: Number(page),

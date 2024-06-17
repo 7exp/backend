@@ -73,11 +73,28 @@ export const getLikeCount = async (req: Request, res: Response) => {
 
 // get like by user id
 export const getLikeByUserId = async (req: Request, res: Response) => {
-  const { id_user } = req.params;
+  const { userid } = req.params;
+
+  // check if user id is provided
+  if (!userid) {
+    return res.status(400).json({ message: "User id is required", data: [] });
+  }
+
+  // add pagination
+  const { page, per_page } = req.query;
+  const currentPage = page ? Number(page) : 1;
+  const perPage = per_page ? Number(per_page) : 10;
+  const offset = (currentPage - 1) * perPage;
 
   try {
+    const countlikes = await prisma.likes.count({
+      where: { id_user: userid },
+    });
+
     const likes = await prisma.likes.findMany({
-      where: { id_user: id_user },
+      where: { id_user: userid },
+      take: perPage,
+      skip: offset,
     });
 
     const data = await Promise.all(
@@ -123,7 +140,14 @@ export const getLikeByUserId = async (req: Request, res: Response) => {
       })
     );
 
-    res.status(200).json({ message: "Likes found", data });
+    res.status(200).json({ message: "Successfully fetched user "+userid+" likes", 
+    data: data,
+    pagination: {
+      page,
+      perPage,
+      totalCount: countlikes,
+      lastPage: Math.ceil(countlikes / perPage),
+    } });
   } catch (error) {
     res.status(500).json({ message: "Error fetching likes", data: error });
   }

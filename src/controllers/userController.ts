@@ -3,6 +3,14 @@ import prisma from "../../prisma/client";
 import bcrypt from "bcrypt";
 import { deleteFileGCS } from "../utils/bucketImage";
 import { config } from "../config";
+import jwt from "jsonwebtoken";
+
+interface UserData {
+  id: string;
+  name: string;
+  role: string;
+  address: string;
+}
 
 export const createUser = async (req: Request, res: Response) => {
   const { name, email, address } = req.body;
@@ -128,24 +136,34 @@ export const deleteUser = async (req: Request, res: Response) => {
 };
 
 export const deleteSelf = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const { password } = req.body;
 
-    // Find the user by ID
+  const { id } = req.params;
+  const { authorization } = req.headers;
+
+  try {
     const user = await prisma.users.findUnique({ where: { id: id } });
 
     if (!user) {
       return res.status(404).json({ message: "User not found", data: [] });
     }
 
-    // Compare the provided password with the stored hashed password
-    const isMatch = await bcrypt.compare(password, user.password as string);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Password is incorrect", data: [] });
+    const token = authorization!.split(" ")[1];
+    const jwtDecode = jwt.verify(token, config.jwtSecret!) as UserData;
+
+    if (!user || user.token !== token) {
+      return res.status(401).json({ message: "Your login credentials do not match the user you are trying to delete", data: [] });
     }
 
-    // Delete the user from the database
+    // check if user has any handicrafts
+    const handicrafts = await prisma.handicraft.findMany({ where: { id_user: id } });
+    if (handicrafts.length > 0) {
+      for (const handicraft of handicrafts) {
+        await prisma.handicraft.update({ where: { id: handicraft.id }, data: { id_user: "deleteduser" } });
+      }
+    }
+
+    await prisma.likes.deleteMany({ where: { id_user: id } });
+    await prisma.history_handicraft.deleteMany({ where: { id_user: id } });
     await prisma.users.delete({ where: { id } });
 
     // If the user has an image, delete it from GCS if it's not the default image
@@ -158,8 +176,8 @@ export const deleteSelf = async (req: Request, res: Response) => {
       }
     }
 
-    res.status(200).json({ message: "Successfully deleted user", data: [] });
+    res.status(200).json({ message: "Successfully deleted user "+id+" with all related data", data: [] });
   } catch (error: any) {
-    res.status(500).json({ message: "Error deleting user", data: error.message });
+    res.status(500).json({ message: "Error deleting user where", data: error.message });
   }
 };
