@@ -903,7 +903,7 @@
 			"response": []
 		},
 		{
-			"name": "Upload Image Handicraft",
+			"name": "Update Image Handicraft",
 			"event": [
 				{
 					"listen": "test",
