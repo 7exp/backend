@@ -1675,6 +1675,25 @@
 			"response": []
 		},
 		{
+			"name": "Delete Detail Handicraft",
+			"id": "0bee04d5-3edf-4b90-9546-fcc0c2ade2f8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "{{BaseUrl}}/handicrafts/detail/{{DetailHandicraftId}}"
+			},
+			"response": []
+		},
+		{
 			"name": "Delete History Handicraft",
 			"id": "b248c6bf-0170-4b46-81a2-a13201a5cedd",
 			"protocolProfileBehavior": {
