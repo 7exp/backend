@@ -21,7 +21,7 @@ jobs:
               with:
                 collection: Postman/craft-backend.json
                 environment: Postman/CraftBackend.postman_environment.json
-                delay-request: 1000
+                delayRequest: 1000
             - name: Deploy to production
               run: |
                 cd ~/backend
