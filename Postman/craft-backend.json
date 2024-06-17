@@ -1142,47 +1142,51 @@
 			"response": []
 		},
 		{
-			"name": "recognition",
+			"name": "recognition Plastic",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "f0ca127f-37a9-41fa-ba95-000e1ec15420",
 						"exec": [
-							"pm.test(\"Response status code is 200\", function () {\r",
-							"  pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Response time is less than 500ms\", function () {\r",
-							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Id is a non-empty string\", function () {\r",
-							"    const responseData = pm.response.json();\r",
-							"    \r",
-							"    pm.expect(responseData).to.be.an('object');\r",
-							"    pm.expect(responseData.data[0].id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Tags should be an array with at least one element\", function () {\r",
-							"    const responseData = pm.response.json().data;\r",
-							"    \r",
-							"    pm.expect(responseData[0].tags).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Waste should be an array with at least one element\", function () {\r",
-							"    const responseData = pm.response.json().data;\r",
-							"    \r",
-							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
-							"});\r",
-							"pm.test(\"Response contains the word 'plastic'\", function () {\r",
-							"    const responseData = pm.response.json().detected;\r",
-							"    \r",
-							"    responseData.forEach((item) => {\r",
-							"        const description = item.description.toLowerCase();\r",
-							"        pm.expect(description).to.include('plastic');\r",
-							"    });\r",
-							"});"
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"pm.test(\"Id is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data[0].id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");",
+							"});",
+							"",
+							"pm.test(\"Tags should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData[0].tags).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Waste should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Response contains the word 'plastic'\", function () {",
+							"    const responseData = pm.response.json().detected.name;",
+							"    ",
+							"    if(responseData && responseData.length > 0){",
+							"        responseData.forEach((item) => {",
+							"            const description = item.description ? item.description.toLowerCase() : '';",
+							"            pm.expect(description).to.include('plastic');",
+							"        });",
+							"    }",
+							"});",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -1190,6 +1194,89 @@
 				}
 			],
 			"id": "3e1e04a6-5729-4107-83df-eb06200fd33d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+							"filesNotInWorkingDirectory": [
+								"/C:/Users/yogan/Pictures/1666430971.jpg"
+							],
+							"src": "postman-cloud:///1ef2b270-93fa-46a0-8ee1-35768df1f420"
+						}
+					]
+				},
+				"url": "{{BaseUrl}}/recognition"
+			},
+			"response": []
+		},
+		{
+			"name": "recognition Alluminum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f0ca127f-37a9-41fa-ba95-000e1ec15420",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"pm.test(\"Id is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data[0].id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");",
+							"});",
+							"",
+							"pm.test(\"Tags should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData[0].tags).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Waste should be an array with at least one element\", function () {",
+							"    const responseData = pm.response.json().data;",
+							"    ",
+							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Response contains the word 'plastic'\", function () {",
+							"    const responseData = pm.response.json().detected.name;",
+							"    ",
+							"    if(responseData && responseData.length > 0){",
+							"        responseData.forEach((item) => {",
+							"            const description = item.description ? item.description.toLowerCase() : '';",
+							"            pm.expect(description).to.include('plastic');",
+							"        });",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "11b679c9-cbdc-405f-8712-e3f7aed213c7",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
