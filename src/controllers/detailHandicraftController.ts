@@ -63,7 +63,7 @@ export const getDetailHandicraft = async (req: Request, res: Response) => {
       return res.status(404).json({ message: "DetailHandicraft not found", data: [] });
     }
 
-    res.status(200).json({ message: "DetailHandicraft found", data: detailHandicraft });
+    res.status(200).json({ message: "Successfully fetched detailHandicraft with id " + id, data: detailHandicraft });
   } catch (error) {
     res.status(500).json({ message: "Error fetching detailHandicraft", data: error });
   }
@@ -78,7 +78,7 @@ export const editDetailHandicraft = async (req: Request, res: Response) => {
   if (!name || !description) {
     return res.status(400).json({ message: "All fields are required", data: [] });
   }
-
+  
   // check if detailHandicraft exists
   const detailHandicraftExists = await prisma.detail_handicraft.findUnique({
     where: {
@@ -125,7 +125,7 @@ export const deleteDetailHandicraft = async (req: Request, res: Response) => {
       const filePath = `detail-handicraft/${fileName}`;
       await deleteFileGCS(config.bucketName as string, filePath);
     }
-    res.status(200).json({ message: `DetailHandicraft with id ${id} deleted successfully`, data: [] });
+    res.status(200).json({ message: `Successfully deleted detailHandicraft with id ${id}`, data: [] });
   } catch (error) {
     res.status(500).json({ message: "Error deleting detailHandicraft", data: error });
   }
