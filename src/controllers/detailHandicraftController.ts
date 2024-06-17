@@ -101,7 +101,7 @@ export const editDetailHandicraft = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).json({ message: "Successfully updated detailHandicraft", data: updatedDetailHandicraft });
+    res.status(200).json({ message: "Successfully updated detailHandicraft from UserId " + id, data: updatedDetailHandicraft });
   } catch (error: any) {
     res.status(500).json({ message: "Error updating detailHandicraft", data: error.message });
   }

@@ -11,6 +11,6 @@ router.get("/", accessValidation, getAllHistoryHandicraft);
 router.get("/:id", accessValidation, getHistoryHandicraft);
 router.put("/:id", accessValidation, historyHandicraftValidation, editHistoryHandicraft);
 router.delete("/:id", accessValidation, historyHandicraftValidation, deleteHistoryHandicraft);
-router.delete("/delteAll/:id", accessValidation, historyHandicraftValidationByidUser, deleteAllHistoryHandicraft);
+router.delete("/deleteAll/:id", accessValidation, historyHandicraftValidationByidUser, deleteAllHistoryHandicraft);
 
 export default router;
