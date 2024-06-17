@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import prisma from "../../prisma/client";
 import { deleteFileGCS } from "../utils/bucketImage";
 import { config } from "../config";
+import bcrypt from "bcrypt";
 
 export const createUser = async (req: Request, res: Response) => {
   const { name, email, address } = req.body;
@@ -72,16 +73,23 @@ export const updatePassword = async (req: Request, res: Response) => {
   const user = await prisma.users.findUnique({ where: { id: id } });
   if (!user) {
     return res.status(404).json({ message: "User not found", data: [] });
-  } else {
-    if (oldPassword !== user.password) {
-      return res.status(400).json({ message: "Old password is incorrect", data: [] });
-    }
-    const result = await prisma.users.update({
-      data: { password: newPassword },
-      where: { id: id },
-    });
-    res.json({ message: `Successfully updated password`, data: result });
   }
+
+  if (!user.password) {
+    return res.status(404).json({ message: "Password not set", data: [] });
+  }
+  // check if old password is correct bycrypt compare
+  const isMatch = await bcrypt.compare(oldPassword, user.password);
+  if (!isMatch) {
+    return res.status(400).json({ message: "Old password is incorrect", data: [] });
+  }
+
+  const result = await prisma.users.update({
+    data: { password: newPassword },
+    where: { id: id },
+  });
+  res.json({ message: `Successfully updated password`, data: result });
+
 };
 
 export const deleteUser = async (req: Request, res: Response) => {

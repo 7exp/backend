@@ -276,7 +276,7 @@ export const deleteHandicraft = async (req: Request, res: Response) => {
     await prisma.detail_handicraft.deleteMany({ where: { id_handicraft: id } });
     await prisma.handicraft.delete({ where: { id: id } });
 
-    res.status(200).json({ message: `Handicraft with id ${id} deleted`, data: [] });
+    res.status(200).json({ message: `Successfully deleted Handicraft with id ${id}`, data: [] });
   } catch (error) {
     res.status(500).json({ message: "Error deleting handicraft", data: error });
   }

@@ -6,6 +6,6 @@ const router = Router();
 
 router.post("/", accessValidation, createLike);
 router.delete("/:id", accessValidation, deleteLike);
-router.get("/:id", accessValidation, getLikeByUserId);
+router.get("/:userid", accessValidation, getLikeByUserId);
 
 export default router;
