@@ -864,7 +864,7 @@
 			"response": []
 		},
 		{
-			"name": "update image detail handi",
+			"name": "update image detail handicraft",
 			"event": [
 				{
 					"listen": "test",
