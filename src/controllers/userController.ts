@@ -37,7 +37,7 @@ export const getUsersById = async (req: Request, res: Response) => {
     where: { id: id },
     select: { id: true, name: true, email: true, address: true, image: true },
   });
-  res.json({ message: "User list", data: result });
+  res.json({ message: "Successfully get user by id", data: result });
 };
 
 export const updateUser = async (req: Request, res: Response) => {
