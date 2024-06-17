@@ -741,7 +741,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "postman-cloud:///1ee9c797-58b6-46b0-abda-1ea42212294d"
+							"src": "https://storage.googleapis.com/capstone-craft/test/userimage.jpg"
 						}
 					]
 				},
