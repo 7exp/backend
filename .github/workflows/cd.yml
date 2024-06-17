@@ -22,7 +22,7 @@ jobs:
                 collection: Postman/craft-backend-dev.json
                 environment: Postman/CraftBackend.postman_environment.json
                 delayRequest: 1000
-                workingDir: ~/backend/Postman
+                workingDir: /home/c129d4ky0993/backend/
             - name: Deploy to production
               run: |
                 cd ~/backend
