@@ -453,7 +453,6 @@
 							"  pm.expect(pm.response.responseTime).to.be.below(500);",
 							"});",
 							"",
-							"",
 							"pm.test(\"Id is a non-empty string\", function () {",
 							"    const responseData = pm.response.json();",
 							"    ",
@@ -1467,7 +1466,7 @@
 			"response": []
 		},
 		{
-			"name": "search",
+			"name": "Search",
 			"event": [
 				{
 					"listen": "test",
