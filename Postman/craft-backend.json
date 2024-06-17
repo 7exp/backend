@@ -1708,7 +1708,35 @@
 				},
 				"method": "DELETE",
 				"header": [],
-				"url": "{{BaseUrl}}/history/handicraft/{{UserId}}"
+				"url": "{{BaseUrl}}/history/handicraft/1add5775-1662-4454-b20b-b72de804cd73"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete All History Handicraft",
+			"id": "a8fda2f6-a523-4130-a4d2-a2211dd5e68b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/history/handicraft/delteAll/f6e9cc3d7-5958-479f-bce2-6882c68f4d18"
 			},
 			"response": []
 		},
@@ -1892,34 +1920,6 @@
 				"method": "GET",
 				"header": [],
 				"url": "{{BaseUrl}}/handicrafts"
-			},
-			"response": []
-		},
-		{
-			"name": "Delete All History Handicraft",
-			"id": "a8fda2f6-a523-4130-a4d2-a2211dd5e68b",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "{{Token}}"
-					}
-				},
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "{{BaseUrl}}/history/handicraft/delteAll/{{UserId}}"
 			},
 			"response": []
 		}
