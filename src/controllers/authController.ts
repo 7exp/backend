@@ -136,10 +136,10 @@ export const logout = async (req: Request, res: Response) => {
     }
 
     const deletetoken = await prisma.users.update({
-      where: { id: user.id},
+      where: { id: user.id },
       data: { token: null },
     });
-    return res.json({ message: "Logout success", data: deletetoken});
+    return res.json({ message: "Logout success", data: deletetoken });
   } catch (error) {
     return res.status(500).json({ message: "Logout failed", data: error });
   }
@@ -165,5 +165,32 @@ export const getUserInfo = async (req: Request, res: Response) => {
     res.json({ id: user.id, name: user.name, email: user.email, address: user.address, role: user.role, image: user.image });
   } catch (error) {
     res.status(401).json({ message: "Unauthorized", data: error });
+  }
+};
+
+// get user self by jwt token in header
+export const getUserSelf = async (req: Request, res: Response) => {
+  const validationReq = req as ValidationRequest;
+  const { authorization } = validationReq.headers;
+
+  if (!authorization) {
+    return res.status(401).json({ message: "Token is undefined or invalid", data: [] });
+  }
+
+  const token = authorization.split(" ")[1];
+
+  try {
+    const jwtDecode = jwt.decode(token) as UserData;
+
+    const user = await prisma.users.findUnique({ where: { id: jwtDecode.id } });
+
+    if (!user || user.token !== token) {
+      return res.status(401).json({ message: "Unauthorized", data: [] });
+    }
+
+    validationReq.userData = jwtDecode;
+    res.status(200).json({ message: "Success", data: user });
+  } catch (error) {
+    return res.status(401).json({ message: "Unauthorized", data: error });
   }
 };
