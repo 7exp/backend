@@ -2865,7 +2865,7 @@
 			"response": []
 		},
 		{
-			"name": "self",
+			"name": "Auth Info",
 			"id": "3d336b11-964e-480d-867f-1d0d24e135d1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
