@@ -2323,7 +2323,7 @@
 			"response": []
 		},
 		{
-			"name": "delete handicraft",
+			"name": "Delete Handicraft By Id",
 			"id": "288e0bc1-a4a0-472c-8e47-6ba5b3e92f69",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -2402,7 +2402,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"passwowrd\": \"password321\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
