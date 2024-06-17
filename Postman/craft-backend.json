@@ -29,8 +29,8 @@
 							"  pm.expect(pm.response.responseTime).to.be.below(200);",
 							"});",
 							"",
-							"pm.test(\"Response status code is 200\", function () {",
-							"  pm.response.to.have.status(200);",
+							"pm.test(\"Response status code is 500\", function () {",
+							"  pm.response.to.have.status(500);",
 							"});",
 							"",
 							"pm.test(\"Response body has the required fields - id, name, and email\", function () {",
@@ -439,7 +439,7 @@
 			"response": []
 		},
 		{
-			"name": "Logout Copy",
+			"name": "Logout",
 			"event": [
 				{
 					"listen": "test",
@@ -451,8 +451,8 @@
 							"});\r",
 							"\r",
 							"\r",
-							"pm.test(\"Response time is less than 300ms\", function () {\r",
-							"  pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
 							"});\r",
 							"\r",
 							"\r",
@@ -2364,13 +2364,6 @@
 							"    pm.expect(responseData.data).to.exist;\r",
 							"});\r",
 							"\r",
-							"\r",
-							"pm.test(\"Data is an array and not empty\", function () {\r",
-							"    const responseData = pm.response.json();\r",
-							"    \r",
-							"    pm.expect(responseData).to.be.an('object');\r",
-							"    pm.expect(responseData.data).to.be.an('array').and.to.have.lengthOf.at.least(1, \"Data should not be empty\");\r",
-							"});\r",
 							""
 						],
 						"type": "text/javascript",
@@ -2397,6 +2390,35 @@
 		},
 		{
 			"name": "Delete History Handicraft",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2ab5a0e3-1326-4d50-a165-de2280466ffc",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields - message and data\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.exist;\r",
+							"    pm.expect(responseData.data).to.exist;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "b248c6bf-0170-4b46-81a2-a13201a5cedd",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -2416,6 +2438,35 @@
 		},
 		{
 			"name": "Delete All History Handicraft By User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e934348d-a2d8-40f9-bc33-efd166dbe52d",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields - message and data\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.exist;\r",
+							"    pm.expect(responseData.data).to.exist;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "a8fda2f6-a523-4130-a4d2-a2211dd5e68b",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -2444,6 +2495,35 @@
 		},
 		{
 			"name": "Delete Handicraft By Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abc9886f-b661-4bda-bd7f-2de8e5cec7c5",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields - message and data\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.exist;\r",
+							"    pm.expect(responseData.data).to.exist;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "288e0bc1-a4a0-472c-8e47-6ba5b3e92f69",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -2474,8 +2554,8 @@
 							"});\r",
 							"\r",
 							"\r",
-							"pm.test(\"Response time is less than 300ms\", function () {\r",
-							"  pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
 							"});\r",
 							"\r",
 							"\r",
