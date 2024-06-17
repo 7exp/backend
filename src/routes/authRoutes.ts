@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { googleAuth, googleCallback, register, login, logout, getUserInfo } from "../controllers/authController";
+import { accessValidation } from "../middleware/authMiddleware";
 
 const router = Router();
 
@@ -8,6 +9,6 @@ router.get("/google/callback", googleCallback);
 router.post("/register", register);
 router.post("/login", login);
 router.get("/me", getUserInfo);
-router.post("/logout", logout);
+router.post("/logout", accessValidation, logout);
 
 export default router;

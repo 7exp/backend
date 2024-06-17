@@ -41,7 +41,7 @@ export const accessValidation = async (req: Request, res: Response, next: NextFu
   const { authorization } = validationReq.headers;
 
   if (!authorization) {
-    return res.status(401).json({ message: "Token is undefined or invalid" });
+    return res.status(401).json({ message: "Token is undefined or invalid", data: [] });
   }
 
   const token = authorization.split(" ")[1];
@@ -56,13 +56,13 @@ export const accessValidation = async (req: Request, res: Response, next: NextFu
       const user = await prisma.users.findUnique({ where: { id: userData.id } });
 
       if (!user || user.token !== token) {
-        return res.status(401).json({ message: "Unauthorized" });
+        return res.status(401).json({ message: "Unauthorized", data: [] });
       }
 
       validationReq.userData = userData;
     }
   } catch (error) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "Unauthorized", data: [] });
   }
 
   next();
@@ -72,7 +72,7 @@ export const accessValidationAdmin = async (req: Request, res: Response, next: N
   const { authorization } = validationReq.headers;
 
   if (!authorization) {
-    return res.status(401).json({ message: "Token is undefined or invalid" });
+    return res.status(401).json({ message: "Token is undefined or invalid", data: [] });
   }
 
   const token = authorization.split(" ")[1];
@@ -84,17 +84,17 @@ export const accessValidationAdmin = async (req: Request, res: Response, next: N
     const user = await prisma.users.findUnique({ where: { id: jwtDecode.id } });
 
     if (!user || user.token !== token) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Unauthorized", data: [] });
     }
 
     if (user.role !== "admin") {
-      return res.status(403).json({ message: "You don't have permission" });
+      return res.status(403).json({ message: "You don't have permission", data: [] });
     }
 
     validationReq.userData = jwtDecode;
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "Unauthorized", data: [] });
   }
 };
 
@@ -103,7 +103,7 @@ export const accessValidationSelf = async (req: Request, res: Response, next: Ne
   const { authorization } = validationReq.headers;
 
   if (!authorization) {
-    return res.status(401).json({ message: "Token is undefined or invalid" });
+    return res.status(401).json({ message: "Token is undefined or invalid", data: [] });
   }
 
   const token = authorization.split(" ")[1];
@@ -115,13 +115,13 @@ export const accessValidationSelf = async (req: Request, res: Response, next: Ne
     const user = await prisma.users.findUnique({ where: { id: jwtDecode.id } });
 
     if (!user || user.token !== token) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Unauthorized", data: [] });
     }
 
     validationReq.userData = jwtDecode;
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "Unauthorized", data: [] });
   }
 };
 
