@@ -98,6 +98,33 @@ export const accessValidationAdmin = async (req: Request, res: Response, next: N
   }
 };
 
+export const accessValidationSelf = async (req: Request, res: Response, next: NextFunction) => {
+  const validationReq = req as ValidationRequest;
+  const { authorization } = validationReq.headers;
+
+  if (!authorization) {
+    return res.status(401).json({ message: "Token is undefined or invalid" });
+  }
+
+  const token = authorization.split(" ")[1];
+
+  try {
+    const jwtDecode = jwt.verify(token, config.jwtSecret!) as UserData;
+
+    // Fetch user from the database using user ID
+    const user = await prisma.users.findUnique({ where: { id: jwtDecode.id } });
+
+    if (!user || user.token !== token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    validationReq.userData = jwtDecode;
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+};
+
 // export const accessValidationAdmin = (req: Request, res: Response, next: NextFunction) => {
 //   const validationReq = req as ValidationRequest;
 //   const { authorization } = validationReq.headers;

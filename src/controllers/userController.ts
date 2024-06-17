@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../../prisma/client";
+import bcrypt from "bcrypt";
 import { deleteFileGCS } from "../utils/bucketImage";
 import { config } from "../config";
 import bcrypt from "bcrypt";
@@ -69,27 +70,37 @@ export const updateUserRole = async (req: Request, res: Response) => {
 export const updatePassword = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { oldPassword, newPassword } = req.body;
-  // if user not found return error
-  const user = await prisma.users.findUnique({ where: { id: id } });
-  if (!user) {
-    return res.status(404).json({ message: "User not found", data: [] });
-  }
 
-  if (!user.password) {
-    return res.status(404).json({ message: "Password not set", data: [] });
-  }
-  // check if old password is correct bycrypt compare
-  const isMatch = await bcrypt.compare(oldPassword, user.password);
-  if (!isMatch) {
-    return res.status(400).json({ message: "Old password is incorrect", data: [] });
-  }
+  try {
+    // Find user by ID
+    const user = await prisma.users.findUnique({ where: { id: id } });
 
-  const result = await prisma.users.update({
-    data: { password: newPassword },
-    where: { id: id },
-  });
-  res.json({ message: `Successfully updated password`, data: result });
+    // If user not found, return error
+    if (!user) {
+      return res.status(404).json({ message: "User not found", data: [] });
+    }
 
+    // Compare old password with the user's stored password
+    const isMatch = await bcrypt.compare(oldPassword, user.password as string);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Old password is incorrect", data: [] });
+    }
+
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update the user's password
+    await prisma.users.update({
+      where: { id: id },
+      data: { password: hashedPassword },
+    });
+
+    // Respond with success message
+    return res.status(200).json({ message: "Password updated successfully", data: [] });
+  } catch (error: any) {
+    // Respond with server error
+    return res.status(500).json({ message: "Internal server error", data: error.message });
+  }
 };
 
 export const deleteUser = async (req: Request, res: Response) => {
@@ -112,6 +123,43 @@ export const deleteUser = async (req: Request, res: Response) => {
       }
       res.json({ message: `Successfully deleted user`, data: [] });
     }
+  } catch (error: any) {
+    res.status(500).json({ message: "Error deleting user", data: error.message });
+  }
+};
+
+export const deleteSelf = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { password } = req.body;
+
+    // Find the user by ID
+    const user = await prisma.users.findUnique({ where: { id: id } });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found", data: [] });
+    }
+
+    // Compare the provided password with the stored hashed password
+    const isMatch = await bcrypt.compare(password, user.password as string);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Password is incorrect", data: [] });
+    }
+
+    // Delete the user from the database
+    await prisma.users.delete({ where: { id } });
+
+    // If the user has an image, delete it from GCS if it's not the default image
+    if (user.image) {
+      const fileName = user.image.split("/").pop() || "";
+      const filePath = `user/${fileName}`;
+
+      if (filePath !== "user/default.png") {
+        await deleteFileGCS(config.bucketName as string, filePath);
+      }
+    }
+
+    res.status(200).json({ message: "Successfully deleted user", data: [] });
   } catch (error: any) {
     res.status(500).json({ message: "Error deleting user", data: error.message });
   }
