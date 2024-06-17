@@ -2400,7 +2400,16 @@
 				},
 				"method": "DELETE",
 				"header": [],
-				"url": "{{BaseUrl}}/users/{{UserId}}"
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"passwowrd\": \"password321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/users/deleteself/{{UserId}}"
 			},
 			"response": []
 		},
