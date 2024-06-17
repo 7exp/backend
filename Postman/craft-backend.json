@@ -1174,6 +1174,14 @@
 							"    const responseData = pm.response.json().data;\r",
 							"    \r",
 							"    pm.expect(responseData[0].waste).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"});\r",
+							"pm.test(\"Response contains the word 'plastic'\", function () {\r",
+							"    const responseData = pm.response.json().detected;\r",
+							"    \r",
+							"    responseData.forEach((item) => {\r",
+							"        const description = item.description.toLowerCase();\r",
+							"        pm.expect(description).to.include('plastic');\r",
+							"    });\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -1202,7 +1210,7 @@
 							"type": "file",
 							"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
 							"filesNotInWorkingDirectory": [
-								"/C:/Users/mynam/Downloads/00000001.jpg"
+								"/C:/Users/yogan/Pictures/1666430971.jpg"
 							],
 							"src": "postman-cloud:///1ef2b270-93fa-46a0-8ee1-35768df1f420"
 						}
