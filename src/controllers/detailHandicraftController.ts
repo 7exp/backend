@@ -112,6 +112,15 @@ export const deleteDetailHandicraft = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
+    const detailHandicraftExists = await prisma.detail_handicraft.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    if (!detailHandicraftExists) {
+      return res.status(404).json({ message: "DetailHandicraft not found", data: [] });
+    }
+    
     const detail_handicraft = await prisma.detail_handicraft.delete({
       where: {
         id: id,

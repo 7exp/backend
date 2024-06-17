@@ -106,13 +106,13 @@ export const fyp = async (req: Request, res: Response): Promise<void> => {
     const totalCount = await prisma.handicraft.count();
 
     // Menghitung jumlah halaman terakhir berdasarkan total data dan ukuran halaman
-    const lastPage = Math.ceil(totalCount / 10); // Karena kita menetapkan 10 data per halaman
+    const lastPage = Math.ceil(totalCount / Number(pageSize)); // Karena kita menetapkan 10 data per halaman
 
     res.status(200).json({
       message: "Successfully fetched FYP wkwkwkk",
       data: recommendedHandicrafts,
       pagination: {
-        page,
+        page: Number(page),
         pageSize,
         totalCount,
         lastPage,

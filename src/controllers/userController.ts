@@ -3,6 +3,7 @@ import prisma from "../../prisma/client";
 import bcrypt from "bcrypt";
 import { deleteFileGCS } from "../utils/bucketImage";
 import { config } from "../config";
+import bcrypt from "bcrypt";
 
 export const createUser = async (req: Request, res: Response) => {
   const { name, email, address } = req.body;
