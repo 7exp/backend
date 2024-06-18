@@ -428,7 +428,7 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "{{Token}}"
+						"token": ""
 					}
 				},
 				"method": "GET",
