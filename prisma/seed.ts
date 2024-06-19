@@ -90,7 +90,7 @@ async function main() {
       email: "deleteduser@email.com",
       address: "Deleted User Address",
       password: "deleteduser",
-      image: "https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png",
+      image: "https://storage.googleapis.com/capstone-craft/user/default.png",
       role: "user",
     }
   });
@@ -103,7 +103,7 @@ async function main() {
       email: "johndoe@me.com",
       address: "User Address",
       password: "wkwkland",
-      image: "https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png",
+      image: "https://storage.googleapis.com/capstone-craft/user/default.png",
       role: "user",
       handicraft: {
         create: [

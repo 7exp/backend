@@ -5,3 +5,234 @@ dist
 compose
 bucket-425203-62e8f72a3fa0.json
 key/gcp-key.json
+
+{
+    "message": "Successfully Fetched Handicraft",
+    "data": [
+        {
+            "id": "2dfa38e5-fb0d-4e4e-80e5-8c3bab9d0685",
+            "name": "Orchid Miniature From Paper",
+            "description": "Hello, everyone!Previously, I made the Houseplant Miniature from paper and also Plant Miniature From Paper. This time I am going to show you how I made orchids miniature from paper. The orchids that I made were Paphiopedilum liemianum and Phalaenopsis bellina, both are protected plant species in Indonesia. This project would be perfect for your miniature dollhouse, more than that, you can give it to your beloved 'plant mom'.Let's rock!",
+            "image": "https://content.instructables.com/F8P/KOEH/LWNJVHPV/F8PKOEHLWNJVHPV.png?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+            "id_user": "dc0413b7-d074-4d0c-874a-92b659a29ba3",
+            "createdAt": "2024-06-17T07:39:29.000Z",
+            "updatedAt": "2024-06-17T07:39:29.000Z",
+            "createdBy": "John Doe",
+            "image_user": "https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png",
+            "waste": [
+                "Paper"
+            ],
+            "tags": [
+                "Accessories",
+                "Decoration",
+                "Art"
+            ],
+            "likes": 0,
+            "totalStep": 16
+        },
+        {
+            "id": "6e3b9ba7-ad3e-4d0f-bdc8-806b5134e726",
+            "name": "Easy to Make Bottle Head Launcher!",
+            "description": "Launches bbs airsoft pellets paper or small rocks. Materrials:Bottle, Scissors, Knife (Sharp), Ballons, Rubberbands",
+            "image": "https://content.instructables.com/F7T/E1RX/FIQ727LB/F7TE1RXFIQ727LB.bmp?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+            "id_user": "dc0413b7-d074-4d0c-874a-92b659a29ba3",
+            "createdAt": "2024-06-17T07:39:29.000Z",
+            "updatedAt": "2024-06-17T07:39:29.000Z",
+            "createdBy": "John Doe",
+            "image_user": "https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png",
+            "waste": [
+                "Plastic Bottles"
+            ],
+            "tags": [
+                "Toys"
+            ],
+            "likes": 0,
+            "totalStep": 6
+        },
+        {
+            "id": "7627ea02-d713-4f7b-b66f-1ed7c0c5c2a7",
+            "name": "Best Paper Airplane Ever (Flies Like a Beauty!)",
+            "description": "This is a very good paper airplane for beginners who are getting into making paper airplanes. It's simple and fast to make, and with the right conditions and modifications, can fly really well!",
+            "image": "https://content.instructables.com/FLU/34O8/LWKOZEEY/FLU34O8LWKOZEEY.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+            "id_user": "dc0413b7-d074-4d0c-874a-92b659a29ba3",
+            "createdAt": "2024-06-17T07:39:29.000Z",
+            "updatedAt": "2024-06-17T07:39:29.000Z",
+            "createdBy": "John Doe",
+            "image_user": "https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png",
+            "waste": [
+                "Paper"
+            ],
+            "tags": [
+                "Toys"
+            ],
+            "likes": 0,
+            "totalStep": 9
+        },
+        {
+            "id": "7d3e83e1-8432-42a2-8686-3dbe8e498f02",
+            "name": "DIY Paper Curtain",
+            "description": "Paper is environmentally friendly. Paper is versatile. Paper is fabulous. You've always wanted to make a beautiful, feasible and useful piece of furniture out of very little material (which you always have at home) for someone or even for yourself in a short period of time? Then follow this instruction step by step and learn how to design a simple yet beautiful, modern curtain with 35 threads out of everyday paper. A proven protection against insects with an additional decorative effect. Dimensions: Approximately length 90cm & height 200cm. The 2-hour-DIY-project 'Paper as material' examines everyday paper as a medium, which supports creativity, concentration and manual skills for anyone. After this instruction one is going to hold a natural, beautiful and ready-to-use piece of furniture in the hands, which brings space to glow, etc...",
+            "image": "https://content.instructables.com/FO5/IRWF/LW24973Y/FO5IRWFLW24973Y.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=300",
+            "id_user": "dc0413b7-d074-4d0c-874a-92b659a29ba3",
+            "createdAt": "2024-06-17T07:39:29.000Z",
+            "updatedAt": "2024-06-17T07:39:29.000Z",
+            "createdBy": "John Doe",
+            "image_user": "https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png",
+            "waste": [
+                "Paper"
+            ],
+            "tags": [
+                "Decoration",
+                "Art"
+            ],
+            "likes": 0,
+            "totalStep": 5
+        },
+        {
+            "id": "e48e1fa6-3807-45cd-8a4c-3dc9997efd2a",
+            "name": "Ultimate Paper Wallet",
+            "description": "This DIY folded paper wallet will hold over ten credit cards and several bills, yet is only 1/4\" thick and will easily fit in a back pocket.",
+            "image": "https://content.instructables.com/FMF/E8BS/F11S8RPJ/FMFE8BSF11S8RPJ.jpg?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
+            "id_user": "dc0413b7-d074-4d0c-874a-92b659a29ba3",
+            "createdAt": "2024-06-17T07:39:29.000Z",
+            "updatedAt": "2024-06-17T07:39:29.000Z",
+            "createdBy": "John Doe",
+            "image_user": "https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png",
+            "waste": [
+                "Paper"
+            ],
+            "tags": [
+                "Fashion",
+                "Accessories"
+            ],
+            "likes": 0,
+            "totalStep": 17
+        },
+        {
+            "id": "ee52189b-918d-4b9e-85ca-4242ae2b5d84",
+            "name": "DIY Notebooks",
+            "description": "While commercially available notebooks have a nice polished feel to them, they are extremely expensive. If you use a large number of them, there is a considerable savings from making your own. If you professionally print the paper stock for them, they have the added benefit of customizable page layouts, for example, storyboards, grids, plain paper or normal lined paper.",
+            "image": "https://content.instructables.com/FDG/SNIX/FT7PR644/FDGSNIXFT7PR644.jpg?auto=webp&frame=1&width=1024&height=1024&fit=bounds&md=d5685481d8087e147ebf2839c4017e05",
+            "id_user": "dc0413b7-d074-4d0c-874a-92b659a29ba3",
+            "createdAt": "2024-06-17T07:39:29.000Z",
+            "updatedAt": "2024-06-17T07:39:29.000Z",
+            "createdBy": "John Doe",
+            "image_user": "https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png",
+            "waste": [
+                "Paper",
+                "Cardboard Box"
+            ],
+            "tags": [
+                "Tools",
+                "Accessories"
+            ],
+            "likes": 0,
+            "totalStep": 14
+        },
+        {
+            "id": "f26769d6-eff5-4cd3-9114-f5a8d4c89893",
+            "name": "Can Lanterns",
+            "description": "Recycle your used drinks cans into potential fire hazards!! A modern take on the paper lantern... now even shinier",
+            "image": "https://content.instructables.com/FIX/KIRV/G4EEP2LL67Q/FIXKIRVG4EEP2LL67Q.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+            "id_user": "dc0413b7-d074-4d0c-874a-92b659a29ba3",
+            "createdAt": "2024-06-17T07:39:29.000Z",
+            "updatedAt": "2024-06-17T07:39:29.000Z",
+            "createdBy": "John Doe",
+            "image_user": "https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png",
+            "waste": [
+                "Aluminum Can"
+            ],
+            "tags": [
+                "Tools",
+                "Lighting"
+            ],
+            "likes": 0,
+            "totalStep": 8
+        },
+        {
+            "id": "fdd71d8a-7dae-41f4-b9ae-66994a279ac0",
+            "name": "Recycle Plastic Grocery Bags, Wire Hangers and Newspaper Into Loons!",
+            "description": "ou can do your bit to re-use and recycle them. There are the normal ways - i.e. use them again, or give them up all together by using cloth bags. However, here's one off-beat way to use them up and create something completely different! You can use them when making papier-mache loons. Of course you will need a few other rubbish things too....",
+            "image": "https://content.instructables.com/FXK/D429/FGAGY8VQ/FXKD429FGAGY8VQ.jpg?auto=webp&frame=1&fit=bounds&md=07168eff904cde0c86fca0a8c5a8a20b",
+            "id_user": "dc0413b7-d074-4d0c-874a-92b659a29ba3",
+            "createdAt": "2024-06-17T07:39:29.000Z",
+            "updatedAt": "2024-06-17T07:39:29.000Z",
+            "createdBy": "John Doe",
+            "image_user": "https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png",
+            "waste": [
+                "Plastic"
+            ],
+            "tags": [
+                "Decoration",
+                "Art"
+            ],
+            "likes": 0,
+            "totalStep": 16
+        },
+        {
+            "id": "5276c706-d30b-4c69-b07a-93a36b178ce3",
+            "name": "kerajinan B",
+            "description": "Deskripsi kerajinan tangan yang kedua",
+            "image": "",
+            "id_user": "5df22711-540b-45db-9271-8322784faf0d",
+            "createdAt": "2024-06-17T11:07:18.000Z",
+            "updatedAt": "2024-06-17T11:07:18.000Z",
+            "createdBy": "John Doe",
+            "image_user": "https://storage.googleapis.com/capstone-craft/user/default.png",
+            "waste": [
+                "Paper",
+                "Plastic"
+            ],
+            "tags": [
+                "tas",
+                "suvenir",
+                "batik"
+            ],
+            "likes": 0,
+            "totalStep": 0
+        },
+        {
+            "id": "d5bf40af-7ea7-475a-a67b-7b03abdb43ff",
+            "name": "kerajinan B",
+            "description": "Deskripsi kerajinan tangan yang kedua",
+            "image": "",
+            "id_user": "5df22711-540b-45db-9271-8322784faf0d",
+            "createdAt": "2024-06-17T11:07:42.000Z",
+            "updatedAt": "2024-06-17T11:07:42.000Z",
+            "createdBy": "John Doe",
+            "image_user": "https://storage.googleapis.com/capstone-craft/user/default.png",
+            "waste": [
+                "Paper",
+                "Plastic"
+            ],
+            "tags": [
+                "tas",
+                "suvenir",
+                "batik"
+            ],
+            "likes": 1,
+            "totalStep": 0
+        },
+        {
+            "id": "d8a8bb5c-389b-41e2-bdaa-273c3bcb67c6",
+            "name": "Night Stand Bottle Light",
+            "description": "This Project is based off of Scooter76's Cool LED Night Light. Besides drilling the bottle, which took a while, the circuit part only took about 20 minutes. When drilling, use a special glass drill bit and go slow with minimal pressure. Take breaks and brush away glass dust. Wear proper protection, including safety glasses and a face mask, to avoid inhaling fine particles.",
+            "image": "https://content.instructables.com/FVR/3L7N/FK3O7S03/FVR3L7NFK3O7S03.jpg?auto=webp&fit=bounds&frame=1auto=webp&frame=1&height=300",
+            "id_user": "dc0413b7-d074-4d0c-874a-92b659a29ba3",
+            "createdAt": "2024-06-17T07:39:29.000Z",
+            "updatedAt": "2024-06-17T07:39:29.000Z",
+            "createdBy": "John Doe",
+            "image_user": "https://storage.googleapis.com/bangkit-bucket-gambar/user/default.png",
+            "waste": [
+                "Paper"
+            ],
+            "tags": [
+                "Tools",
+                "Accessories",
+                "Decoration"
+            ],
+            "likes": 0,
+            "totalStep": 6
+        }
+    ]
+}
