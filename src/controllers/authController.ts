@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { google } from "googleapis";
 import { config } from "../config";
+import { stat } from "fs";
 
 const oauth2Client = new google.auth.OAuth2(config.googleClientId, config.googleClientSecret, config.googleCallbackUrl);
 
@@ -146,51 +147,40 @@ export const logout = async (req: Request, res: Response) => {
 };
 
 export const getUserInfo = async (req: Request, res: Response) => {
-  const token = req.cookies.token;
+  const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized", data: [] });
+    return res.status(401).json({
+      message: "Unauthorized",
+      status: false,
+      data: []
+    });
   }
 
   try {
-    const decoded = jwt.verify(token, config.jwtSecret!);
+    const decoded = jwt.decode(token);
     const user = await prisma.users.findUnique({
       where: { id: (decoded as any).id },
     });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found", data: [] });
+      return res.status(404).json({ message: "Auth token doesn't match any user", status: false, data: [] });
     }
 
-    res.json({ id: user.id, name: user.name, email: user.email, address: user.address, role: user.role, image: user.image });
+    res.json({
+      message: "Authorized Successfully",
+      status: true,
+      data:
+      {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        address: user.address,
+        role: user.role,
+        image: user.image,
+      },
+    });
   } catch (error) {
     res.status(401).json({ message: "Unauthorized", data: error });
-  }
-};
-
-// get user self by jwt token in header
-export const getUserSelf = async (req: Request, res: Response) => {
-  const validationReq = req as ValidationRequest;
-  const { authorization } = validationReq.headers;
-
-  if (!authorization) {
-    return res.status(401).json({ message: "Token is undefined or invalid", data: [] });
-  }
-
-  const token = authorization.split(" ")[1];
-
-  try {
-    const jwtDecode = jwt.decode(token) as UserData;
-
-    const user = await prisma.users.findUnique({ where: { id: jwtDecode.id } });
-
-    if (!user || user.token !== token) {
-      return res.status(401).json({ message: "Unauthorized", data: [] });
-    }
-
-    validationReq.userData = jwtDecode;
-    res.status(200).json({ message: "Success", data: user });
-  } catch (error) {
-    return res.status(401).json({ message: "Unauthorized", data: error });
   }
 };

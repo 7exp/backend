@@ -205,7 +205,14 @@ export const updateImageUser = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).json({ message: "Successfully updated User image", data: updatedUser });
+    res.status(200).json({ message: "Successfully updated User image",
+      data: {
+        id: updatedUser.id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        image: updatedUser.image,
+      }
+    });
   } catch (error: any) {
     // Handle any error during file upload or database update
     try {
