@@ -11,7 +11,7 @@ jobs:
         runs-on: self-hosted
         steps:
             - uses: actions/checkout@v4
-            - name: Run dev environment
+            - name: Run Dev Environment
               run: |
                 cd ~/backend
                 git pull
@@ -23,7 +23,7 @@ jobs:
                 environment: Postman/CraftBackend.postman_environment.json
                 delayRequest: 1000
                 workingDir: /home/c129d4ky0993/backend/
-            - name: Deploy to production
+            - name: Deploy to Production
               run: |
                 cd ~/backend
                 git pull
