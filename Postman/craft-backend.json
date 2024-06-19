@@ -388,6 +388,101 @@
 			"response": []
 		},
 		{
+			"name": "Auth Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aff2b5fd-ce5c-4061-bbff-3c934dff6d81",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"pm.test(\"Status in the response data is true\", function () {",
+							"  var responseData = pm.response.json();",
+							"  pm.expect(responseData.status).to.be.true;",
+							"});",
+							"",
+							"pm.test(\"Id is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "3d336b11-964e-480d-867f-1d0d24e135d1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": ""
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{BaseUrl}}/auth/info"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a71f8beb-6004-4a8e-8580-6c5a7a6ba080",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"pm.test(\"Id is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "2a8f8864-5a78-46a5-941b-1ea1d83d68d2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{BaseUrl}}/users/{{UserId}}"
+			},
+			"response": []
+		},
+		{
 			"name": "Update User Password",
 			"event": [
 				{
@@ -1371,7 +1466,7 @@
 			"response": []
 		},
 		{
-			"name": "search",
+			"name": "Search",
 			"event": [
 				{
 					"listen": "test",
@@ -2861,25 +2956,6 @@
 					}
 				},
 				"url": "{{BaseUrl}}/users/deleteself/{{UserId}}"
-			},
-			"response": []
-		},
-		{
-			"name": "self",
-			"id": "3d336b11-964e-480d-867f-1d0d24e135d1",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "{{Token}}"
-					}
-				},
-				"method": "GET",
-				"header": [],
-				"url": "{{BaseUrl}}/auth/self"
 			},
 			"response": []
 		}
