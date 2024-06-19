@@ -318,7 +318,6 @@ export const searchHandicraft = async (req: Request, res: Response) => {
           const tagsName = await prisma.tag.findMany({ where: { id: { in: tags.map((tag) => tag.id_tag) } } });
           data.tags = tagsName.map((tag) => tag.name);
 
-          handicrafts = handicrafts.filter((handicraft) => handicraft.id !== data.id);
           if (handicrafts.length < 20) handicrafts.push(data);
           return data;
         })
@@ -328,6 +327,9 @@ export const searchHandicraft = async (req: Request, res: Response) => {
     if (handicrafts.length === 0) {
       return res.status(404).json({ message: "No Handicraft Found", data: [] });
     }
+
+    // remove duplicate handicrafts id
+    handicrafts = handicrafts.filter((v, i, a) => a.findIndex((t) => t.id === v.id) === i);
 
     res.status(200).json({ message: "Successfully Fetched Handicraft", data: handicrafts });
   } catch (error) {
