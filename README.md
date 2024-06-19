@@ -4,16 +4,13 @@
 <h1 align="center"> Backend Craft It App </h1>
 <h3 align="center"> A backend supporting an Android app for recognizing waste materials and converting them into handicrafts. </h3>
 
-
 </br>
 
 <p align="center"> 
-  <img src="" alt="Sample signal" width="70%" height="70%">
+  <img src="https://github.com/7exp/backend/blob/main/public/images/giphy.gif" alt="Sample app" width="70%" height="70%">
 </p>
 
-
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
 
 <!-- TABLE OF CONTENTS -->
 <h2 id="table-of-contents"> :book: Table of Contents</h2>
@@ -232,5 +229,3 @@ This project is the result of the collaborative efforts of several contributors.
 ![Activities](https://repobeats.axiom.co/api/embed/a19d5048e43a501a5cb06b4d0e7f07630d5e307b.svg "Repobeats analytics image")
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
-
