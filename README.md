@@ -1,14 +1,14 @@
 <p align="center"> 
   <img src="public/images/Project Logo.png" alt="HAR Logo" width="80px" height="80px">
 </p>
-<h1 align="center"> A Backend For An Android Application Designed to Recognize Waste Materials and Transform Them Into Handicrafts
- </h1>
-<h3 align="center"> This project is a backend for an Android application designed to recognize waste materials and transform them into handicrafts. The backend provides essential functionality to support the application, including data management, authentication, and communication with the Android client.</h3>
+<h1 align="center"> Backend Craft It App </h1>
+<h3 align="center"> A backend supporting an Android app for recognizing waste materials and converting them into handicrafts. </h3>
+
 
 </br>
 
 <p align="center"> 
-  <img src="images/Signal.gif" alt="Sample signal" width="70%" height="70%">
+  <img src="" alt="Sample signal" width="70%" height="70%">
 </p>
 
 
@@ -37,9 +37,7 @@
 <h2 id="about-the-project"> :pencil: About The Project</h2>
 
 <p align="justify"> 
-  This project aims to classify human activities using data obtained from accelerometer and gyroscope sensors from phone and watch. The raw data will be preprocessed using two
-  different approaches such as topological data analysis and statistical features extraction from segmented time series. The goal is to compare and evaluate the performance of
-  different classifiers (Decision Tree, k Nearest Neighbors, Random Forest, SVM and CNN) which are trained on the two sets of preprocessed data.
+ This project is a backend for an Android application designed to recognize waste materials and transform them into handicrafts. The backend provides essential functionality to support the application, including data management, authentication, and communication with the Android client.
 </p>
 
 <p align="center">
