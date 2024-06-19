@@ -227,6 +227,9 @@ export const getHandicraftById = async (req: Request, res: Response) => {
   try {
     const handicraft = await prisma.handicraft.findUnique({
       where: { id },
+      include: {
+        detail_handicraft: true,
+      },
     });
 
     if (!handicraft) {
