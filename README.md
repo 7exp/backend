@@ -11,6 +11,10 @@
   <img src="images/Signal.gif" alt="Sample signal" width="70%" height="70%">
 </p>
 
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+
 <!-- TABLE OF CONTENTS -->
 <h2 id="table-of-contents"> :book: Table of Contents</h2>
 
@@ -20,20 +24,10 @@
     <li><a href="#about-the-project"> ➤ About The Project</a></li>
     <li><a href="#Technology"> ➤ Technology</a></li>
     <li><a href="#folder-structure"> ➤ Folder Structure</a></li>
-    <li><a href="#dataset"> ➤ Dataset</a></li>
-    <li><a href="#roadmap"> ➤ Roadmap</a></li>
-    <li>
-      <a href="#preprocessing"> ➤ Preprocessing</a>
-      <ul>
-        <li><a href="#preprocessed-data">Pre-processed data</a></li>
-        <li><a href="#statistical-feature">Statistical feature</a></li>
-        <li><a href="#topological-feature">Topological feature</a></li>
-      </ul>
-    </li>
-    <!--<li><a href="#experiments">Experiments</a></li>-->
-    <li><a href="#results-and-discussion"> ➤ Results and Discussion</a></li>
-    <li><a href="#references"> ➤ References</a></li>
-    <li><a href="#contributors"> ➤ Contributors</a></li>
+    <li><a href="#Quick"> ➤ Quick Start</a></li>
+    <li><a href="#Wiki"> ➤ Wiki</a></li>
+    <li><a href="#Contributors"> ➤ Contributors</a></li>
+    <li><a href="#Activities"> ➤ Activities</a></li>
   </ol>
 </details>
 
@@ -159,7 +153,7 @@ The following open source packages are used in this project:
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## ⚡️ Quick start
+<h2 id="Quick"> ⚡️ Quick start </h2>
 
 First, clone the repository:
 
@@ -205,7 +199,7 @@ docker run --rm -it -v ${PWD}:${PWD} -w ${PWD} koddr/cgapp:latest [COMMAND]
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## 📖 Project Wiki
+<h2 id="Wiki">📖 Project Wiki</h2>
 
 Explore the extensive features and functionalities of **Backend Craft It** by delving into our comprehensive [Wiki](https://github.com/7exp/backend/wiki). Whether you're new to the project or a seasoned developer, our Wiki offers:
 
@@ -216,7 +210,7 @@ Dive into our Wiki today to harness the full potential of **Backend Craft It** a
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## Contributors <a name="contributors"></a>
+<h2 id="Contributors">📜 Contributors</h2>
 
 This project is the result of the collaborative efforts of several contributors. 💖 We appreciate the hard work and dedication of the following individuals:
 
@@ -228,17 +222,17 @@ This project is the result of the collaborative efforts of several contributors.
   </a>
     </td>
     <td valign="top">  <a href="gymnastiarag.my.id">
-    <img src=https://github.com/7exp/backend/blob/main/public/images/AGIM-modified.png" alt="Gymnastiar Alma Ghifari" width="200px">
+    <img src="https://github.com/7exp/backend/blob/main/public/images/AGIM-modified.png" alt="Gymnastiar Alma Ghifari" width="200px">
     <p align="center">Gymnastiar Alma Ghifari</p>
   </tr>
 </table>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## Activities
+<h2 id="Activities">⭐️ Activities</h2>
 
 ![Activities](https://repobeats.axiom.co/api/embed/a19d5048e43a501a5cb06b4d0e7f07630d5e307b.svg "Repobeats analytics image")
 
-```
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-```
+
