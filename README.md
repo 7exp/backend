@@ -1,15 +1,16 @@
 <p align="center"> 
   <img src="public/images/Project Logo.png" alt="HAR Logo" width="80px" height="80px">
 </p>
-<h1 align="center"> A Backend For An Android Application Designed to Recognize Waste Materials and Transform Them Into Handicrafts
- </h1>
-<h3 align="center"> This project is a backend for an Android application designed to recognize waste materials and transform them into handicrafts. The backend provides essential functionality to support the application, including data management, authentication, and communication with the Android client.</h3>
+<h1 align="center"> Backend Craft It App </h1>
+<h3 align="center"> A backend supporting an Android app for recognizing waste materials and converting them into handicrafts. </h3>
 
 </br>
 
 <p align="center"> 
-  <img src="images/Signal.gif" alt="Sample signal" width="70%" height="70%">
+  <img src="https://github.com/7exp/backend/blob/main/public/images/giphy.gif" alt="Sample app" width="70%" height="70%">
 </p>
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- TABLE OF CONTENTS -->
 <h2 id="table-of-contents"> :book: Table of Contents</h2>
@@ -20,20 +21,10 @@
     <li><a href="#about-the-project"> ➤ About The Project</a></li>
     <li><a href="#Technology"> ➤ Technology</a></li>
     <li><a href="#folder-structure"> ➤ Folder Structure</a></li>
-    <li><a href="#dataset"> ➤ Dataset</a></li>
-    <li><a href="#roadmap"> ➤ Roadmap</a></li>
-    <li>
-      <a href="#preprocessing"> ➤ Preprocessing</a>
-      <ul>
-        <li><a href="#preprocessed-data">Pre-processed data</a></li>
-        <li><a href="#statistical-feature">Statistical feature</a></li>
-        <li><a href="#topological-feature">Topological feature</a></li>
-      </ul>
-    </li>
-    <!--<li><a href="#experiments">Experiments</a></li>-->
-    <li><a href="#results-and-discussion"> ➤ Results and Discussion</a></li>
-    <li><a href="#references"> ➤ References</a></li>
-    <li><a href="#contributors"> ➤ Contributors</a></li>
+    <li><a href="#Quick"> ➤ Quick Start</a></li>
+    <li><a href="#Wiki"> ➤ Wiki</a></li>
+    <li><a href="#Contributors"> ➤ Contributors</a></li>
+    <li><a href="#Activities"> ➤ Activities</a></li>
   </ol>
 </details>
 
@@ -43,9 +34,7 @@
 <h2 id="about-the-project"> :pencil: About The Project</h2>
 
 <p align="justify"> 
-  This project aims to classify human activities using data obtained from accelerometer and gyroscope sensors from phone and watch. The raw data will be preprocessed using two
-  different approaches such as topological data analysis and statistical features extraction from segmented time series. The goal is to compare and evaluate the performance of
-  different classifiers (Decision Tree, k Nearest Neighbors, Random Forest, SVM and CNN) which are trained on the two sets of preprocessed data.
+ This project is a backend for an Android application designed to recognize waste materials and transform them into handicrafts. The backend provides essential functionality to support the application, including data management, authentication, and communication with the Android client.
 </p>
 
 <p align="center">
@@ -159,7 +148,7 @@ The following open source packages are used in this project:
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## ⚡️ Quick start
+<h2 id="Quick"> ⚡️ Quick start </h2>
 
 First, clone the repository:
 
@@ -205,7 +194,7 @@ docker run --rm -it -v ${PWD}:${PWD} -w ${PWD} koddr/cgapp:latest [COMMAND]
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## 📖 Project Wiki
+<h2 id="Wiki">📖 Project Wiki</h2>
 
 Explore the extensive features and functionalities of **Backend Craft It** by delving into our comprehensive [Wiki](https://github.com/7exp/backend/wiki). Whether you're new to the project or a seasoned developer, our Wiki offers:
 
@@ -216,7 +205,7 @@ Dive into our Wiki today to harness the full potential of **Backend Craft It** a
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## Contributors <a name="contributors"></a>
+<h2 id="Contributors">📜 Contributors</h2>
 
 This project is the result of the collaborative efforts of several contributors. 💖 We appreciate the hard work and dedication of the following individuals:
 
@@ -228,17 +217,15 @@ This project is the result of the collaborative efforts of several contributors.
   </a>
     </td>
     <td valign="top">  <a href="gymnastiarag.my.id">
-    <img src=https://github.com/7exp/backend/blob/main/public/images/AGIM-modified.png" alt="Gymnastiar Alma Ghifari" width="200px">
+    <img src="https://github.com/7exp/backend/blob/main/public/images/AGIM-modified.png" alt="Gymnastiar Alma Ghifari" width="200px">
     <p align="center">Gymnastiar Alma Ghifari</p>
   </tr>
 </table>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## Activities
+<h2 id="Activities">⭐️ Activities</h2>
 
 ![Activities](https://repobeats.axiom.co/api/embed/a19d5048e43a501a5cb06b4d0e7f07630d5e307b.svg "Repobeats analytics image")
 
-```
-
-```
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
