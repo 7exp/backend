@@ -181,15 +181,15 @@ That's all you need to know to start! 🎉
 
 ### 🐳 Deployment quick start
 
-If you want to deploy the project directly to your server, you can follow these steps:
+If you want to deploy the project directly to your server, you can follow these steps: 🚀
 
-**1. Copy the [docker-compose.yml](https://github.com/7exp/backend/blob/main/docker-compose.yml) file:** First, you'll need to copy the docker-compose.yml file from the project's repository to your server. You can do this by running the following command on your server:
+**1. Copy the [docker-compose.yml](https://github.com/7exp/backend/blob/main/docker-compose.yml) file:** First, you'll need to copy the docker-compose.yml file from the project's repository to your server. You can do this by running the following command on your server: 📥
 ```bash
 wget https://raw.githubusercontent.com/7exp/backend/main/docker-compose.yml 
 ```
 This will download the `docker-compose.yml` file from the repository to your server.
 
-**2. Configure environment variables:** The project may require some environment variables to be set. You can create a .env file in the same directory as the docker-compose.yml file and add your environment variables there. For example:
+**2. Configure environment variables:** The project may require some environment variables to be set. You can create a .env file in the same directory as the docker-compose.yml file and add your environment variables there. For example: ⚙️
 ```
 JWT_SECRET=your_secret
 DATABASE_URL=mysql://user:password@db:3306/databasename
@@ -198,18 +198,18 @@ BUCKET_NAME=your_GCP_bucket_name
 KEYFILENAME=your_GCP_key `keyfile.json`
 ```
 
-**3. Check the ports:** The docker-compose.yml file may specify ports for the containers to bind to on the host machine. Make sure that these ports are not already in use on your server.
+**3. Check the ports:** The docker-compose.yml file may specify ports for the containers to bind to on the host machine. Make sure that these ports are not already in use on your server. 🔍
 
-**4. Install Docker:** Before you can run the docker-compose command, you'll need to make sure that [Docker](https://docs.docker.com/engine/install/) is installed on your server.
+**4. Install Docker:** Before you can run the docker-compose command, you'll need to make sure that [Docker](https://docs.docker.com/engine/install/) is installed on your server. 🐳
 
-**5. Start the containers:** Once you have the docker-compose.yml file, the .env file, and Docker installed, you can start the project's containers by running the following command:
+**5. Start the containers:** Once you have the docker-compose.yml file, the .env file, and Docker installed, you can start the project's containers by running the following command: 🚀
 ```bash
 docker-compose up -d
 ```
 The -d flag tells Docker to run the containers in detached mode (in the background).
 
 
-This will start the server in the background. 🚀
+This will start the server in the background. 🎉
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
