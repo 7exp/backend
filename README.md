@@ -216,7 +216,7 @@ This project is the result of the collaborative efforts of several contributors.
     <p align="center">Yoga Novaindra</p>
   </a>
     </td>
-    <td valign="top">  <a href="gymnastiarag.my.id">
+    <td valign="top">  <a href="https://gymnastiarag.my.id/">
     <img src="https://github.com/7exp/backend/blob/main/public/images/AGIM-modified.png" alt="Gymnastiar Alma Ghifari" width="200px">
     <p align="center">Gymnastiar Alma Ghifari</p>
   </tr>
